@@ -1,0 +1,17 @@
+ul li a {
+  background: linear-gradient(to right, #ffffff, #ffffff),
+    linear-gradient(to right, rgb(97 97 97), rgb(97 97 97));
+  background-size: 100% 1.5px, 0 1.5px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 250ms;
+}
+
+ul li a:hover {
+  background-size: 0 1.5px, 100% 1.5px;
+}
+
+nav {
+  padding-left: 120px;
+  padding-right: 120px;
+}

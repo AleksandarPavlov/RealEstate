@@ -1,0 +1,15 @@
+.image-grid-wrapper {
+  margin: auto;
+  margin-top: 50px;
+}
+.hero-section {
+  max-width: 2000px;
+  margin: auto;
+}
+app-main-content {
+  margin: auto;
+  margin-top: 100px;
+}
+.search-wrapper {
+  margin-bottom: 130px;
+}
