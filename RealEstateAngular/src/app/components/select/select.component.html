@@ -1,0 +1,13 @@
+<div class="w-[150px] max-w-sm relative mt-4">
+    <div class="relative">
+        <i [ngClass]="icon" class="absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"></i>
+      <select
+        class="w-full h-10 bg-white placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded px-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+      >
+      <option value="" disabled selected hidden>{{ placeholder }}</option>
+      <ng-container *ngFor="let option of options">
+        <option [value]="option.value" > {{ option.label }}</option>
+      </ng-container>
+      </select>
+    </div>
+  </div>

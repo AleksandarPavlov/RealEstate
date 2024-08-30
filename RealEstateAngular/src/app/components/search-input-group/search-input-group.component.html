@@ -1,77 +1,17 @@
 <div class="input-wrapper gap-4">
-  <div class="w-[300px] max-w-sm relative mt-4">
-    <div class="relative">
-      <div class="w-full max-w-sm min-w-[300px]">
-        <div class="relative">
-          <input
-            class="w-full pl-3 h-10 pr-28 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
-            placeholder="Search for properties"
-          />
-          <button
-            class="absolute py-1.5 text-white text-sm right-1 top-1 my-auto px-3 flex items-center rounded hover:bg-slate-700"
-            type="button"
-            style="background-color: #f07070"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-4 h-4 mr-2"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            Search
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="w-[150px] max-w-sm relative mt-4">
-    <div class="relative">
-      <i
-        class="fa-solid fa-location-dot absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-      ></i>
-      <select
-        class="w-full h-10 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded px-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
-      >
-        <option value="" disabled selected hidden class="">Location</option>
-        <option value="brazil">Brazil</option>
-        <option value="bucharest">Bucharest</option>
-        <option value="london">London</option>
-        <option value="washington">Washington</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="w-[150px] max-w-sm relative mt-4">
-    <div class="relative">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="absolute w-5 h-5 top-2.5 left-2.5 text-slate-500"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
-        />
-      </svg>
-
-      <input
-        type="number"
-        class="w-full pl-10 h-10 pr-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
-        placeholder="5"
-        value="5"
-      />
-    </div>
-  </div>
+  <app-search-bar
+    [placeholder]="'Search for properties'"
+    [buttonClass] = "'absolute py-1.5 text-white text-sm right-1 top-1 my-auto px-3 flex items-center rounded hover:bg-slate-700'"
+    [buttonColor] = "'#f07070'"
+  ></app-search-bar>
+  <app-select
+    [placeholder]="'Location'"
+    [icon] ="'fa-solid fa-location-dot'"
+    [options] = "locationSelectOptions">
+  </app-select>
+  <app-select 
+  [placeholder]="'Type'"
+  [icon] ="'fa-solid fa-building'"
+  [options] = "typeSelectOptions">
+</app-select>
 </div>

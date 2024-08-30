@@ -2,6 +2,9 @@
 
 body {
   font-family: "Inter";
+
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @tailwind base;
