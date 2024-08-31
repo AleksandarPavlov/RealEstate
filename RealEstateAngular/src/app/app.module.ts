@@ -13,6 +13,7 @@ import { SelectComponent } from './components/select/select.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { DataGridComponent } from './components/data-grid/data-grid.component';
 import { IconCardComponent } from './components/icon-card/icon-card.component';
+import { NumberInputComponent } from './components/number-input/number-input.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { IconCardComponent } from './components/icon-card/icon-card.component';
     SearchBarComponent,
     DataGridComponent,
     IconCardComponent,
+    NumberInputComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

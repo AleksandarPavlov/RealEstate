@@ -1,0 +1,15 @@
+<div class="w-[150px] max-w-sm relative mt-4">
+  <div class="relative">
+    <i
+      [ngClass]="icon"
+      class="absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
+    ></i>
+
+    <input
+      type="number"
+      class="w-full pl-8 h-10 pr-3 py-2 bg-transparent placeholder:text-slate-700 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+      placeholder="{{ placeholder }}"
+      value="{{ placeholder }}"
+    />
+  </div>
+</div>

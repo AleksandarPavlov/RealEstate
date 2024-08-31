@@ -7,9 +7,9 @@ import { SelectOption } from 'src/app/models/select-option-model';
   styleUrls: ['./search-input-group.component.css'],
 })
 export class SearchInputGroupComponent {
-  locationSelectOptions: SelectOption[] = [
-    { label: 'Novi Sad', value: 'Novi Sad' },
-    { label: 'Belgrade', value: 'Belgrade' },
+  listingSelectOptions: SelectOption[] = [
+    { label: 'Rent', value: 'Rent' },
+    { label: 'Sell', value: 'Sell' },
   ];
 
   typeSelectOptions: SelectOption[] = [

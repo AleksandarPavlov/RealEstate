@@ -1,17 +1,30 @@
-<div class="input-wrapper gap-4">
+<div class="input-wrapper flex flex-wrap gap-4 justify-center items-center">
   <app-search-bar
-    [placeholder]="'Search for properties'"
-    [buttonClass] = "'absolute py-1.5 text-white text-sm right-1 top-1 my-auto px-3 flex items-center rounded hover:bg-slate-700'"
-    [buttonColor] = "'#f07070'"
+    [placeholder]="'Search for location'"
+    [buttonClass]="
+      'absolute py-1.5 text-white text-sm right-1 top-1 my-auto px-3 flex items-center rounded hover:bg-slate-700'
+    "
+    [buttonColor]="'#f07070'"
   ></app-search-bar>
+
   <app-select
-    [placeholder]="'Location'"
-    [icon] ="'fa-solid fa-location-dot'"
-    [options] = "locationSelectOptions">
-  </app-select>
-  <app-select 
-  [placeholder]="'Type'"
-  [icon] ="'fa-solid fa-building'"
-  [options] = "typeSelectOptions">
-</app-select>
+    [placeholder]="'Listing'"
+    [icon]="'fa-solid fa-bars'"
+    [options]="listingSelectOptions"
+  ></app-select>
+
+  <app-select
+    [placeholder]="'Type'"
+    [icon]="'fa-solid fa-building'"
+    [options]="typeSelectOptions"
+  ></app-select>
+
+  <div class="flex justify-center items-center gap-4">
+    <app-number-input [placeholder]="'m² from'" [icon]="'fa-solid fa-maximize'">
+    </app-number-input>
+    <app-number-input
+      [placeholder]="'Price to'"
+      [icon]="'fa-solid fa-euro-sign'"
+    ></app-number-input>
+  </div>
 </div>

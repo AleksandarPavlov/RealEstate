@@ -14,17 +14,17 @@ app-main-content {
   margin-top: 100px;
 }
 .search-wrapper {
-  margin-bottom: 120px;
+  margin-bottom: 60px;
 }
-.whatWeDoSection{
-  width:1200px;
+.whatWeDoSection {
+  width: 1200px;
   margin: auto;
   margin-top: 50px;
 }
-app-icon-card{
-  margin:auto
+app-icon-card {
+  margin: auto;
 }
 
-.whatWeDoTitle{
-  margin:auto
+.whatWeDoTitle {
+  margin: auto;
 }
