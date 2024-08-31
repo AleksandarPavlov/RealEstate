@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API.Contracts\\RealEstate.API.Contracts.csproj",
+      "projectUniqueName": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API.Contracts\\RealEstate.API.Contracts.csproj",
       "projectName": "RealEstate.API.Contracts",
-      "projectPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API.Contracts\\RealEstate.API.Contracts.csproj",
+      "projectPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API.Contracts\\RealEstate.API.Contracts.csproj",
       "packagesPath": "C:\\Users\\Aleksandar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API.Contracts\\obj\\",
+      "outputPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API.Contracts\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aleksandar\\AppData\\Roaming\\NuGet\\NuGet.Config",

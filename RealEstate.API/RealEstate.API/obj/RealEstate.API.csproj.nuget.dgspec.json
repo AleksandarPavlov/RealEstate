@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj": {}
+    "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj": {
+    "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj",
+        "projectUniqueName": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj",
         "projectName": "RealEstate.API",
-        "projectPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj",
+        "projectPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API\\RealEstate.API.csproj",
         "packagesPath": "C:\\Users\\Aleksandar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.API\\obj\\",
+        "outputPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aleksandar\\AppData\\Roaming\\NuGet\\NuGet.Config",

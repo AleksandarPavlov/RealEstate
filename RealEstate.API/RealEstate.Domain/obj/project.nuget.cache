@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JyclkTRZ84EBxzZQF53yxGQCGpHwumkGcy24AuRucQRn29t3Zgjgp2wCNYjksDpALCxCR/2MXvjpguD1snbp8A==",
+  "dgSpecHash": "kiIpIXxrPnhNPcT6YPEZVOnot2qJLRoUbT8Pd74sWQNI5pPWWL4dKQPrw0/0Hc+v3sWDedlUdPdJanm6F/lW9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate.API\\RealEstate.Domain\\RealEstate.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.Domain\\RealEstate.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

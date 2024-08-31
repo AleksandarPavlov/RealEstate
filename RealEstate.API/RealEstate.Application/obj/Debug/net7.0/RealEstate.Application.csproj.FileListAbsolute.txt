@@ -1,0 +1,12 @@
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\bin\Debug\net7.0\RealEstate.Application.deps.json
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\bin\Debug\net7.0\RealEstate.Application.dll
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\bin\Debug\net7.0\RealEstate.Application.pdb
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\RealEstate.Application.csproj.AssemblyReference.cache
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\RealEstate.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\RealEstate.Application.AssemblyInfoInputs.cache
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\RealEstate.Application.AssemblyInfo.cs
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\RealEstate.Application.csproj.CoreCompileInputs.cache
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\RealEstate.Application.dll
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\refint\RealEstate.Application.dll
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\RealEstate.Application.pdb
+C:\Users\Aleksandar\Desktop\RealEstate\RealEstate.API\RealEstate.Application\obj\Debug\net7.0\ref\RealEstate.Application.dll
