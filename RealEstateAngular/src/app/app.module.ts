@@ -14,6 +14,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { DataGridComponent } from './components/data-grid/data-grid.component';
 import { IconCardComponent } from './components/icon-card/icon-card.component';
 import { NumberInputComponent } from './components/number-input/number-input.component';
+import { CardCarouselComponent } from './components/card-carousel/card-carousel.component';
+import { ImageCardComponent } from './components/image-card/image-card.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { NumberInputComponent } from './components/number-input/number-input.com
     DataGridComponent,
     IconCardComponent,
     NumberInputComponent,
+    CardCarouselComponent,
+    ImageCardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

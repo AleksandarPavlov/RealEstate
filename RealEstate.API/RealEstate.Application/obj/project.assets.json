@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Aleksandar\\.nuget\\packages\\": {}
+    "C:\\Users\\aleksandar.pavlov\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.Application\\RealEstate.Application.csproj",
+      "projectUniqueName": "C:\\Users\\aleksandar.pavlov\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.Application\\RealEstate.Application.csproj",
       "projectName": "RealEstate.Application",
-      "projectPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.Application\\RealEstate.Application.csproj",
-      "packagesPath": "C:\\Users\\Aleksandar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.Application\\obj\\",
+      "projectPath": "C:\\Users\\aleksandar.pavlov\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.Application\\RealEstate.Application.csproj",
+      "packagesPath": "C:\\Users\\aleksandar.pavlov\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\aleksandar.pavlov\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Aleksandar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\aleksandar.pavlov\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -40,6 +40,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -56,12 +61,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.17, 7.0.17]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.17, 7.0.17]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[7.0.17, 7.0.17]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

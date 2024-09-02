@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "UKK0NlxeycAK4A/T+9QCedqxqUp/9IsYgOX0im+8sjkB5h2+dLn20GvEn5E24YQ41oqFsc8w0IvdtboiT830NA==",
+  "dgSpecHash": "4tUoxwdqwYL/G348l+VGYg/UWQ4iAr/gzJcgxxWFczCXP/33fuFwM9Vn7eQsq5iEN5UIGNjxVy3ZMCr9aWI22w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aleksandar\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API.Contracts\\RealEstate.API.Contracts.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\aleksandar.pavlov\\Desktop\\RealEstate\\RealEstate.API\\RealEstate.API.Contracts\\RealEstate.API.Contracts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\aleksandar.pavlov\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.17\\microsoft.windowsdesktop.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\aleksandar.pavlov\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.17\\microsoft.netcore.app.ref.7.0.17.nupkg.sha512",
+    "C:\\Users\\aleksandar.pavlov\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.17\\microsoft.aspnetcore.app.ref.7.0.17.nupkg.sha512"
+  ],
   "logs": []
 }
