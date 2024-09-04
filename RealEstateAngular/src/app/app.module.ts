@@ -16,6 +16,7 @@ import { IconCardComponent } from './components/icon-card/icon-card.component';
 import { NumberInputComponent } from './components/number-input/number-input.component';
 import { CardCarouselComponent } from './components/card-carousel/card-carousel.component';
 import { ImageCardComponent } from './components/image-card/image-card.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ImageCardComponent } from './components/image-card/image-card.component
     NumberInputComponent,
     CardCarouselComponent,
     ImageCardComponent,
+    FooterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

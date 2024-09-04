@@ -4,6 +4,9 @@ nav {
   max-width: 2000px;
   margin: auto;
 }
+.nav-wrapper{
+  z-index: 9999;
+}
 #logo{
   text-shadow: 2px 3px 5px rgba(0,0,0,0.15);
 }
@@ -46,4 +49,13 @@ ul li a:hover {
 
 ul li a:hover::before{
   width: 100%;
+}
+ul li{
+  cursor: pointer;
+}
+.prodaja-menu {
+  width: 600px;
+  position: absolute;
+  left: 51.5%;
+  transform: translateX(-50%);
 }

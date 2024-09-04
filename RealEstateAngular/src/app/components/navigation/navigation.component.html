@@ -1,5 +1,6 @@
+<div class="nav-wrapper sticky top-0">
 <nav
-  class="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-white bg-white border rounded-none shadow-sm h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200"
+  class=" z-10 block w-full max-w-full px-4 py-2 text-white bg-white border rounded-none shadow-sm h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200"
 >
   <div class="flex items-center justify-between text-blue-gray-900">
     <div class="flex items-center gap-2">
@@ -27,8 +28,9 @@
           </li>
           <li
             class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+            (click)="toggleMenu()"
           >
-            <a href="#" class="flex items-center ">
+            <a  class="flex items-center">
               Prodaja
             </a>
           </li>
@@ -49,12 +51,14 @@
           >
             <a href="#" class="flex items-center"> Registracija </a>
           </li>
+          
         </ul>
       </div>
     </div>
+    
     <div class="flex items-center gap-x-1">
       <button
-        class="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+        class="select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
         type="button"
       >
         <span>Postavi oglas</span>
@@ -83,4 +87,202 @@
       </span>
     </button>
   </div>
+  
 </nav>
+
+<div
+*ngIf="isMenuOpen"
+class="prodaja-menu absolute z-[999] hidden min-w-[180px] max-w-screen-xl overflow-auto rounded-xl border border-blue-gray-50 bg-white p-3 s  shadow-lg shadow-blue-gray-500/10 focus:outline-none lg:block"
+id=":r8:"
+role="menu"
+data-popover="menu"
+data-popover-placement="bottom"
+>
+<ul
+class="grid grid-cols-3 gap-y-2 outline-none outline-0"
+role="menuitem"
+>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-semibold text-blue-gray-900 antialiased">
+        Prodaja stanova
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-semibold text-blue-gray-900 antialiased">
+        Prodaja kuća
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-semibold text-blue-gray-900 antialiased">
+        Prodaja zemljišta
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja stanova Beograd
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja kuća Beograd
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja zemljišta Beograd
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja stanova Novi Sad
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja kuća Novi Sad
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja zemljišta Novi Sad
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja stanova Niš
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja kuća Niš
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja zemljišta Niš
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja stanova Kragujevac
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja kuća Kragujevac
+      </p>
+    </div>
+  </button>
+</a>
+<a href="#">
+  <button
+    role="menuitem"
+    class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+  >
+    <div>
+      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+        Prodaja zemljišta Kragujevac
+      </p>
+    </div>
+  </button>
+</a>
+</ul>
+</div>
