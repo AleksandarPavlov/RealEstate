@@ -17,6 +17,10 @@ import { NumberInputComponent } from './components/number-input/number-input.com
 import { CardCarouselComponent } from './components/card-carousel/card-carousel.component';
 import { ImageCardComponent } from './components/image-card/image-card.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { PropertyPageComponent } from './pages/property-page/property-page.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { TextCardComponent } from './components/text-card/text-card.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,10 @@ import { FooterComponent } from './components/footer/footer.component';
     CardCarouselComponent,
     ImageCardComponent,
     FooterComponent,
+    NotFoundPageComponent,
+    PropertyPageComponent,
+    GalleryComponent,
+    TextCardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
