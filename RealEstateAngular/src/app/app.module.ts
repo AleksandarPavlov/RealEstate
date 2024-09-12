@@ -21,6 +21,9 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { PropertyPageComponent } from './pages/property-page/property-page.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { TextCardComponent } from './components/text-card/text-card.component';
+import { MapComponent } from './components/map/map.component';
+import { TableComponent } from './components/table/table.component';
+import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { TextCardComponent } from './components/text-card/text-card.component';
     PropertyPageComponent,
     GalleryComponent,
     TextCardComponent,
+    MapComponent,
+    TableComponent,
+    PropertyListPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

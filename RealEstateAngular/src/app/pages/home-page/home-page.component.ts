@@ -9,6 +9,7 @@ import { Property } from 'src/app/models/property.model';
 export class HomePageComponent {
   properties: Property[] = [
     {
+      id: 1,
       address: 'Cara Dušana, Novi Sad',
       floorNumber: 'Prizemlje',
       isForRent: false,
@@ -22,6 +23,7 @@ export class HomePageComponent {
         'https://www.decorilla.com/online-decorating/wp-content/uploads/2022/11/Minimalist-apartment-design-Apartment-therapy.jpeg',
     },
     {
+      id: 2,
       address: 'Novi Beograd, Beograd',
       floorNumber: '4',
       isForRent: true,
@@ -35,6 +37,7 @@ export class HomePageComponent {
         'https://media.self.com/photos/630635c30b7f36ce816f374a/4:3/w_2560%2Cc_limit/DAB03919-10470989.jpg',
     },
     {
+      id: 3,
       address: 'Novosadskog Sajma, Novi Sad',
       floorNumber: '3',
       isForRent: false,
@@ -48,6 +51,7 @@ export class HomePageComponent {
         'https://www.home-designing.com/wp-content/uploads/2019/12/grey-modern-sofa.jpg',
     },
     {
+      id: 4,
       address: 'Adice, Novi Sad',
       floorNumber: 'Prizemlje',
       isForRent: false,

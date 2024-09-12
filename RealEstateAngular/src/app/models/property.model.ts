@@ -1,4 +1,5 @@
 export class Property {
+  id: number = 0;
   image: string = '';
   propertyName: string = '';
   address: string = '';
@@ -11,6 +12,7 @@ export class Property {
   isForRent: boolean = false;
 
   constructor(
+    id: number,
     image: string,
     propertyName: string,
     address: string,
@@ -22,6 +24,7 @@ export class Property {
     pricePerMmSquared: number,
     isForRent: boolean
   ) {
+    this.id = id;
     this.image = image;
     this.propertyName = propertyName;
     this.address = address;
