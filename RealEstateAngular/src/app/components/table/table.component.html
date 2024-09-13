@@ -30,254 +30,79 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex items-center gap-8">
-                <img src="https://cdn.decoist.com/wp-content/uploads/2018/06/Decorating-the-small-living-room-in-contemporary-style.jpg"
-                  alt="John Michael" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
-                <div class="flex flex-col">
-                  <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    Novi Beograd Residence
+            <tr *ngFor="let property of properties">
+                <td class="name-image p-4 border-b border-blue-gray-50" routerLink = '/property/{{property.id}}'>
+                  <div class="flex items-center gap-8">
+                    <img src="{{property.image}}"
+                      alt="Property Image" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
+                    <div class="flex flex-col">
+                      <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
+                        {{property.propertyName}}
+                      </p>
+                      <p class="block text-xs antialiased font-normal leading-normal text-gray-700">
+                        {{property.address}}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="p-4 border-b border-blue-gray-50">
+                  <div class="flex flex-col">
+                    <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
+                        {{property.sizeInMmSquared}} m² | Broj soba: {{property.numberOfRooms}} | Sprat: {{property.floorNumber}}
+                    </p>
+                  </div>
+                </td>
+                <td class="p-4 border-b border-blue-gray-50">
+                  <div class="w-max">
+                    <div class="relative grid items-center px-2 py-1 text-xs font-bold text-gray-50 rounded-md select-none whitespace-nowrap"
+                      [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#8dcc8e'}">
+                      <span class="">{{ property.isForRent ? 'Izdavanje' : 'Prodaja' }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="p-4 border-b border-blue-gray-50">
+                  <p class="block text-sm antialiased font-semibold leading-normal text-gray-900"
+                     [ngStyle]="{'color': !property.isForRent ? '#f07070' : '#8dcc8e'}">
+                    {{property.price}} €
                   </p>
-                  <p
-                    class="block  text-xs antialiased font-normal leading-normal text-gray-700">
-                    Mileve Maric 14, Beograd
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex flex-col">
-                <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    55m² | 2 sobe | Sprat: Prizemlje
-                </p>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="w-max">
-                <div
-                  class="relative grid items-center px-2 py-1  text-xs font-bold text-gray-50 rounded-md select-none whitespace-nowrap" style="background-color: #f07070;">
-                  <span class="">Prodaja</span>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <p class="block text-sm antialiased font-semibold leading-normal text-gray-900" style="color: #f07070;">
-                140000 €
-              </p>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <button
-                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle  text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    <i class="fa-solid fa-map-location-dot text-lg text-gray-800 text-gray-800"></i>
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex items-center gap-8">
-                <img src="https://cf.ltkcdn.net/interiordesign/images/orig/229528-2000x1334-modern-kitchen.jpg"
-                  alt="John Michael" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
-                <div class="flex flex-col">
-                  <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    Novogradnja Cara Dušana
-                  </p>
-                  <p
-                    class="block  text-xs antialiased font-normal leading-normal text-gray-700">
-                    Cara Dušana 10, Novi Sad
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex flex-col">
-                <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    49m² | 2 sobe | Sprat: 3
-                </p>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="w-max">
-                <div
-                  class="relative grid items-center px-2 py-1  text-xs font-bold text-gray-50  rounded-md select-none whitespace-nowrap" style="background-color: #8dcc8e;">
-                  <span class="">Izdavanje</span>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <p class="block text-sm antialiased font-semibold leading-normal text-gray-900" style="color: #8dcc8e;">
-                450 €
-              </p>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <button
-                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle  text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    <i class="fa-solid fa-map-location-dot text-lg text-gray-800"></i>
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex items-center gap-8">
-                <img src="https://cdn.decoist.com/wp-content/uploads/2018/06/Decorating-the-small-living-room-in-contemporary-style.jpg"
-                  alt="John Michael" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
-                <div class="flex flex-col">
-                  <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    Novi Beograd Residence
-                  </p>
-                  <p
-                    class="block  text-xs antialiased font-normal leading-normal text-gray-700">
-                    Mileve Maric 14, Beograd
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex flex-col">
-                <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    55m² | 2 sobe | Sprat: Prizemlje
-                </p>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="w-max">
-                <div
-                  class="relative grid items-center px-2 py-1  text-xs font-bold text-gray-50 rounded-md select-none whitespace-nowrap" style="background-color: #f07070;">
-                  <span class="">Prodaja</span>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <p class="block text-sm antialiased font-semibold leading-normal text-gray-900" style="color: #f07070;">
-                140000 €
-              </p>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <button
-                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle  text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    <i class="fa-solid fa-map-location-dot text-lg"></i>
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex items-center gap-8">
-                <img src="https://cdn.decoist.com/wp-content/uploads/2018/06/Decorating-the-small-living-room-in-contemporary-style.jpg"
-                  alt="John Michael" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
-                <div class="flex flex-col">
-                  <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    Novi Beograd Residence
-                  </p>
-                  <p
-                    class="block  text-xs antialiased font-normal leading-normal text-gray-700">
-                    Mileve Maric 14, Beograd
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex flex-col">
-                <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    55m² | 2 sobe | Sprat: Prizemlje
-                </p>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="w-max">
-                <div
-                  class="relative grid items-center px-2 py-1  text-xs font-bold text-gray-50  rounded-md select-none whitespace-nowrap" style="background-color: #f07070;">
-                  <span class="">Prodaja</span>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <p class="block text-sm antialiased font-semibold leading-normal text-gray-900" style="color: #f07070;">
-                140000 €
-              </p>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <button
-                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle  text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    <i class="fa-solid fa-map-location-dot text-lg text-gray-800"></i>
-                </span>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex items-center gap-8">
-                <img src="https://cdn.decoist.com/wp-content/uploads/2018/06/Decorating-the-small-living-room-in-contemporary-style.jpg"
-                  alt="John Michael" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
-                <div class="flex flex-col">
-                  <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    Novi Beograd Residence
-                  </p>
-                  <p
-                    class="block  text-xs antialiased font-normal leading-normal text-gray-700">
-                    Mileve Maric 14, Beograd
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="flex flex-col">
-                <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                    55m² | 2 sobe | Sprat: Prizemlje
-                </p>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="w-max">
-                <div
-                  class="relative grid items-center px-2 py-1  text-xs font-bold text-gray-50  rounded-md select-none whitespace-nowrap" style="background-color: #f07070;">
-                  <span class="">Prodaja</span>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <p class="block text-sm antialiased font-semibold leading-normal text-gray-900" style="color: #f07070;">
-                140000 €
-              </p>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <button
-                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle  text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    <i class="fa-solid fa-map-location-dot text-lg text-gray-800"></i>
-                </span>
-              </button>
-            </td>
-          </tr>
+                </td>
+                <td class="p-4 border-b border-blue-gray-50">
+                  <div class="relative group inline-block">
+                    <button class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            type="button">
+                      <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                        <i class="fa-solid fa-map-location-dot text-lg text-gray-800"></i>
+                      </span>
+                    </button>
+                    <div class="map-wrapper opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute right-full -translate-y-1/2 top-5 w-64 h-40 bg-white text-gray-800 border border-gray-300">
+                      <app-map [mapId]="'map' + property.id"
+                               [mapWidth]="'100%'"
+                               [mapHeight]="'100%'">
+                      </app-map>
+                    </div>
+                  </div>
+                </td>
+              </tr>
         </tbody>
       </table>
     </div>
     <div class="flex items-center justify-between p-4 border-t border-blue-gray-50">
       <p class="block  text-sm antialiased font-normal leading-normal text-blue-gray-900">
-        Page 1 of 10
+        Stranica 1 od 10
       </p>
       <div class="flex gap-2">
         <button
-          class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle  text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          type="button">
-          Previous
-        </button>
-        <button
-          class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle  text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          type="button">
-          Next
-        </button>
+        class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+        type="button"
+      >
+        Prethodna
+      </button>
+      <button
+      class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+      type="button"
+    >
+      Sledeća
+    </button>
       </div>
     </div>
   </div>
