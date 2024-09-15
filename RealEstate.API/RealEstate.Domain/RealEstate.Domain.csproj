@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Label\" />
-    <Folder Include="Address\" />
-    <Folder Include="User\" />
+    <Compile Remove="Address\**" />
+    <Compile Remove="Label\**" />
+    <Compile Remove="User\**" />
+    <EmbeddedResource Remove="Address\**" />
+    <EmbeddedResource Remove="Label\**" />
+    <EmbeddedResource Remove="User\**" />
+    <None Remove="Address\**" />
+    <None Remove="Label\**" />
+    <None Remove="User\**" />
   </ItemGroup>
 
   <ItemGroup>

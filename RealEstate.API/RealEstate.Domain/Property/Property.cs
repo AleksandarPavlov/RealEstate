@@ -16,7 +16,7 @@ namespace RealEstate.Domain.Property
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public PropertyNumberOfRooms? NumberOfRooms { get; private set; }
-        private Property(PropertyName name, PropertyListingType listingType, PropertyType type, PropertyLocation location, PropertyPrice price, PropertySize sizeInMmSquared, bool? isFurnished, string floorNumber, PropertyNumberOfRooms? numberOfRooms)
+        private Property(PropertyName name, PropertyListingType listingType, PropertyType type, PropertyLocation location, PropertyPrice price, PropertySize sizeInMmSquared, bool? isFurnished, string? floorNumber, PropertyNumberOfRooms? numberOfRooms)
         {
             Name = name;
             ListingType = listingType;

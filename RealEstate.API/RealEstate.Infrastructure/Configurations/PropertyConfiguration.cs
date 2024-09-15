@@ -12,6 +12,22 @@ namespace RealEstate.Infrastructure.Configurations
             builder.Property(p => p.Name).HasConversion(
                 propertyName => propertyName.Value,
                 value => PropertyName.Create(value).Value);
+
+            builder.Property(p => p.Location).HasConversion(
+               location => location.Value,
+               value => PropertyLocation.Create(value).Value);
+
+            builder.Property(p => p.Price).HasConversion(
+               price => price.Value,
+               value => PropertyPrice.Create(value).Value);
+
+            builder.Property(p => p.NumberOfRooms).HasConversion(
+               numberOfRooms => numberOfRooms != null ? numberOfRooms.Value : (int?)null, 
+               value => value.HasValue ? PropertyNumberOfRooms.Create(value.Value).Value : null);
+
+            builder.Property(p => p.SizeInMmSquared).HasConversion(
+               size => size.Value,
+               value => PropertySize.Create(value).Value);
         }
     }
 }

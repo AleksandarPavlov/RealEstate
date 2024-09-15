@@ -13,16 +13,16 @@ namespace RealEstate.Domain.Property
         string location,
         int price,
         double sizeInMmSquared,
-        bool isFurnished,
-        string floorNumber,
-        int numberOfRooms)
+        bool? isFurnished,
+        string? floorNumber,
+        int? numberOfRooms)
     {
             var nameResult = PropertyName.Create(name);
             var locationResult = PropertyLocation.Create(location);
             var priceResult = PropertyPrice.Create(price);
             var sizeInMmSquaredResult = PropertySize.Create(sizeInMmSquared);
             var propertyType = PropertyType.APARTMENT;      
-            var numberOfRoomsResult = PropertyNumberOfRooms.Create(numberOfRooms);
+            var numberOfRoomsResult = PropertyNumberOfRooms.Create(numberOfRooms ?? null);
             
 
             var combinedResult = ResultExtensions.CombineResults(

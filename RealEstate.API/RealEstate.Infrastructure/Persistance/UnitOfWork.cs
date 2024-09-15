@@ -14,6 +14,10 @@ namespace RealEstate.Infrastructure.Persistance
         {
             _dbContext.SaveChanges();
         }
-     
+
+        public Task SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return _dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }
