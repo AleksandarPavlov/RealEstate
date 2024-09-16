@@ -19,7 +19,6 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
 
         public async Task<Result<DomainProperty>> Handle(CreateApartmentCommand request, CancellationToken cancellationToken)
         {
-            Console.WriteLine(request.floorNumber + " " + request.name + " " + request.isFurnished);
             var apartmentResult = DomainProperty.CreateApartmentProperty(
                 request.name,
                 request.listingType,

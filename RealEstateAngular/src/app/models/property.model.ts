@@ -10,6 +10,7 @@ export class Property {
   price: number = 0;
   pricePerMmSquared?: number = 0;
   isForRent: boolean = false;
+  isPremium: boolean = false;
 
   constructor(
     id: number,
@@ -22,7 +23,8 @@ export class Property {
     isFurnished: boolean,
     price: number,
     pricePerMmSquared: number,
-    isForRent: boolean
+    isForRent: boolean,
+    isPremium: boolean
   ) {
     this.id = id;
     this.image = image;
@@ -35,5 +37,6 @@ export class Property {
     this.price = price;
     this.pricePerMmSquared = pricePerMmSquared;
     this.isForRent = isForRent;
+    this.isPremium = isPremium;
   }
 }

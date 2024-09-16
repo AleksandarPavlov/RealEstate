@@ -1,6 +1,5 @@
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Domain.Persistance;
 using RealEstate.Domain.Property;

@@ -21,6 +21,7 @@ export class HomePageComponent {
       sizeInMmSquared: 55,
       image:
         'https://www.decorilla.com/online-decorating/wp-content/uploads/2022/11/Minimalist-apartment-design-Apartment-therapy.jpeg',
+      isPremium: false,
     },
     {
       id: 2,
@@ -35,6 +36,7 @@ export class HomePageComponent {
       sizeInMmSquared: 50,
       image:
         'https://media.self.com/photos/630635c30b7f36ce816f374a/4:3/w_2560%2Cc_limit/DAB03919-10470989.jpg',
+      isPremium: true,
     },
     {
       id: 3,
@@ -49,6 +51,7 @@ export class HomePageComponent {
       sizeInMmSquared: 55,
       image:
         'https://www.home-designing.com/wp-content/uploads/2019/12/grey-modern-sofa.jpg',
+      isPremium: false,
     },
     {
       id: 4,
@@ -63,6 +66,7 @@ export class HomePageComponent {
       sizeInMmSquared: 105,
       image:
         'https://cf.bstatic.com/xdata/images/hotel/max1024x768/353742714.jpg?k=bcee6772c5eeb8549b16d03f382e2a3920aa7ba49cb86934c3f141c2fa284ad7&o=&hp=1',
+      isPremium: false,
     },
   ];
 }

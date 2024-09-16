@@ -30,16 +30,20 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let property of properties">
+          <tr *ngFor="let property of properties"  
+          [ngStyle]="{'background': property.isPremium ? 'linear-gradient(90deg, rgba(240,112,112,1) 0%, rgba(252,228,228,1) 50%, rgba(255,255,255,1) 100%)' : 'none'}">
                 <td class="name-image p-4 border-b border-blue-gray-50" routerLink = '/property/{{property.id}}'>
                   <div class="flex items-center gap-8">
                     <img src="{{property.image}}"
                       alt="Property Image" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
                     <div class="flex flex-col">
-                      <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
+                      <p *ngIf ="property.isPremium"class="block text-lg antialiased font-bold leading-normal text-gray-50">
+                        Premijum Oglas
+                      </p>
+                      <p class="block text-sm antialiased font-semibold leading-normal text-gray-900" [ngClass]="{'font-bold': property.isPremium, 'font-semibold' : !property.isPremium}">
                         {{property.propertyName}}
                       </p>
-                      <p class="block text-xs antialiased font-normal leading-normal text-gray-700">
+                      <p class="block text-xs antialiased font-normal leading-normal"  [ngClass]="{'text-gray-900 font-semibold': property.isPremium, 'text-gray-700': !property.isPremium}">
                         {{property.address}}
                       </p>
                     </div>

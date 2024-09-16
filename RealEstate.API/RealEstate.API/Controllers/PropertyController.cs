@@ -21,7 +21,6 @@ namespace RealEstate.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult> CreateApartmentAsync([FromBody] CreateApartmentRequest apartment, CancellationToken cancellationToken)
         {
-            Console.WriteLine(apartment.floorNumber + " " + apartment.name + " " + apartment.isFurnished);
 
             var result = await _mediator.Send(new CreateApartmentCommand
             (
