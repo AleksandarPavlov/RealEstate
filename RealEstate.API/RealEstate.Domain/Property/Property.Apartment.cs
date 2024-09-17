@@ -15,7 +15,9 @@ namespace RealEstate.Domain.Property
         double sizeInMmSquared,
         bool? isFurnished,
         string? floorNumber,
-        int? numberOfRooms)
+        int? numberOfRooms,
+        double? latitude,
+        double? longitude)
     {
             var nameResult = PropertyName.Create(name);
             var locationResult = PropertyLocation.Create(location);
@@ -23,6 +25,7 @@ namespace RealEstate.Domain.Property
             var sizeInMmSquaredResult = PropertySize.Create(sizeInMmSquared);
             var propertyType = PropertyType.APARTMENT;      
             var numberOfRoomsResult = PropertyNumberOfRooms.Create(numberOfRooms ?? null);
+            var coordinatesResult = PropertyCoordinates.Create(latitude, longitude);
             
 
             var combinedResult = ResultExtensions.CombineResults(
@@ -30,14 +33,15 @@ namespace RealEstate.Domain.Property
                locationResult,
                priceResult,
                sizeInMmSquaredResult,
-               numberOfRoomsResult
+               numberOfRoomsResult,
+               coordinatesResult
            );
 
             return combinedResult.Match(
              success =>
              {
-                 var (propertyName, propertyLocation, propertyPrice, propertySize, propertyNumberOfRooms) = success;
-                 var property = new Property(propertyName, listingType, propertyType, propertyLocation, propertyPrice, propertySize, isFurnished, floorNumber, propertyNumberOfRooms);
+                 var (propertyName, propertyLocation, propertyPrice, propertySize, propertyNumberOfRooms, propertyCoordinates) = success;
+                 var property = new Property(propertyName, listingType, propertyType, propertyLocation, propertyPrice, propertySize, isFurnished, floorNumber, propertyNumberOfRooms, propertyCoordinates);
                  return Result<Property>.Success(property);
              },
              Result<Property>.Failure

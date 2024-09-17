@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
 using RealEstate.Application.Property.Commands.CreateApartment;
+using RealEstate.Application.Property.Commands.CreateHouse;
 
 namespace RealEstate.API.Controllers
 {
@@ -36,6 +37,31 @@ namespace RealEstate.API.Controllers
 
             return result.Match<ActionResult>(
                 success => Ok(success), 
+                failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
+            );
+
+        }
+
+        [HttpPost("create-house")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
+        public async Task<ActionResult> CreateHouseAsync([FromBody] CreateHouseRequest house, CancellationToken cancellationToken)
+        {
+
+            var result = await _mediator.Send(new CreateHouseCommand
+            (
+             house.name,
+             house.listingType,
+             house.location,
+             house.price,
+             house.sizeInMmSquared,
+             house.isFurnished,
+             house.floorNumber,
+             house.numberOfRooms
+         ), cancellationToken);
+
+            return result.Match<ActionResult>(
+                success => Ok(success),
                 failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
             );
 

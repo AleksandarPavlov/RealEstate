@@ -16,7 +16,18 @@ namespace RealEstate.Domain.Property
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public PropertyNumberOfRooms? NumberOfRooms { get; private set; }
-        private Property(PropertyName name, PropertyListingType listingType, PropertyType type, PropertyLocation location, PropertyPrice price, PropertySize sizeInMmSquared, bool? isFurnished, string? floorNumber, PropertyNumberOfRooms? numberOfRooms)
+        public PropertyCoordinates? Coordinates { get; private set; }
+        private Property(
+            PropertyName name, 
+            PropertyListingType listingType, 
+            PropertyType type, 
+            PropertyLocation location, 
+            PropertyPrice price, 
+            PropertySize sizeInMmSquared, 
+            bool? isFurnished, 
+            string? floorNumber, 
+            PropertyNumberOfRooms? numberOfRooms, 
+            PropertyCoordinates? coordinates)
         {
             Name = name;
             ListingType = listingType;
@@ -27,6 +38,7 @@ namespace RealEstate.Domain.Property
             IsFurnished = isFurnished;
             FloorNumber = floorNumber;
             NumberOfRooms = numberOfRooms;
+            Coordinates = coordinates;
         }
     }
 }

@@ -28,6 +28,10 @@ namespace RealEstate.Infrastructure.Configurations
             builder.Property(p => p.SizeInMmSquared).HasConversion(
                size => size.Value,
                value => PropertySize.Create(value).Value);
+
+            builder.Property(p => p.Coordinates).HasConversion(
+               coordinates => coordinates == null ? null : coordinates.ToString(),
+               value => PropertyCoordinates.CreateCoordinatesFromString(value));
         }
     }
 }
