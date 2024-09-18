@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
@@ -30,6 +29,7 @@ namespace RealEstate.API.Controllers
              apartment.location,
              apartment.price,
              apartment.sizeInMmSquared,
+             apartment.isPremium,
              apartment.isFurnished,
              apartment.floorNumber,
              apartment.numberOfRooms
@@ -55,6 +55,7 @@ namespace RealEstate.API.Controllers
              house.location,
              house.price,
              house.sizeInMmSquared,
+             house.isPremium,
              house.isFurnished,
              house.floorNumber,
              house.numberOfRooms
@@ -64,7 +65,7 @@ namespace RealEstate.API.Controllers
                 success => Ok(success),
                 failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
             );
-
         }
     }
 }
+

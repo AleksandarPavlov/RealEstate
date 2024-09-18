@@ -13,10 +13,12 @@ namespace RealEstate.Domain.Property
         public PropertyLocation Location { get; private set; }
         public PropertyPrice Price { get; private set; }
         public PropertySize SizeInMmSquared { get; private set; }
+        public bool IsPremium { get; private set; }
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public PropertyNumberOfRooms? NumberOfRooms { get; private set; }
         public PropertyCoordinates? Coordinates { get; private set; }
+
         private Property(
             PropertyName name, 
             PropertyListingType listingType, 
@@ -24,6 +26,7 @@ namespace RealEstate.Domain.Property
             PropertyLocation location, 
             PropertyPrice price, 
             PropertySize sizeInMmSquared, 
+            bool isPremium,
             bool? isFurnished, 
             string? floorNumber, 
             PropertyNumberOfRooms? numberOfRooms, 
@@ -35,6 +38,7 @@ namespace RealEstate.Domain.Property
             Location = location;
             Price = price;
             SizeInMmSquared = sizeInMmSquared;
+            IsPremium = isPremium;
             IsFurnished = isFurnished;
             FloorNumber = floorNumber;
             NumberOfRooms = numberOfRooms;

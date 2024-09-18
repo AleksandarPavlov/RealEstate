@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using RealEstate.API.Contracts.Coordinates;
 using RealEstate.Domain.Common.Dtos;
 using RealEstate.Domain.Services;
 
@@ -19,7 +20,7 @@ namespace RealEstate.Infrastructure.Services
             _apiKey = _configuration["Geocode:Key"];
         }
 
-        public async Task<CoordinatesResponse?> FetchCoordinates(string address)
+        public async Task<Coordinates?> FetchCoordinates(string address)
         {
             try
             {
@@ -34,14 +35,18 @@ namespace RealEstate.Infrastructure.Services
                     return null;
                 }
 
-                return coordinatesList[0];
+                var firstCoordinatesMatch = coordinatesList[0];
+
+                var coordinates = new Coordinates(firstCoordinatesMatch.Lat, firstCoordinatesMatch.Lon);
+
+                return coordinates;
 
                 }
 
                 catch (HttpRequestException e)
                 {
                     throw new Exception("Error fetching coordinates", e);
-                }
+            }
         
         }
 

@@ -21,7 +21,7 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
 
         public async Task<Result<DomainProperty>> Handle(CreateHouseCommand request, CancellationToken cancellationToken)
         {
-            var locationCoordinates = await _coordinatesService.FetchCoordinates(request.location);
+            var locationCoordinates = await _coordinatesService.FetchCoordinates(request.Location);
 
             double? latitude = null;
             double? longitude = null;
@@ -33,14 +33,15 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
             }
 
             var houseResult = DomainProperty.CreateHouseProperty(
-                request.name,
-                request.listingType,
-                request.location,
-                request.price,
-                request.sizeInMmSquared,
-                request.isFurnished,
-                request.floorNumber,
-                request.numberOfRooms,
+                request.Name,
+                request.ListingType,
+                request.Location,
+                request.Price,
+                request.SizeInMmSquared,
+                request.IsFurnished,
+                request.IsPremium,
+                request.FloorNumber,
+                request.NumberOfRooms,
                 latitude,
                 longitude
             );

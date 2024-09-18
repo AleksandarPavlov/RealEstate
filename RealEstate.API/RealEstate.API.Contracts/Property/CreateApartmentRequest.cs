@@ -10,9 +10,10 @@ namespace RealEstate.API.Contracts.Property
         string location,
         int price,
         double sizeInMmSquared,
-        bool? isFurnished,
-        string? floorNumber,
-        int? numberOfRooms
+        bool isPremium,
+        bool isFurnished,
+        string floorNumber,
+        int numberOfRooms
     );
 
 }

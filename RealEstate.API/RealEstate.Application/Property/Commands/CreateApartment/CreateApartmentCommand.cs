@@ -6,14 +6,15 @@ using DomainProperty = RealEstate.Domain.Property.Property;
 namespace RealEstate.Application.Property.Commands.CreateApartment
 {
     public record CreateApartmentCommand(
-        string name,
-        PropertyListingType listingType,
-        string location,
-        int price,
-        double sizeInMmSquared,
-        bool? isFurnished,
-        string? floorNumber,
-        int? numberOfRooms
+        string Name,
+        PropertyListingType ListingType,
+        string Location,
+        int Price,
+        double SizeInMmSquared,
+        bool IsPremium,
+        bool IsFurnished,
+        string FloorNumber,
+        int NumberOfRooms
         ) : IRequest<Result<DomainProperty>>;
 
 }

@@ -13,6 +13,6 @@ namespace RealEstate.Infrastructure.Persistance
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
-
+        
     }
 }

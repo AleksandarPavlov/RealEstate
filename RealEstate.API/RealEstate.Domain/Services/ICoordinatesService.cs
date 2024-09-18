@@ -5,6 +5,6 @@ namespace RealEstate.Domain.Services
 {
     public interface ICoordinatesService
     {
-        Task<CoordinatesResponse?> FetchCoordinates(string address);
+        Task<Coordinates?> FetchCoordinates(string address);
     }
 }
