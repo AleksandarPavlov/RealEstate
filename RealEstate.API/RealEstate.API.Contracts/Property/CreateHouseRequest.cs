@@ -4,14 +4,14 @@ namespace RealEstate.API.Contracts.Property
 {
     public record CreateHouseRequest
     (
-         string name,
-         PropertyListingType listingType,
-         string location,
-         int price,
-         double sizeInMmSquared,
-         bool isPremium,
-         bool isFurnished,
-         string floorNumber,
-         int numberOfRooms
+         string Name,
+         PropertyListingType ListingType,
+         string Location,
+         int Price,
+         double SizeInMmSquared,
+         bool IsPremium,
+         bool IsFurnished,
+         string FloorNumber,
+         int NumberOfRooms
     );
 }

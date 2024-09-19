@@ -22,7 +22,7 @@ namespace RealEstate.Infrastructure.Configurations
                value => PropertyPrice.Create(value).Value);
 
             builder.Property(p => p.NumberOfRooms).HasConversion(
-               numberOfRooms => numberOfRooms != null ? numberOfRooms.Value : (int?)null, 
+               numberOfRooms => numberOfRooms != null ? numberOfRooms.Value : null, 
                value => value.HasValue ? PropertyNumberOfRooms.Create(value.Value).Value : null);
 
             builder.Property(p => p.SizeInMmSquared).HasConversion(

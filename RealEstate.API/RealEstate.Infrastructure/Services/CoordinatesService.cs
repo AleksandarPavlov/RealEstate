@@ -12,19 +12,21 @@ namespace RealEstate.Infrastructure.Services
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly string? _apiKey;
+        private readonly string? _geoApiUrl;
 
         public CoordinatesService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
             _configuration = configuration;
             _apiKey = _configuration["Geocode:Key"];
+            _geoApiUrl = _configuration["Geocode:ApiUrl"];
         }
 
         public async Task<Coordinates?> FetchCoordinates(string address)
         {
             try
             {
-                var url = $"https://geocode.maps.co/search?q={Uri.EscapeDataString(address)}&api_key={_apiKey}";
+                var url = $"{_geoApiUrl}/search?q={Uri.EscapeDataString(address)}&api_key={_apiKey}";
 
                 var response = await _httpClient.GetStringAsync(url);
 

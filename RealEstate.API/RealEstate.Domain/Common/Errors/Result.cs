@@ -32,4 +32,6 @@ public class Result<T>
     {
         return IsSuccess ? onSuccess(Value) : onFailure(Error);
     }
+
+    public static implicit operator Result<T>(T value) => Success(value);
 }
