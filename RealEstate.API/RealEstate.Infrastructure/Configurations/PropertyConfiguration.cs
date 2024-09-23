@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RealEstate.Domain.Property;
 using RealEstate.Domain.Property.ValueObjects;
 
-namespace RealEstate.Infrastructure.Configurations
+/*namespace RealEstate.Infrastructure.Configurations
 {
     internal class PropertyConfiguration : IEntityTypeConfiguration<Property>
     {
@@ -35,3 +35,4 @@ namespace RealEstate.Infrastructure.Configurations
         }
     }
 }
+*/

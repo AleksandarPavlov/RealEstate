@@ -22,7 +22,7 @@ namespace RealEstate.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("RealEstate.Domain.Property.Property", b =>
+            modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.Property", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

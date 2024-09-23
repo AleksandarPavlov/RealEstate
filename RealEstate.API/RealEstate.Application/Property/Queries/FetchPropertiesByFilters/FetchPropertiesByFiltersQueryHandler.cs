@@ -1,8 +1,8 @@
 ﻿
 using MediatR;
 using RealEstate.Application.Property.Dtos;
+using RealEstate.Domain.Persistance;
 using RealEstate.Domain.Persistance.Read;
-using RealEstate.Infrastructure.Persistance;
 using DomainProperty = RealEstate.Domain.Property.Property;
 
 namespace RealEstate.Application.Property.Queries.FetchPropertiesByFilters

@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using RealEstate.Domain.Property;
+using RealEstate.Infrastructure.Persistance.Entities;
 
 namespace RealEstate.Infrastructure.Persistance
 {
@@ -10,10 +10,10 @@ namespace RealEstate.Infrastructure.Persistance
               : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+/*        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-        }
+        }*/
 
         public DbSet<Property> Property { get; set; } = null!;
 

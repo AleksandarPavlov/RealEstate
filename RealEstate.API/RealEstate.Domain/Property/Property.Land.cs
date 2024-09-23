@@ -8,6 +8,7 @@ namespace RealEstate.Domain.Property
     public partial class Property
     {
         public static Result<Property> CreateLandProperty(
+            long id,
             string name,
             PropertyListingType listingType,
             string location,
@@ -37,7 +38,7 @@ namespace RealEstate.Domain.Property
                  success =>
                  {
                      var (propertyName, propertyLocation, propertyPrice, propertySize, propertyCoordinates) = success;
-                     var property = new Property(propertyName, listingType, propertyType, propertyLocation, propertyPrice, propertySize, isPremium, null, null, null, propertyCoordinates);
+                     var property = new Property(id, propertyName, listingType, propertyType, propertyLocation, propertyPrice, propertySize, isPremium, null, null, null, propertyCoordinates);
                      return Result<Property>.Success(property);
                  },
                  Result<Property>.Failure

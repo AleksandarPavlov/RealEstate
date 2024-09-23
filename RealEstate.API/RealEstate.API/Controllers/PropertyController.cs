@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
+using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
 
 namespace RealEstate.API.Controllers
 {
@@ -91,15 +91,31 @@ namespace RealEstate.API.Controllers
             );
         }
 
-      /*  [HttpGet]
+        [HttpGet]
         [ActionName(nameof(GetByQueryParamsAsync))]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<PropertyResponse>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PropertyResponse>))]
         public async Task<ActionResult<IEnumerable<PropertyResponse>>> GetByQueryParamsAsync(
         [FromQuery] PropertiesByFilterRequest propertiesByFilterRequest)
         {
-            return await _mediator
-                .Send();
-        }*/
+            var result = await _mediator
+                .Send(new FetchPropertiesByFiltersQuery
+                (
+                    propertiesByFilterRequest.City,
+                    propertiesByFilterRequest.ListingType,
+                    propertiesByFilterRequest.PropertyType,
+                    propertiesByFilterRequest.SizeFrom,
+                    propertiesByFilterRequest.PriceTo,
+                    propertiesByFilterRequest.GroundFloor,
+                    propertiesByFilterRequest.NumberOfRooms,
+                    propertiesByFilterRequest.Page,
+                    propertiesByFilterRequest.PageSize
+                ));
+
+            return result.Match<ActionResult>(
+                success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),
+                failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
     }
 }
 

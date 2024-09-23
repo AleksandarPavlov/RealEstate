@@ -17,8 +17,13 @@ namespace RealEstate.Domain.Property.ValueObjects
             ? Result<PropertyCoordinates>.Success(new PropertyCoordinates(null, null))
             : Result<PropertyCoordinates>.Success(new PropertyCoordinates(latitudeValue, longitudeValue));
 
-        public override string ToString()
+        public override string? ToString()
         {
+            if (!Latitude.HasValue || !Longitude.HasValue)
+            {
+                return null; 
+            }
+
             return Latitude.ToString() + ',' + Longitude.ToString();
         }
 

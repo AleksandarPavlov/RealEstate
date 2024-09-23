@@ -1,19 +1,19 @@
 ﻿using MediatR;
 using RealEstate.Application.Property.Commands.CreateHouse;
 using RealEstate.Domain.Persistance;
+using RealEstate.Domain.Persistance.Write;
 using RealEstate.Domain.Services;
-using RealEstate.Infrastructure.Persistance;
 using DomainProperty = RealEstate.Domain.Property.Property;
 
 namespace RealEstate.Application.Property.Commands.CreateLand
 {
     public class CreateLandCommandHandler : IRequestHandler<CreateLandCommand, Result<DomainProperty>>
     {
-        private readonly IEntityRepository<DomainProperty> _propertyRepository;
+        private readonly IPropertyWriteRepository _propertyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICoordinatesService _coordinatesService;
 
-        public CreateLandCommandHandler(IEntityRepository<DomainProperty> propertyRepository, IUnitOfWork unitOfWork, ICoordinatesService coordinatesService)
+        public CreateLandCommandHandler(IPropertyWriteRepository propertyRepository, IUnitOfWork unitOfWork, ICoordinatesService coordinatesService)
         {
             _propertyRepository = propertyRepository;
             _unitOfWork = unitOfWork;
@@ -34,6 +34,7 @@ namespace RealEstate.Application.Property.Commands.CreateLand
             }
 
             var landResult = DomainProperty.CreateLandProperty(
+                0,
                 request.Name,
                 request.ListingType,
                 request.Location,

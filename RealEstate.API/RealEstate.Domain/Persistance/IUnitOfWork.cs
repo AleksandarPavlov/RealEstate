@@ -1,9 +1,7 @@
-﻿
-namespace RealEstate.Infrastructure.Persistance
+﻿namespace RealEstate.Domain.Persistance
 {
     public interface IUnitOfWork
     {
-        void Commit();
         Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

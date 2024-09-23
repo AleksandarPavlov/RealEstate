@@ -5,8 +5,7 @@ namespace RealEstate.Domain.Common.Enums
     {
         APARTMENT = 0,
         HOUSE = 1,
-        BUSINESS_PREMISE = 2,
-        LAND = 3,
-        PARKING =4
+        LAND = 2,
+        UNKNOWN =3
     }
 }

@@ -12,7 +12,7 @@ namespace RealEstate.Application.Property.Dtos
         int? PriceTo,
         bool? GroundFloor,
         int? NumberOfRooms,
-        int? Page = 0,
-        int? PageSize = 10
+        int Page = 0,
+        int PageSize = 10
         );
 }

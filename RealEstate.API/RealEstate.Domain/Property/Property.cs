@@ -20,6 +20,7 @@ namespace RealEstate.Domain.Property
         public PropertyCoordinates? Coordinates { get; private set; }
 
         private Property(
+            long id,
             PropertyName name, 
             PropertyListingType listingType, 
             PropertyType type, 
@@ -32,6 +33,7 @@ namespace RealEstate.Domain.Property
             PropertyNumberOfRooms? numberOfRooms, 
             PropertyCoordinates? coordinates)
         {
+            Id = id;
             Name = name;
             ListingType = listingType;
             Type = type;

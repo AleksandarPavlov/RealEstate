@@ -12,8 +12,8 @@ using RealEstate.Infrastructure.Persistance;
 namespace RealEstate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240918082215_Coordinates")]
-    partial class Coordinates
+    [Migration("20240923120759_AddPrimaryKey")]
+    partial class AddPrimaryKey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace RealEstate.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("RealEstate.Domain.Property.Property", b =>
+            modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.Property", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

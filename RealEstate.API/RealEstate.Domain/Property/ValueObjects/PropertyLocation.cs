@@ -1,9 +1,11 @@
 ﻿
+using RealEstate.Domain.Common;
 using RealEstate.Domain.Common.Errors;
+using System.Diagnostics.Metrics;
 
 namespace RealEstate.Domain.Property.ValueObjects
 {
-    public class PropertyLocation
+    public class PropertyLocation : BaseValueObject
     {
         private PropertyLocation(string value)
         {
@@ -20,6 +22,10 @@ namespace RealEstate.Domain.Property.ValueObjects
         public override string ToString()
         {
             return Value;
+        }
+        protected override IEnumerable<object?> GetEqualityComponents()
+        {
+            yield return Value;
         }
     }
 }
