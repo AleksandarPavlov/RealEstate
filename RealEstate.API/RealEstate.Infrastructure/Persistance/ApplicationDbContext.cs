@@ -1,18 +1,21 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using RealEstate.Infrastructure.Persistance.Entities;
 
 namespace RealEstate.Infrastructure.Persistance
 {
     public class ApplicationDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+              : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=RealEstate;Trusted_Connection=True;Encrypt=false;");
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+/*        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-        }
+        }*/
+
+        public DbSet<Property> Property { get; set; } = null!;
 
     }
 }

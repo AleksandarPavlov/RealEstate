@@ -1,0 +1,10 @@
+.tabs li{
+    cursor: pointer;
+    transition: 0.2s;
+}
+.banner{
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/images/form-banner4.jpg');
+    background-size: cover;
+    background-position: center;
+}

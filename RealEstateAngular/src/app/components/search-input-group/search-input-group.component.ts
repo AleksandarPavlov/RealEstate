@@ -8,14 +8,14 @@ import { SelectOption } from 'src/app/models/select-option-model';
 })
 export class SearchInputGroupComponent {
   listingSelectOptions: SelectOption[] = [
-    { label: 'Rent', value: 'Rent' },
-    { label: 'Sell', value: 'Sell' },
+    { label: 'Izdavanje', value: 'Rent' },
+    { label: 'Prodaja', value: 'Sell' },
   ];
 
   typeSelectOptions: SelectOption[] = [
-    { label: 'Apartment', value: 'Apartment' },
-    { label: 'House', value: 'House' },
+    { label: 'Stan', value: 'Apartment' },
+    { label: 'Kuća', value: 'House' },
     { label: 'Parking', value: 'Parking' },
-    { label: 'Land', value: 'Land' },
+    { label: 'Zemljište', value: 'Land' },
   ];
 }
