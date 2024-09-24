@@ -10,12 +10,18 @@ namespace RealEstate.Infrastructure.Persistance
               : base(options)
         {
         }
-/*        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-        }*/
 
         public DbSet<Property> Property { get; set; } = null!;
+        public DbSet<PropertyImage> PropertyImage { get; set; } = null!;
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Property>()
+              .HasMany(p => p.Images) 
+              .WithOne(img => img.Property)
+              .HasForeignKey(img => img.PropertyId) 
+              .OnDelete(DeleteBehavior.Cascade); 
+
+        }
     }
 }

@@ -19,22 +19,24 @@ namespace RealEstate.API.Controllers
         } 
 
         [HttpPost("create-apartment")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<ActionResult> CreateApartmentAsync([FromBody] CreateApartmentRequest apartmentRequest, CancellationToken cancellationToken)
+        public async Task<ActionResult> CreateApartmentAsync([FromForm] CreateApartmentRequest apartmentRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
 
             var result = await _mediator.Send(new CreateApartmentCommand
             (
              apartmentRequest.Name,
              apartmentRequest.ListingType,
-             apartmentRequest.Location,
+             apartmentRequest.City,
+             apartmentRequest.Address,
              apartmentRequest.Price,
              apartmentRequest.SizeInMmSquared,
              apartmentRequest.IsPremium,
              apartmentRequest.IsFurnished,
              apartmentRequest.FloorNumber,
-             apartmentRequest.NumberOfRooms
+             apartmentRequest.NumberOfRooms,
+             images
          ), cancellationToken);
 
             return result.Match<ActionResult>(
@@ -45,22 +47,24 @@ namespace RealEstate.API.Controllers
         }
 
         [HttpPost("create-house")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<ActionResult> CreateHouseAsync([FromBody] CreateHouseRequest houseRequest, CancellationToken cancellationToken)
+        public async Task<ActionResult> CreateHouseAsync([FromBody] CreateHouseRequest houseRequest, IFormFile mainImage, CancellationToken cancellationToken)
         {
 
             var result = await _mediator.Send(new CreateHouseCommand
             (
              houseRequest.Name,
              houseRequest.ListingType,
-             houseRequest.Location,
+             houseRequest.City,
+             houseRequest.Address,
              houseRequest.Price,
              houseRequest.SizeInMmSquared,
              houseRequest.IsPremium,
              houseRequest.IsFurnished,
              houseRequest.FloorNumber,
-             houseRequest.NumberOfRooms
+             houseRequest.NumberOfRooms,
+             houseRequest.Images
          ), cancellationToken);
 
             return result.Match<ActionResult>(
@@ -70,19 +74,21 @@ namespace RealEstate.API.Controllers
         }
 
         [HttpPost("create-land")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<ActionResult> CreateLandAsync([FromBody] CreateLandRequest landRequest, CancellationToken cancellationToken)
+        public async Task<ActionResult> CreateLandAsync([FromBody] CreateLandRequest landRequest, IFormFile mainImage,CancellationToken cancellationToken)
         {
 
             var result = await _mediator.Send(new CreateLandCommand
             (
              landRequest.Name,
              landRequest.ListingType,
-             landRequest.Location,
+             landRequest.City,
+             landRequest.Address,
              landRequest.Price,
              landRequest.SizeInMmSquared,
-             landRequest.IsPremium
+             landRequest.IsPremium,
+             landRequest.Images
          ), cancellationToken);
 
             return result.Match<ActionResult>(

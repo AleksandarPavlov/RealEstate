@@ -21,7 +21,7 @@ namespace RealEstate.Infrastructure.Persistance.Read
 
             if (!string.IsNullOrEmpty(filters.City))
             {
-                query = query.Where(p => p.Location == filters.City);
+                query = query.Where(p => p.City == filters.City);
             }
 
             if (filters.ListingType.HasValue)

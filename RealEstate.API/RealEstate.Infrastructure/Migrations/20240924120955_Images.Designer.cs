@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstate.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using RealEstate.Infrastructure.Persistance;
 namespace RealEstate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240924120955_Images")]
+    partial class Images
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,24 +87,34 @@ namespace RealEstate.Infrastructure.Migrations
                     b.Property<long>("PropertyId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("PropertyId1")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropertyId");
+                    b.HasIndex("PropertyId")
+                        .IsUnique();
+
+                    b.HasIndex("PropertyId1");
 
                     b.ToTable("PropertyImage");
                 });
 
             modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.PropertyImage", b =>
                 {
-                    b.HasOne("RealEstate.Infrastructure.Persistance.Entities.Property", "Property")
-                        .WithMany("Images")
-                        .HasForeignKey("PropertyId")
+                    b.HasOne("RealEstate.Infrastructure.Persistance.Entities.Property", null)
+                        .WithOne("MainImage")
+                        .HasForeignKey("RealEstate.Infrastructure.Persistance.Entities.PropertyImage", "PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("RealEstate.Infrastructure.Persistance.Entities.Property", "Property")
+                        .WithMany("Images")
+                        .HasForeignKey("PropertyId1");
 
                     b.Navigation("Property");
                 });
@@ -109,6 +122,8 @@ namespace RealEstate.Infrastructure.Migrations
             modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.Property", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("MainImage");
                 });
 #pragma warning restore 612, 618
         }

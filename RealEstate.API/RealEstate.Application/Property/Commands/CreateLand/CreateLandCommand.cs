@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using RealEstate.Domain.Common.Enums;
 using DomainProperty = RealEstate.Domain.Property.Property;
 
@@ -7,9 +8,11 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
     public record CreateLandCommand(
         string Name,
         PropertyListingType ListingType,
-        string Location,
+        string City,
+        string? Address,
         int Price,
         double SizeInMmSquared,
-        bool IsPremium
+        bool IsPremium,
+        IEnumerable<IFormFile>? Images
      ) : IRequest<Result<DomainProperty>>;
 }

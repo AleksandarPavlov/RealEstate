@@ -10,14 +10,16 @@ public record PropertyResponse
     string Name,
     PropertyListingType ListingType,
     PropertyType Type,
-    string Location,
+    string City,
+    string? Address,
     int Price,
     double SizeInMmSquared,
     bool IsPremium,
     bool? IsFurnished,
     string? FloorNumber,
     int? NumberOfRooms,
-    CoordinatesResponse? Coordinates
+    CoordinatesResponse? Coordinates,
+    IEnumerable<string>? Images
 );
 
 

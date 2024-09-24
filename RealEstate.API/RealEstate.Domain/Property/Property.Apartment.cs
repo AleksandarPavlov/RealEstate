@@ -11,7 +11,8 @@ namespace RealEstate.Domain.Property
             long id,
             string name,
             PropertyListingType listingType,
-            string location,
+            string city,
+            string? address,
             int price,
             double sizeInMmSquared,
             bool isPremium,
@@ -19,10 +20,11 @@ namespace RealEstate.Domain.Property
             string floorNumber,
             int numberOfRooms,
             double? latitude,
-            double? longitude)
+            double? longitude,
+            IEnumerable<string>? images)
     {
             var nameResult = PropertyName.Create(name);
-            var locationResult = PropertyLocation.Create(location);
+            var locationResult = PropertyLocation.Create(city, address);
             var priceResult = PropertyPrice.Create(price);
             var sizeInMmSquaredResult = PropertySize.Create(sizeInMmSquared);
             var propertyType = PropertyType.APARTMENT;      
@@ -43,7 +45,22 @@ namespace RealEstate.Domain.Property
              success =>
              {
                  var (propertyName, propertyLocation, propertyPrice, propertySize, propertyNumberOfRooms, propertyCoordinates) = success;
-                 var property = new Property(id, propertyName, listingType, propertyType, propertyLocation, propertyPrice, propertySize, isPremium, isFurnished, floorNumber, propertyNumberOfRooms, propertyCoordinates);
+
+                 var property = new Property(
+                     id, 
+                     propertyName, 
+                     listingType, 
+                     propertyType, 
+                     propertyLocation, 
+                     propertyPrice, 
+                     propertySize, 
+                     isPremium, 
+                     isFurnished, 
+                     floorNumber, 
+                     propertyNumberOfRooms, 
+                     propertyCoordinates, 
+                     images);
+
                  return Result<Property>.Success(property);
              },
              Result<Property>.Failure

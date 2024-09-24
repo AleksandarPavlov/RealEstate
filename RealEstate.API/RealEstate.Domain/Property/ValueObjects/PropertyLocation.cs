@@ -1,31 +1,28 @@
 ﻿
-using RealEstate.Domain.Common;
 using RealEstate.Domain.Common.Errors;
-using System.Diagnostics.Metrics;
 
 namespace RealEstate.Domain.Property.ValueObjects
 {
-    public class PropertyLocation : BaseValueObject
+    public class PropertyLocation
     {
-        private PropertyLocation(string value)
+        private PropertyLocation(string city, string? address)
         {
-            Value = value;
+            City = city;
+            Address = address;
         }
 
-        public string Value { get; }
-        public static Result<PropertyLocation> Create(string value)
+        public string City { get; }
+        public string? Address { get; }
+        public static Result<PropertyLocation> Create(string city, string? address)
         {
-            return string.IsNullOrWhiteSpace(value)
-               ? Result<PropertyLocation>.Failure(new Error("PropertyLocation", $"Invalid value '{value}' for PropertyLocation"))
-               : Result<PropertyLocation>.Success(new PropertyLocation(value));
+            return string.IsNullOrWhiteSpace(city)
+               ? Result<PropertyLocation>.Failure(new Error("PropertyLocation", $"Invalid value '{city}' and '{address}' for PropertyLocation"))
+               : Result<PropertyLocation>.Success(new PropertyLocation(city, address));
         }
         public override string ToString()
         {
-            return Value;
+            return Address + ", " + City;
         }
-        protected override IEnumerable<object?> GetEqualityComponents()
-        {
-            yield return Value;
-        }
+
     }
 }

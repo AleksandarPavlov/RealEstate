@@ -12,7 +12,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public string Name { get; set; } = string.Empty;
         public PropertyListingType ListingType { get; private set; } = PropertyListingType.UNKNOWN;
         public PropertyType Type { get; private set; } = PropertyType.UNKNOWN;
-        public string Location { get; private set; } = string.Empty;
+        public string City { get; private set; } = string.Empty;
+        public string? Address { get; private set; }
         public int Price { get; private set; }
         public double SizeInMmSquared { get; private set; }
         public bool IsPremium { get; private set; } = false;
@@ -20,13 +21,15 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public string? FloorNumber { get; private set; }
         public int? NumberOfRooms { get; private set; }
         public string? Coordinates { get; private set; }
+        public ICollection<PropertyImage>? Images { get; private set; }
 
         public Property(
             long id,
             string name,
             PropertyListingType listingType,
             PropertyType type,
-            string location,
+            string city,
+            string? address,
             int price,
             double sizeInMmSquared,
             bool isPremium,
@@ -39,7 +42,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             Name = name;
             ListingType = listingType;
             Type = type;
-            Location = location;
+            City = city;
+            Address = address;
             Price = price;
             SizeInMmSquared = sizeInMmSquared;
             IsPremium = isPremium;
@@ -60,7 +64,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Id,
                         entity.Name,
                         entity.ListingType,
-                        entity.Location,
+                        entity.City,
+                        entity.Address,
                         entity.Price,
                         entity.SizeInMmSquared,
                         entity.IsPremium,
@@ -68,8 +73,9 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.FloorNumber ?? string.Empty,
                         entity.NumberOfRooms ?? 0,
                         coordinates.Latitude,
-                        coordinates.Longitude                     
-                        ) ;
+                        coordinates.Longitude,
+                        entity.Images?.Select(image => image.Url)
+                        );
 
                 case PropertyType.HOUSE:
                     return DomainProperty.CreateHouseProperty
@@ -77,7 +83,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Id,
                         entity.Name,
                         entity.ListingType,
-                        entity.Location,
+                        entity.City,
+                        entity.Address,
                         entity.Price,
                         entity.SizeInMmSquared,
                         entity.IsPremium,
@@ -85,7 +92,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.FloorNumber ?? string.Empty,
                         entity.NumberOfRooms ?? 0,
                         coordinates.Latitude,
-                        coordinates.Longitude
+                        coordinates.Longitude,
+                        entity.Images?.Select(image => image.Url)
                         );
 
                 case PropertyType.LAND:
@@ -94,12 +102,14 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Id,
                         entity.Name,
                         entity.ListingType,
-                        entity.Location,
+                        entity.City,
+                        entity.Address,
                         entity.Price,
                         entity.SizeInMmSquared,
                         entity.IsPremium,
                         coordinates.Latitude,
-                        coordinates.Longitude
+                        coordinates.Longitude,
+                        entity.Images?.Select(image => image.Url)
                         ); ;
 
                 default:
@@ -110,13 +120,14 @@ namespace RealEstate.Infrastructure.Persistance.Entities
 
         public static Property FromDomain(DomainProperty entity) {
 
-            return new Property
+            var property = new Property
                 (
                 entity.Id,
                 entity.Name.Value,
                 entity.ListingType,
                 entity.Type,
-                entity.Location.Value,
+                entity.Location.City,
+                entity.Location.Address,
                 entity.Price.Value,
                 entity.SizeInMmSquared.Value,
                 entity.IsPremium,
@@ -126,6 +137,11 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                 entity.Coordinates?.ToString()
                 );
 
+            if (entity.Images != null && entity.Images.Any()) {
+                property.Images = entity.Images.Select(image => new PropertyImage(image)).ToList();
+            }
+
+            return property;
         }
 
     }

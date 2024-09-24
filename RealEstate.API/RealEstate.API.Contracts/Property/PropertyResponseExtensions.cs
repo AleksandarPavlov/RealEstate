@@ -14,15 +14,17 @@ namespace RealEstate.API.Contracts.Property
                 property.Name.Value,
                 property.ListingType,
                 property.Type,
-                property.Location.Value,
+                property.Location.City,
+                property.Location.Address,
                 property.Price.Value,
                 property.SizeInMmSquared.Value,
                 property.IsPremium,
                 property.IsFurnished,
                 property.FloorNumber,
                 property.NumberOfRooms?.Value ?? null,
-                CoordinatesResponseExtensions.ToContract(property.Coordinates)
-            );
+                CoordinatesResponseExtensions.ToContract(property.Coordinates),
+                property.Images
+            ); ;
         
         }
     }

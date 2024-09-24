@@ -20,7 +20,7 @@ namespace RealEstate.Domain.Property.ValueObjects
                ? Result<PropertyNumberOfRooms>.Failure(new Error("PropertyNumberOfRooms", $"Invalid value '{value}' for PropertyNumberOfRooms"))
                : Result<PropertyNumberOfRooms>.Success(new PropertyNumberOfRooms(value));
         }
-        public override string ToString()
+        public override string? ToString()
         {
             return Value.ToString();
         }

@@ -22,11 +22,13 @@ namespace RealEstate.Infrastructure.Services
             _geoApiUrl = _configuration["Geocode:ApiUrl"];
         }
 
-        public async Task<Coordinates?> FetchCoordinates(string address)
+        public async Task<Coordinates?> FetchCoordinates(string city, string? address)
         {
             try
             {
-                var url = $"{_geoApiUrl}/search?q={Uri.EscapeDataString(address)}&api_key={_apiKey}";
+                var location = (city + ", " + address).Trim();
+
+                var url = $"{_geoApiUrl}/search?q={Uri.EscapeDataString(location)}&api_key={_apiKey}";
 
                 var response = await _httpClient.GetStringAsync(url);
 

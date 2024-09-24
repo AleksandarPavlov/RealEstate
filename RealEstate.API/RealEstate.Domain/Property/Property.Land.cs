@@ -11,15 +11,17 @@ namespace RealEstate.Domain.Property
             long id,
             string name,
             PropertyListingType listingType,
-            string location,
+            string city,
+            string? address,
             int price,
             double sizeInMmSquared,
             bool isPremium,
             double? latitude,
-            double? longitude)
+            double? longitude,
+            IEnumerable<string>? images)
             {
                 var nameResult = PropertyName.Create(name);
-                var locationResult = PropertyLocation.Create(location);
+                var locationResult = PropertyLocation.Create(city, address);
                 var priceResult = PropertyPrice.Create(price);
                 var sizeInMmSquaredResult = PropertySize.Create(sizeInMmSquared);
                 var propertyType = PropertyType.LAND;
@@ -38,7 +40,22 @@ namespace RealEstate.Domain.Property
                  success =>
                  {
                      var (propertyName, propertyLocation, propertyPrice, propertySize, propertyCoordinates) = success;
-                     var property = new Property(id, propertyName, listingType, propertyType, propertyLocation, propertyPrice, propertySize, isPremium, null, null, null, propertyCoordinates);
+
+                     var property = new Property(
+                         id, 
+                         propertyName, 
+                         listingType, 
+                         propertyType, 
+                         propertyLocation, 
+                         propertyPrice, 
+                         propertySize, 
+                         isPremium, 
+                         null, 
+                         null, 
+                         null, 
+                         propertyCoordinates, 
+                         images);
+
                      return Result<Property>.Success(property);
                  },
                  Result<Property>.Failure

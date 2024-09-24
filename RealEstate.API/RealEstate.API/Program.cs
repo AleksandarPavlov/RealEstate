@@ -25,6 +25,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPropertyReadRepository, PropertyReadRepository>();
 builder.Services.AddScoped<IPropertyWriteRepository, PropertyWriteRepository>();
 builder.Services.AddScoped<ICoordinatesService, CoordinatesService>();
+builder.Services.AddScoped<IImageStorageService, ImageStorageService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateApartmentCommandHandler).Assembly));
 
 
