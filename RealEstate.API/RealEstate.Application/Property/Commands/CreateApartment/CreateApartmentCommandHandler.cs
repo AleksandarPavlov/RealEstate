@@ -35,16 +35,12 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
                 longitude = double.Parse(locationCoordinates.Lon);
             }
 
-            var mainImageResult = await _imageStorageService.UploadToExternalApi(request.Images?.FirstOrDefault());
 
-            IEnumerable<string>? mainImageDisplayUrl = null;
+            var imagesResult = (request.Images != null && request.Images.Any()) 
+                ? await _imageStorageService.UploadToExternalApi(request.Images) 
+                : null;
 
-            if (mainImageResult != null) {
-
-                mainImageDisplayUrl = new List<string> { mainImageResult.DisplayUrl };
-
-            }
-
+            
             var apartmentResult = DomainProperty.CreateApartmentProperty(
                 0,
                 request.Name,
@@ -59,8 +55,8 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
                 request.NumberOfRooms,
                 latitude,
                 longitude,
-                mainImageDisplayUrl
-            );
+                imagesResult?.Select(image => image.DisplayUrl)
+                );
 
             return await apartmentResult.Match(
                 async apartment =>

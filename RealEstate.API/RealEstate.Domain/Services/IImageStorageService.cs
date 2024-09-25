@@ -7,6 +7,6 @@ namespace RealEstate.Domain.Services
 {
     public interface IImageStorageService
     {
-        Task<ImageData?> UploadToExternalApi(IFormFile? image);
+        Task<IEnumerable<ImageData>> UploadToExternalApi(IEnumerable<IFormFile> images);
     }
 }

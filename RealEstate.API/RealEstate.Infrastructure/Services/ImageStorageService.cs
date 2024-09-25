@@ -26,50 +26,54 @@ namespace RealEstate.Infrastructure.Services
             _storageApiUrl = _configuration["ImageStorage:ApiUrl"];
         }
 
-        public async Task<ImageData?> UploadToExternalApi(IFormFile? image)
+        public async Task<IEnumerable<ImageData>> UploadToExternalApi(IEnumerable<IFormFile> images)
         {
-            if (image == null) {
-                return null;
-            }
-            using var imageStream = image.OpenReadStream();
-
-            using var originalImage = Image.FromStream(imageStream);
-
-            var resizedImage = ScaleImage(originalImage, 400);
-
-            using var memoryStream = new MemoryStream();
-
-            resizedImage.Save(memoryStream, ImageFormat.Jpeg);
-
-            var imageBytes = memoryStream.ToArray();
-
-            var base64Image = Convert.ToBase64String(imageBytes);
-
-            var form = new MultipartFormDataContent
-            {
-                { new StringContent(base64Image), "image" }
-            };
-
             var url = $"{_storageApiUrl}?key={_apiKey}";
 
-            var response = await _httpClient.PostAsync(url, form);
-
-            if (response.IsSuccessStatusCode)
+            var uploadTasks = images.Select(async image =>
             {
+                using var imageStream = image.OpenReadStream();
+
+                using var originalImage = Image.FromStream(imageStream);
+
+                var resizedImage = ScaleImage(originalImage, 400);
+
+                using var memoryStream = new MemoryStream();
+
+                resizedImage.Save(memoryStream, ImageFormat.Jpeg);
+
+                var imageBytes = memoryStream.ToArray();
+
+                var base64Image = Convert.ToBase64String(imageBytes);
+
+                var stringContent = new StringContent(base64Image);
+
+                var form = new MultipartFormDataContent
+                {
+                    { stringContent, "image" }
+                };
+
+                var response = await _httpClient.PostAsync(url, form);
+
                 var jsonResponse = await response.Content.ReadAsStringAsync();
 
-                var apiResponse = JsonConvert.DeserializeObject<ImageUploadResponse>(jsonResponse);
+                if (response.IsSuccessStatusCode)
+                {
+                    var apiResponse = JsonConvert.DeserializeObject<ImageUploadResponse>(jsonResponse);
 
-                if (apiResponse == null) {
-                    return null;
+                    return apiResponse?.Data; 
                 }
+                else
+                {
+                    return null; 
+                }
+            });
 
-                return apiResponse.Data;
-            }
-            else
-            {           
-                throw new Exception($"Image upload failed with status {response.StatusCode}");
-            }
+            var results = await Task.WhenAll(uploadTasks);
+
+            var resultList = results.Where(data => data != null).Cast<ImageData>().ToList();
+
+            return resultList;
         }
 
         private static Image ScaleImage(Image image, int height)

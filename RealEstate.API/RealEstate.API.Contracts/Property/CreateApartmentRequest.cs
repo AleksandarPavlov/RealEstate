@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using RealEstate.Domain.Common.Enums;
+﻿using RealEstate.Domain.Common.Enums;
 
 namespace RealEstate.API.Contracts.Property;
 

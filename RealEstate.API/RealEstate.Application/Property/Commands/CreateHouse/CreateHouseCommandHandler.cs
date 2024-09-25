@@ -34,16 +34,10 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
                 longitude = double.Parse(locationCoordinates.Lon);
             }
 
-            var mainImageResult = await _imageStorageService.UploadToExternalApi(request.Images?.FirstOrDefault());
-
-            IEnumerable<string>? mainImageDisplayUrl = null;
-
-            if (mainImageResult != null)
-            {
-
-                mainImageDisplayUrl = new List<string> { mainImageResult.DisplayUrl };
-
-            }
+            var imagesResult = (request.Images != null && request.Images.Any())
+           ? await _imageStorageService.UploadToExternalApi(request.Images)
+           : null;
+          
 
             var houseResult = DomainProperty.CreateHouseProperty(
                 0,
@@ -59,7 +53,7 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
                 request.NumberOfRooms,
                 latitude,
                 longitude,
-                mainImageDisplayUrl
+                imagesResult?.Select(image => image.DisplayUrl)
             );
 
             return await houseResult.Match(

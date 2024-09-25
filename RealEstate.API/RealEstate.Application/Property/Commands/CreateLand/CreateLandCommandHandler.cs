@@ -35,14 +35,9 @@ namespace RealEstate.Application.Property.Commands.CreateLand
                 longitude = double.Parse(locationCoordinates.Lon);
             }
 
-            var mainImageResult = await _imageStorageService.UploadToExternalApi(request.Images?.FirstOrDefault());
-
-            IEnumerable<string>? mainImageDisplayUrl = null;
-
-            if (mainImageResult != null)
-            {
-                mainImageDisplayUrl = new List<string> { mainImageResult.DisplayUrl };
-            }
+            var imagesResult = (request.Images != null && request.Images.Any())
+            ? await _imageStorageService.UploadToExternalApi(request.Images)
+            : null;
 
             var landResult = DomainProperty.CreateLandProperty(
                 0,
@@ -55,7 +50,7 @@ namespace RealEstate.Application.Property.Commands.CreateLand
                 request.IsPremium,
                 latitude,
                 longitude,
-                mainImageDisplayUrl
+                imagesResult?.Select(image => image.DisplayUrl)
             );
 
             return await landResult.Match(

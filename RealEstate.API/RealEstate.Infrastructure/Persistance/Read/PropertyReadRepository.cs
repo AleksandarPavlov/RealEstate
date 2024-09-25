@@ -56,6 +56,7 @@ namespace RealEstate.Infrastructure.Persistance.Read
 
             var properties = await query.Skip(filters.Page * filters.PageSize)
                                .Take(filters.PageSize)
+                               .Include(p => p.Images)
                                .ToListAsync();
 
             var domainProperties = properties

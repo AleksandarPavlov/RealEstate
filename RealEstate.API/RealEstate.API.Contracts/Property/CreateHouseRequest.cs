@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using RealEstate.Domain.Common.Enums;
+﻿using RealEstate.Domain.Common.Enums;
 
 namespace RealEstate.API.Contracts.Property;
 
@@ -14,6 +13,5 @@ public record CreateHouseRequest
      bool IsPremium,
      bool IsFurnished,
      string FloorNumber,
-     int NumberOfRooms,
-     IEnumerable<IFormFile>? Images
+     int NumberOfRooms
 );

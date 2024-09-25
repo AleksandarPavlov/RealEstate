@@ -37,7 +37,7 @@ namespace RealEstate.API.Controllers
              apartmentRequest.FloorNumber,
              apartmentRequest.NumberOfRooms,
              images
-         ), cancellationToken);
+             ), cancellationToken);
 
             return result.Match<ActionResult>(
                 success => Ok(success), 
@@ -49,7 +49,7 @@ namespace RealEstate.API.Controllers
         [HttpPost("create-house")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<ActionResult> CreateHouseAsync([FromBody] CreateHouseRequest houseRequest, IFormFile mainImage, CancellationToken cancellationToken)
+        public async Task<ActionResult> CreateHouseAsync([FromBody] CreateHouseRequest houseRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
 
             var result = await _mediator.Send(new CreateHouseCommand
@@ -64,8 +64,8 @@ namespace RealEstate.API.Controllers
              houseRequest.IsFurnished,
              houseRequest.FloorNumber,
              houseRequest.NumberOfRooms,
-             houseRequest.Images
-         ), cancellationToken);
+             images
+             ), cancellationToken);
 
             return result.Match<ActionResult>(
                 success => Ok(success),
@@ -76,7 +76,7 @@ namespace RealEstate.API.Controllers
         [HttpPost("create-land")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<ActionResult> CreateLandAsync([FromBody] CreateLandRequest landRequest, IFormFile mainImage,CancellationToken cancellationToken)
+        public async Task<ActionResult> CreateLandAsync([FromBody] CreateLandRequest landRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
 
             var result = await _mediator.Send(new CreateLandCommand
@@ -88,8 +88,8 @@ namespace RealEstate.API.Controllers
              landRequest.Price,
              landRequest.SizeInMmSquared,
              landRequest.IsPremium,
-             landRequest.Images
-         ), cancellationToken);
+             images
+             ), cancellationToken);
 
             return result.Match<ActionResult>(
                 success => Ok(success),
