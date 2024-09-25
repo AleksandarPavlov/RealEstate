@@ -25,6 +25,8 @@ import { PropertyListPageComponent } from './pages/property-list-page/property-l
 import { PropertyPageComponent } from './pages/property-page/property-page.component';
 import { FormPageComponent } from './pages/form-page/form-page.component';
 import { FormComponent } from './components/form/form.component';
+import { RadioComponent } from './components/radio/radio.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { FormComponent } from './components/form/form.component';
     PropertyListPageComponent,
     FormPageComponent,
     FormComponent,
+    RadioComponent,
+    TextareaComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
