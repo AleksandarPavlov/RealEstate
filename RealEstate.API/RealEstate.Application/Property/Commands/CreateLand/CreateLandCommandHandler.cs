@@ -47,6 +47,7 @@ namespace RealEstate.Application.Property.Commands.CreateLand
                 request.Address,
                 request.Price,
                 request.SizeInMmSquared,
+                DateTime.Now,
                 request.IsPremium,
                 latitude,
                 longitude,

@@ -18,6 +18,7 @@ namespace RealEstate.API.Contracts.Property
                 property.Location.Address,
                 property.Price.Value,
                 property.SizeInMmSquared.Value,
+                property.CreationTime,
                 property.IsPremium,
                 property.IsFurnished,
                 property.FloorNumber,

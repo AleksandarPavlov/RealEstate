@@ -16,6 +16,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public string? Address { get; private set; }
         public int Price { get; private set; }
         public double SizeInMmSquared { get; private set; }
+        public DateTime CreationTime { get; private set; }
         public bool IsPremium { get; private set; } = false;
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
@@ -32,6 +33,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             string? address,
             int price,
             double sizeInMmSquared,
+            DateTime creationTime,
             bool isPremium,
             bool? isFurnished,
             string? floorNumber,
@@ -46,6 +48,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             Address = address;
             Price = price;
             SizeInMmSquared = sizeInMmSquared;
+            CreationTime = creationTime;
             IsPremium = isPremium;
             IsFurnished = isFurnished;
             FloorNumber = floorNumber;
@@ -68,6 +71,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Address,
                         entity.Price,
                         entity.SizeInMmSquared,
+                        entity.CreationTime,
                         entity.IsPremium,
                         entity.IsFurnished ?? false,
                         entity.FloorNumber ?? string.Empty,
@@ -87,6 +91,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Address,
                         entity.Price,
                         entity.SizeInMmSquared,
+                        entity.CreationTime,
                         entity.IsPremium,
                         entity.IsFurnished ?? false,
                         entity.FloorNumber ?? string.Empty,
@@ -106,6 +111,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Address,
                         entity.Price,
                         entity.SizeInMmSquared,
+                        entity.CreationTime,
                         entity.IsPremium,
                         coordinates.Latitude,
                         coordinates.Longitude,
@@ -130,6 +136,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                 entity.Location.Address,
                 entity.Price.Value,
                 entity.SizeInMmSquared.Value,
+                entity.CreationTime,
                 entity.IsPremium,
                 entity.IsFurnished,
                 entity.FloorNumber,

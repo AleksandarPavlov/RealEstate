@@ -13,18 +13,22 @@
     [options]="listingSelectOptions"
   ></app-select>
 
-  <app-select
+
+    <app-select
     [placeholder]="'Nekretnina'"
     [icon]="'fa-solid fa-building'"
-    [options]="typeSelectOptions"
-  ></app-select>
+    [options]="typeSelectOptions">
+    </app-select>
 
   <div class="flex justify-center items-center gap-4">
-    <app-number-input [placeholder]="'m² od'" [icon]="'fa-solid fa-maximize'">
+    <app-number-input [placeholder]="'m² od'" 
+      [icon]="'fa-solid fa-maximize'"
+      [marginTop] = "true">
     </app-number-input>
     <app-number-input
       [placeholder]="'Cena do €'"
       [icon]="'fa-solid fa-euro-sign'"
+      [marginTop] = "true"
     ></app-number-input>
   </div>
 </div>

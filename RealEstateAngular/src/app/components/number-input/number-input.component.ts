@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class NumberInputComponent {
   @Input() icon: string = '';
   @Input() placeholder: string = '';
+  @Input() marginTop: boolean = false;
 }

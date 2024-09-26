@@ -14,6 +14,7 @@ public record PropertyResponse
     string? Address,
     int Price,
     double SizeInMmSquared,
+    DateTime CreationTime,
     bool IsPremium,
     bool? IsFurnished,
     string? FloorNumber,

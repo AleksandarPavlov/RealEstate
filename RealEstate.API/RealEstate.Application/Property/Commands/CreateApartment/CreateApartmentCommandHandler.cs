@@ -49,6 +49,7 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
                 request.Address,
                 request.Price,
                 request.SizeInMmSquared,
+                DateTime.Now,
                 request.IsPremium,
                 request.IsFurnished,
                 request.FloorNumber,
