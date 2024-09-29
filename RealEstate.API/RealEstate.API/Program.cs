@@ -4,7 +4,6 @@ using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Domain.Persistance;
 using RealEstate.Domain.Persistance.Read;
 using RealEstate.Domain.Persistance.Write;
-using RealEstate.Domain.Property;
 using RealEstate.Domain.Services;
 using RealEstate.Infrastructure.Persistance;
 using RealEstate.Infrastructure.Persistance.Read;
@@ -12,11 +11,22 @@ using RealEstate.Infrastructure.Persistance.Write;
 using RealEstate.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:4200")
+                                 .AllowAnyMethod()
+                                 .AllowAnyHeader();
+                      });
+});
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
@@ -31,6 +41,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Creat
 
 
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SelectOption } from 'src/app/models/select-option-model';
+import { SelectOption } from 'src/app/models/select-option.model';
 
 @Component({
   selector: 'app-select',

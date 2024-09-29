@@ -1,1 +1,11 @@
-<div id={{mapId}} [style.height]="mapHeight" [style.width]="mapWidth"></div>
+<div *ngIf="areCoordinatesValid" 
+       id={{mapId}} 
+       [style.height]="mapHeight" 
+       [style.width]="mapWidth">
+</div>
+
+<div *ngIf="!areCoordinatesValid" class="broken-map" 
+       [style.width]="mapWidth" 
+       [style.height]="mapHeight">
+    <p>Map data not available</p>
+  </div>

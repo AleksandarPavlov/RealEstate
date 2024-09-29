@@ -49,7 +49,7 @@ namespace RealEstate.API.Controllers
         [HttpPost("create-house")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<ActionResult> CreateHouseAsync([FromBody] CreateHouseRequest houseRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
+        public async Task<ActionResult> CreateHouseAsync([FromForm] CreateHouseRequest houseRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
 
             var result = await _mediator.Send(new CreateHouseCommand
@@ -76,7 +76,7 @@ namespace RealEstate.API.Controllers
         [HttpPost("create-land")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<ActionResult> CreateLandAsync([FromBody] CreateLandRequest landRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
+        public async Task<ActionResult> CreateLandAsync([FromForm] CreateLandRequest landRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
 
             var result = await _mediator.Send(new CreateLandCommand

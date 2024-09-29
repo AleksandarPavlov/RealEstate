@@ -12,22 +12,22 @@
       <div class="w-full">
         <div class="tabs relative right-0">
           <ul class="relative flex flex-wrap px-1.5 py-1.5 list-none rounded-md" role="list" style="background-color: #fce4e4;">
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.Apartment}"
-            (click)="selectTab(propertyType.Apartment)"
+            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.APARTMENT}"
+            (click)="selectTab(propertyType.APARTMENT)"
             role="tab">
               <a class="tab text-gray-900 text-sm font-semibold">
                 Stan
               </a>
             </li>
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.House}"
-            (click)="selectTab(propertyType.House)"
+            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.HOUSE}"
+            (click)="selectTab(propertyType.HOUSE)"
             role="tab">
               <a class="tab text-gray-900 text-sm font-semibold">
                 Kuća
               </a>
             </li>
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.Land}"
-            (click)="selectTab(propertyType.Land)"
+            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.LAND}"
+            (click)="selectTab(propertyType.LAND)"
             role="tab">
               <a class="tab text-gray-900 text-sm font-semibold">
                 Zemljište
@@ -81,19 +81,19 @@
                   </p>
                   <app-number-input [placeholder]="''" [icon]="'fa-solid fa-euro-sign'"></app-number-input>
                 </div>
-                <div *ngIf="activeTab !== propertyType.Land">
+                <div *ngIf="activeTab !== propertyType.LAND">
                   <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
                     Sprat
                   </p>
                   <app-number-input [placeholder]="''" [icon]="'fa-solid fa-arrow-up'"></app-number-input>
                 </div>
-                <div *ngIf="activeTab != propertyType.Land">
+                <div *ngIf="activeTab != propertyType.LAND">
                   <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
                     Broj Soba
                   </p>
                   <app-number-input [placeholder]="''" [icon]="'fa-solid fa-person-shelter'"></app-number-input>
                 </div>
-                <div *ngIf="activeTab != propertyType.Land">
+                <div *ngIf="activeTab != propertyType.LAND">
                   <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
                     Namešten
                   </p>

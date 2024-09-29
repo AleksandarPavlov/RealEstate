@@ -30,17 +30,38 @@
             class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
             (click)="toggleMenu()"
           >
-            <a  class="flex items-center"  [routerLink]="['/list']" [queryParams]="{ type: 'sell' }">
+            <a  class="flex items-center">
               Prodaja
             </a>
           </li>
           <li
             class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
           >
-            <a href="#" class="flex items-center" [routerLink]="['/list']" [queryParams]="{ type: 'rent' }">
+            <a href="#" class="flex items-center" >
               Izdavanje
             </a>
           </li>
+          <li
+          class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+        >
+          <a href="#" class="flex items-center" [routerLink]="['/post-property']">
+            Postavi oglas
+          </a>
+        </li>
+        <li
+        class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+      >
+        <a href="#" class="flex items-center" [routerLink]="['/post-property']">
+          Uloguj se
+        </a>
+      </li>
+      <li
+      class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+    >
+      <a href="#" class="flex items-center" [routerLink]="['/post-property']">
+        Registracija
+      </a>
+    </li>
         </ul>
       </div>
     </div>
@@ -92,8 +113,9 @@ data-popover-placement="bottom"
 class="grid grid-cols-3 gap-y-2 outline-none outline-0"
 role="menuitem"
 >
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Apartment' }"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -104,8 +126,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'House' }"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -116,8 +139,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Land' }"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -128,8 +152,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Apartment', City: 'Beograd'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -140,8 +165,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'House', City: 'Beograd'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -152,8 +178,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Land', City: 'Beograd'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -164,8 +191,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Apartment', City: 'Novi Sad'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -176,8 +204,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'House', City: 'Novi Sad'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -188,8 +217,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Land', City: 'Novi Sad'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -200,8 +230,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Apartment', City: 'Niš'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -213,8 +244,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'House', City: 'Niš'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -225,8 +257,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Land', City: 'Niš'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -237,21 +270,23 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Apartment', City: 'Kragujevac'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
     <div>
 
-      <p class="block text-xs font-light text-blue-gray-900 antialiased">
+      <p class="block text-xs font-light text-blue-gray-900 antialiased" >
         Prodaja stanova Kragujevac
       </p>
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'House', City: 'Kragujevac'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >
@@ -262,8 +297,9 @@ role="menuitem"
     </div>
   </button>
 </a>
-<a href="#">
+<a >
   <button
+    [routerLink]="['/list']" [queryParams]="{ ListingType: 'sell', PropertyType: 'Land', City: 'Kragujevac'}"
     role="menuitem"
     class="flex w-full cursor-pointer select-none items-center gap-3 rounded-lg px-3 pb-2 pt-[9px] text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
   >

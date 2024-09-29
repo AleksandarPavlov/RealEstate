@@ -8,7 +8,7 @@ import { RadioSize } from 'src/app/models/radioSize.enum';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
-  activeTab: PropertyType = PropertyType.Apartment;
+  activeTab: PropertyType = PropertyType.APARTMENT;
   propertyType = PropertyType;
   isFurnishedOptions = ['Da', 'Ne'];
   sellOrRentOptions = ['Prodaja', 'Izdavanje'];

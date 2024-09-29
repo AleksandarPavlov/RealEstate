@@ -32,19 +32,28 @@
         <tbody>
           <tr *ngFor="let property of properties"  
           [ngStyle]="{
-            'background': property.isPremium ? '#fff8f9' : 'none',
-            'box-shadow': property.isPremium ? '0 0 8px #f07070' : 'none'
+            'background': property.isPremium && property.listingType === listingType.RENT ? '#f0fff4' : 
+                          (property.isPremium ? '#fff8f9' : 'none'),
+            'box-shadow': property.isPremium && property.listingType === listingType.RENT ? '0 0 8px #8dcc8e' : 
+                          (property.isPremium ? '0 0 8px #f07070' : 'none')
           }">
                 <td class="name-image p-4 border-b border-blue-gray-50" routerLink = '/property/{{property.id}}'>
                   <div class="flex items-center gap-8">
-                    <img src="{{property.image}}"
-                      alt="Property Image" class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
+                    <img *ngIf="property.images[0] && property.images.length > 0" 
+                    [src]="property.images[0]" 
+                    alt="Property Image" 
+                    class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
+               
+                 <img *ngIf="!property.images[0] || property.images.length === 0" 
+                    src="../../../assets/images/image-placeholder.png" 
+                    alt="Default Image" 
+                    class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
                     <div class="flex flex-col">
                       <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                        {{property.propertyName}}
+                        {{property.name}}
                       </p>
                       <p class="block text-xs antialiased font-normal leading-normal">
-                        {{property.address}}
+                        {{property.address}} {{property.city}} 
                       </p>
                     </div>
                   </div>
@@ -52,21 +61,24 @@
                 <td class="p-4 border-b border-blue-gray-50">
                   <div class="flex flex-col">
                     <p class="block text-xs antialiased font-normal leading-normal text-gray-900">
-                        {{property.sizeInMmSquared}} m² | Broj soba: {{property.numberOfRooms}} | Sprat: {{property.floorNumber}}
+                      <span class="font-semibold">{{ property.sizeInMmSquared }}m²</span> | 
+                      Broj soba: <span class="font-semibold">{{ property.numberOfRooms !== null ? property.numberOfRooms : '/' }}</span> | 
+                      Sprat: <span class="font-semibold">{{ property.floorNumber !== null ? property.floorNumber : '/' }}</span> | 
+                      Nameštaj: <span class="font-semibold">{{ property.isFurnished !== null ? (property.isFurnished ? 'Da' : 'Ne') : '/' }}</span>
                     </p>
                   </div>
                 </td>
                 <td class="p-4 border-b border-blue-gray-50">
                   <div class="w-max">
                     <div class="relative grid items-center px-2 py-1 text-xs font-bold text-gray-50 rounded-md select-none whitespace-nowrap"
-                      [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#8dcc8e'}">
-                      <span class="">{{ property.isForRent ? 'Izdavanje' : 'Prodaja' }}</span>
+                      [ngStyle]="{'background-color': property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'}">
+                      <span class="">{{ property.listingType == listingType.SELL ? 'Prodaja' : 'Izdavanje' }}</span>
                     </div>
                   </div>
                 </td>
                 <td class="p-4 border-b border-blue-gray-50">
                   <p class="block text-sm antialiased font-semibold leading-normal text-gray-900"
-                     [ngStyle]="{'color': !property.isForRent ? '#f07070' : '#8dcc8e'}">
+                     [ngStyle]="{'color': property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'}">
                     {{property.price}} €
                   </p>
                 </td>
@@ -81,7 +93,9 @@
                     <div class="map-wrapper opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute right-full -translate-y-1/2 top-5 w-64 h-40 bg-white text-gray-800 border border-gray-300">
                       <app-map [mapId]="'map' + property.id"
                                [mapWidth]="'100%'"
-                               [mapHeight]="'100%'">
+                               [mapHeight]="'100%'"
+                               [lat]="property.coordinates ? property.coordinates.lat : null"
+                               [lon]="property.coordinates ? property.coordinates.lon : null" >
                       </app-map>
                     </div>
                   </div>

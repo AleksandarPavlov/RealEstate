@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Property } from 'src/app/models/property.model';
+import { ListingType } from 'src/app/models/propertyListingType.enum';
+import { PropertyResponse } from 'src/app/models/propertyResponse.model';
 
 @Component({
   selector: 'app-table',
@@ -7,5 +8,6 @@ import { Property } from 'src/app/models/property.model';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent {
-  @Input() properties!: Property[];
+  @Input() properties: PropertyResponse[] = [];
+  listingType = ListingType;
 }
