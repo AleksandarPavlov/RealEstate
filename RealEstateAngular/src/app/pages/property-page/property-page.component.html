@@ -1,15 +1,19 @@
 <app-navigation></app-navigation>
 <div class="grid grid-cols-2 grid-rows-1 gap-3">
-<app-gallery></app-gallery>
-<app-text-card></app-text-card>
+  <app-gallery [images]="property.images"></app-gallery>
+  <app-text-card [property]="property"></app-text-card>
 </div>
-<h1 class="map-header block antialiased tracking-normal text-center mt-16 text-gray-900 font-bold text-3xl">Lokacija na mapi</h1>
+<h1
+  class="map-header block antialiased tracking-normal text-center mt-16 text-gray-900 font-bold text-3xl"
+>
+  Lokacija na mapi
+</h1>
 <app-map
-[mapId] = "'map'"
-[mapWidth] = "'75%'"
-[mapHeight] = "'350px'"
+  [mapWidth]="'75%'"
+  [mapHeight]="'350px'"
+  [mapId]="'map' + property.id"
+  [lat]="property.coordinates ? property.coordinates.lat : null"
+  [lon]="property.coordinates ? property.coordinates.lon : null"
 ></app-map>
 <app-footer></app-footer>
-<div class="bottom-skyline">
-
-</div>
+<div class="bottom-skyline"></div>

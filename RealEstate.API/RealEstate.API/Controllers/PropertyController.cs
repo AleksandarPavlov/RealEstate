@@ -5,6 +5,7 @@ using RealEstate.API.Contracts.Property;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
 using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
+using RealEstate.Application.Property.Queries.FetchPropertyById;
 
 namespace RealEstate.API.Controllers
 {
@@ -120,6 +121,20 @@ namespace RealEstate.API.Controllers
             return result.Match<ActionResult>(
                 success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),
                 failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
+
+        [HttpGet("{id}")]
+        [ActionName(nameof(GetById))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PropertyResponse))]
+        public async Task<ActionResult<PropertyResponse>> GetById(long id)
+        {
+            var result = await _mediator
+                .Send(new FetchPropertyByIdQuery(id));
+
+            return result.Match<ActionResult>(
+                success => Ok(PropertyResponseExtensions.ToContract(success)),
+                failure => NotFound(new ErrorResponse(failure.Code, failure.Description))
             );
         }
     }

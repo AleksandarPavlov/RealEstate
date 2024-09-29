@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using RealEstate.Application.Property.Dtos;
+using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance.Read;
 using RealEstate.Infrastructure.Persistance.Entities;
 using DomainProperty = RealEstate.Domain.Property.Property;
@@ -66,6 +68,17 @@ namespace RealEstate.Infrastructure.Persistance.Read
 
             return Result<IEnumerable<DomainProperty>>.Success(domainProperties);
 
+        }
+
+        public async Task<Result<DomainProperty>> FetchPropertyById(long id)
+        {
+            var property = await _context.Property
+                                .Include(p => p.Images) 
+                                .SingleOrDefaultAsync(p => p.Id == id);
+
+            return property is not null
+            ? Result<DomainProperty>.Success(Property.ToDomain(property).Value)
+            : Result<DomainProperty>.Failure(new Error("Id", $"Unable to fetch proeprty with id '{id}'"));
         }
     }
 }

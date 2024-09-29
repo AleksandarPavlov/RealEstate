@@ -28,4 +28,10 @@ export class PropertyService {
       { params }
     );
   }
+
+  fetchById(id: number) {
+    return this.httpClient.get<PropertyResponse>(
+      'http://localhost:5157/property/' + id
+    );
+  }
 }

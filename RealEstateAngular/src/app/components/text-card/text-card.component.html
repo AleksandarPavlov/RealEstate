@@ -1,56 +1,117 @@
-<div class="card relative flex flex-col bg-white border border-slate-200 rounded-lg">
-    <div class="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
-        <div class="flex items-center gap-4">
-            <img src="https://docs.material-tailwind.com/img/face-2.jpg" alt="avatar"
-              class="inline-block relative object-cover object-center !rounded-full w-8 h-8" />
-            <div>
-              <h6 class="block text-sm antialiased font-normal leading-relaxed tracking-normal text-gray-900">
-                Aleksandar Pavlov
-              </h6>
-              <p class="block  text-xs antialiased font-normal leading-normal text-gray-700">
-                Izdavač oglasa
-              </p>
-            </div>
-            <span class="absolute top-4 right-3">
-                <div class="relative grid select-none items-center whitespace-nowrap rounded-md py-1.5 px-3 text-xs font-bold text-white" style="background-color: #f07070;">
-                <span>Prodaja</span>
-              </div>
-            </span>
-          </div>
-    </div>
-    <div class="p-4">
-        <h5 class="mb-2 text-slate-900 text-xl font-semibold">
-            Novi Beograd Residence
-        </h5>
-        <p class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Tip nekretnine:</span> Stan
+<div
+  class="card relative flex flex-col bg-white border border-slate-200 rounded-lg"
+>
+  <div class="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
+    <div class="flex items-center gap-4">
+      <img
+        src="https://docs.material-tailwind.com/img/face-2.jpg"
+        alt="avatar"
+        class="inline-block relative object-cover object-center !rounded-full w-8 h-8"
+      />
+      <div>
+        <h6
+          class="block text-sm antialiased font-normal leading-relaxed tracking-normal text-gray-900"
+        >
+          Aleksandar Pavlov
+        </h6>
+        <p
+          class="block text-xs antialiased font-normal leading-normal text-gray-700"
+        >
+          Izdavač oglasa
         </p>
-        <p class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Adresa:</span> Novi Beograd, Dositeja Obradovića
-        </p>
-        <p class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Kvadratura:</span> 50m²
-        </p>
-        <p class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Broj soba:</span> 2
-        </p>
-        <p class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Sprat:</span> 4
-        </p>
-        <p class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Namešten:</span> Da
-        </p>
-        <p class="block text-md antialiased font-semibold leading-normal mt-4 text-gray-900 max-w-lg" style="color:#f07070">
-            <span class="font-bold text-sm  text-gray-900">Cena:</span> 120000 €
-        <p class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Cena po m²:</span> 2157 €
-        </p>
-        <p class="limit-text block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg">
-            <span class="font-bold">Opis:</span> 3.0, Karaburma, Patrisa Lumumbe, 58m2, 5/5, TA, parking, nov.
-            Posebno funkcionalan stan, očuvan i održavan bez posebnih ulaganja. Bez prolaznih soba. Svetao, sa prelepim panoramskim pogledom na Dunav. Prodaje se sa sa sve nameštajem.
-        </p>
-    </div>
-    <div class="bottom-line">
-
+      </div>
+      <span class="absolute top-4 right-3">
+        <div
+          class="relative grid select-none items-center whitespace-nowrap rounded-md py-1.5 px-3 text-xs font-bold text-white"
+          [ngStyle]="{
+            'background-color':
+              property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'
+          }"
+        >
+          <span>{{
+            property.listingType == listingType.SELL ? "Prodaja" : "Izdavanje"
+          }}</span>
+        </div>
+      </span>
     </div>
   </div>
+  <div class="p-4">
+    <h5 class="mb-2 text-slate-900 text-xl font-semibold">
+      {{ property.name }}
+    </h5>
+    <p
+      class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Tip nekretnine:</span>
+      <span *ngIf="property.type === propertyType.APARTMENT"> Stan</span>
+      <span *ngIf="property.type === propertyType.HOUSE"> Kuća</span>
+      <span *ngIf="property.type === propertyType.LAND"> Zemljište</span>
+    </p>
+    <p
+      class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Adresa:</span> {{ property.address }},
+      {{ property.city }}
+    </p>
+    <p
+      class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Kvadratura:</span>
+      {{ property.sizeInMmSquared }}m²
+    </p>
+    <p
+      class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Broj soba:</span>
+      {{ property.numberOfRooms !== null ? property.numberOfRooms : "/" }}
+    </p>
+    <p
+      class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Sprat:</span>
+      {{ property.floorNumber !== null ? property.floorNumber : "/" }}
+    </p>
+    <p
+      class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Namešten:</span>
+      {{
+        property.isFurnished !== null
+          ? property.isFurnished
+            ? "Da"
+            : "Ne"
+          : "/"
+      }}
+    </p>
+    <p
+      class="block text-md antialiased font-semibold leading-normal mt-4 text-gray-900 max-w-lg"
+      [ngStyle]="{
+        color: property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'
+      }"
+    >
+      <span class="font-bold text-sm text-gray-900">Cena:</span>
+      {{ property.price }} €
+    </p>
+
+    <p
+      class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Cena po m²:</span> 2157 €
+    </p>
+    <p
+      class="limit-text block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
+    >
+      <span class="font-bold">Opis:</span> 3.0, Karaburma, Patrisa Lumumbe,
+      58m2, 5/5, TA, parking, nov. Posebno funkcionalan stan, očuvan i održavan
+      bez posebnih ulaganja. Bez prolaznih soba. Svetao, sa prelepim panoramskim
+      pogledom na Dunav. Prodaje se sa sa sve nameštajem.
+    </p>
+  </div>
+  <div
+    class="bottom-line"
+    [ngStyle]="{
+      'background-color':
+        property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'
+    }"
+  ></div>
+</div>
