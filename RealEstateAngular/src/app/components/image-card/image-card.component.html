@@ -10,7 +10,7 @@
       </div>
 
         <span class="absolute top-4 right-3">
-            <div class="relative grid select-none items-center whitespace-nowrap rounded-md py-1.5 px-3 text-xs font-bold text-white"   [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#8dcc8e'}">
+            <div class="relative grid select-none items-center whitespace-nowrap rounded-md py-1.5 px-3 text-xs font-bold text-white"   [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#79a450'}">
             <span>{{ property.isForRent ? 'Izdavanje' : 'Prodaja' }}</span>
           </div>
         </span>
@@ -31,14 +31,14 @@
     <p class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg">
         {{property.isFurnished ? 'Namešten' : 'Prazan'}}
     </p>
-    <p class="block text-md antialiased font-semibold leading-normal mt-3 max-w-lg"  [ngStyle]="{'color': !property.isForRent ? '#f07070' : '#8dcc8e'}">
+    <p class="block text-md antialiased font-semibold leading-normal mt-3 max-w-lg"  [ngStyle]="{'color': !property.isForRent ? '#f07070' : '#79a450'}">
         {{property.price}} € 
     </p>
     <p class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg" >
        {{ property.pricePerMmSquared ? property.pricePerMmSquared + ' € / m²' : '/' }}
     </p>
     </div>
-    <div class="bottom-line"  [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#8dcc8e'}">
+    <div class="bottom-line"  [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#79a450'}">
 
     </div>
   </div> 

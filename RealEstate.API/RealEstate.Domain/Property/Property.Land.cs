@@ -19,7 +19,8 @@ namespace RealEstate.Domain.Property
             bool isPremium,
             double? latitude,
             double? longitude,
-            IEnumerable<string>? images)
+            IEnumerable<string>? images,
+            string? description)
             {
                 var nameResult = PropertyName.Create(name);
                 var locationResult = PropertyLocation.Create(city, address);
@@ -27,20 +28,23 @@ namespace RealEstate.Domain.Property
                 var sizeInMmSquaredResult = PropertySize.Create(sizeInMmSquared);
                 var propertyType = PropertyType.LAND;
                 var coordinatesResult = PropertyCoordinates.Create(latitude, longitude);
+                var descriptionResult = PropertyDescription.Create(description);
 
 
-                var combinedResult = ResultExtensions.CombineResults(
+
+            var combinedResult = ResultExtensions.CombineResults(
                    nameResult,
                    locationResult,
                    priceResult,
                    sizeInMmSquaredResult,
-                   coordinatesResult
+                   coordinatesResult,
+                   descriptionResult    
                );
 
                 return combinedResult.Match(
                  success =>
                  {
-                     var (propertyName, propertyLocation, propertyPrice, propertySize, propertyCoordinates) = success;
+                     var (propertyName, propertyLocation, propertyPrice, propertySize, propertyCoordinates, propertyDescription) = success;
 
                      var property = new Property(
                          id, 
@@ -56,7 +60,8 @@ namespace RealEstate.Domain.Property
                          null, 
                          null, 
                          propertyCoordinates, 
-                         images);
+                         images,
+                         propertyDescription);
 
                      return Result<Property>.Success(property);
                  },

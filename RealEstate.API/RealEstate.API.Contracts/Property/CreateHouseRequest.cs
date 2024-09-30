@@ -13,5 +13,6 @@ public record CreateHouseRequest
      bool IsPremium,
      bool IsFurnished,
      string FloorNumber,
-     int NumberOfRooms
+     int NumberOfRooms,
+     string? Description
 );

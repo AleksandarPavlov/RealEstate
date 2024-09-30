@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'property/:id', component: PropertyPageComponent },
   { path: 'list', component: PropertyListPageComponent },
   { path: 'post-property', component: FormPageComponent },
+  { path: 'not-found', component: NotFoundPageComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
 

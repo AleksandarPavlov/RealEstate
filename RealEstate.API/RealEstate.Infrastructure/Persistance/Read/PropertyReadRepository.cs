@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 using RealEstate.Application.Property.Dtos;
 using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance.Read;

@@ -34,6 +34,10 @@ export class PropertyListPageComponent {
     window.scroll(0, 0);
 
     this.route.queryParams.subscribe((params) => {
+      this.propertyTypeName = undefined;
+      this.listingTypeName = undefined;
+      this.cityName = undefined;
+
       const queryParams = new PropertyQueryParams({
         City: params['City'] ? params['City'] : undefined,
         ListingType: params['ListingType']

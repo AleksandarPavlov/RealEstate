@@ -10,5 +10,6 @@ public record CreateLandRequest
     string? Address,
     int Price,
     double SizeInMmSquared,
-    bool IsPremium
+    bool IsPremium,
+    string? Description
 );

@@ -51,7 +51,8 @@ namespace RealEstate.Application.Property.Commands.CreateLand
                 request.IsPremium,
                 latitude,
                 longitude,
-                imagesResult?.Select(image => image.DisplayUrl)
+                imagesResult?.Select(image => image.DisplayUrl),
+                request.Description
             );
 
             return await landResult.Match(

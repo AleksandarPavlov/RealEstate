@@ -13,6 +13,7 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
         int Price,
         double SizeInMmSquared,
         bool IsPremium,
-        IEnumerable<IFormFile>? Images
+        IEnumerable<IFormFile>? Images,
+        string? Description
      ) : IRequest<Result<DomainProperty>>;
 }

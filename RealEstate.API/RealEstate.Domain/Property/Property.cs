@@ -20,9 +20,10 @@ namespace RealEstate.Domain.Property
         public PropertyNumberOfRooms? NumberOfRooms { get; private set; }
         public PropertyCoordinates? Coordinates { get; private set; }
         public IEnumerable<string>? Images { get; private set; }
+        public PropertyDescription? Description { get; private set; }   
         private Property(
             long id,
-            PropertyName name, 
+            PropertyName name,
             PropertyListingType listingType,
             PropertyType type,
             PropertyLocation location,
@@ -34,7 +35,8 @@ namespace RealEstate.Domain.Property
             string? floorNumber,
             PropertyNumberOfRooms? numberOfRooms,
             PropertyCoordinates? coordinates,
-            IEnumerable<string>? images)
+            IEnumerable<string>? images,
+            PropertyDescription? description)
         {
             Id = id;
             Name = name;
@@ -50,6 +52,7 @@ namespace RealEstate.Domain.Property
             NumberOfRooms = numberOfRooms;
             Coordinates = coordinates;
             Images = images;
+            Description = description;
         }
     }
 }

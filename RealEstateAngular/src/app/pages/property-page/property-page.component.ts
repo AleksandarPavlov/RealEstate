@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { PropertyResponse } from 'src/app/models/propertyResponse.model';
 import { PropertyService } from 'src/app/services/property.service';
@@ -16,7 +16,8 @@ export class PropertyPageComponent {
 
   constructor(
     private propertyService: PropertyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -31,9 +32,16 @@ export class PropertyPageComponent {
     this.propertyService
       .fetchById(id)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => {
-        this.property = response;
-      });
+      .subscribe(
+        (response) => {
+          this.property = response;
+        },
+        (error) => {
+          if (error.status === 404) {
+            this.router.navigate(['/not-found']);
+          }
+        }
+      );
   }
 
   ngOnDestroy(): void {

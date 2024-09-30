@@ -23,6 +23,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public int? NumberOfRooms { get; private set; }
         public string? Coordinates { get; private set; }
         public ICollection<PropertyImage>? Images { get; private set; }
+        public string? Description { get; private set; }
 
         public Property(
             long id,
@@ -38,7 +39,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             bool? isFurnished,
             string? floorNumber,
             int? numberOfRooms,
-            string? coordinates)
+            string? coordinates,
+            string? description)
         {
             Id = id;
             Name = name;
@@ -54,6 +56,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             FloorNumber = floorNumber;
             NumberOfRooms = numberOfRooms;
             Coordinates = coordinates?.ToString();
+            Description = description;
         }
         public static Result<DomainProperty> ToDomain(Property entity) 
         {
@@ -78,7 +81,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.NumberOfRooms ?? 0,
                         coordinates.Latitude,
                         coordinates.Longitude,
-                        entity.Images?.Select(image => image.Url)
+                        entity.Images?.Select(image => image.Url),
+                        entity.Description
                         );
 
                 case PropertyType.HOUSE:
@@ -98,7 +102,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.NumberOfRooms ?? 0,
                         coordinates.Latitude,
                         coordinates.Longitude,
-                        entity.Images?.Select(image => image.Url)
+                        entity.Images?.Select(image => image.Url),
+                        entity.Description
                         );
 
                 case PropertyType.LAND:
@@ -115,8 +120,9 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.IsPremium,
                         coordinates.Latitude,
                         coordinates.Longitude,
-                        entity.Images?.Select(image => image.Url)
-                        ); ;
+                        entity.Images?.Select(image => image.Url),
+                        entity.Description
+                        );
 
                 default:
                     return Result<DomainProperty>.Failure(new Error("PropertyType", "Unknown property type"));
@@ -141,7 +147,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                 entity.IsFurnished,
                 entity.FloorNumber,
                 entity.NumberOfRooms?.Value,
-                entity.Coordinates?.ToString()
+                entity.Coordinates?.ToString(),
+                entity.Description?.Value
                 );
 
             if (entity.Images != null && entity.Images.Any()) {

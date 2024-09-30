@@ -54,7 +54,8 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
                 request.NumberOfRooms,
                 latitude,
                 longitude,
-                imagesResult?.Select(image => image.DisplayUrl)
+                imagesResult?.Select(image => image.DisplayUrl),
+                request.Description
             );
 
             return await houseResult.Match(

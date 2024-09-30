@@ -20,7 +20,9 @@ public record PropertyResponse
     string? FloorNumber,
     int? NumberOfRooms,
     CoordinatesResponse? Coordinates,
-    IEnumerable<string>? Images
+    IEnumerable<string>? Images,
+    string? Description,
+    int? PricePerMmSquared
 );
 
 

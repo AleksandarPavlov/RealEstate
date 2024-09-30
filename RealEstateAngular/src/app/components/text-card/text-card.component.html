@@ -25,7 +25,7 @@
           class="relative grid select-none items-center whitespace-nowrap rounded-md py-1.5 px-3 text-xs font-bold text-white"
           [ngStyle]="{
             'background-color':
-              property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'
+              property.listingType == listingType.SELL ? '#f07070' : '#79a450'
           }"
         >
           <span>{{
@@ -50,19 +50,19 @@
     <p
       class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Adresa:</span> {{ property.address }},
+      <span class="font-bold">Adresa: </span>{{ property.address }}<span *ngIf="property.address">,</span> 
       {{ property.city }}
     </p>
     <p
       class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Kvadratura:</span>
+      <span class="font-bold">Kvadratura: </span>
       {{ property.sizeInMmSquared }}m²
     </p>
     <p
       class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Broj soba:</span>
+      <span class="font-bold">Broj soba: </span>
       {{ property.numberOfRooms !== null ? property.numberOfRooms : "/" }}
     </p>
     <p
@@ -86,7 +86,7 @@
     <p
       class="block text-md antialiased font-semibold leading-normal mt-4 text-gray-900 max-w-lg"
       [ngStyle]="{
-        color: property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'
+        color: property.listingType == listingType.SELL ? '#f07070' : '#79a450'
       }"
     >
       <span class="font-bold text-sm text-gray-900">Cena:</span>
@@ -96,22 +96,19 @@
     <p
       class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Cena po m²:</span> 2157 €
+      <span class="font-bold">Cena po m²:</span> {{property.pricePerMmSquared}} €
     </p>
     <p
       class="limit-text block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Opis:</span> 3.0, Karaburma, Patrisa Lumumbe,
-      58m2, 5/5, TA, parking, nov. Posebno funkcionalan stan, očuvan i održavan
-      bez posebnih ulaganja. Bez prolaznih soba. Svetao, sa prelepim panoramskim
-      pogledom na Dunav. Prodaje se sa sa sve nameštajem.
+      <span class="font-bold">Opis:</span> {{property.description}}.
     </p>
   </div>
   <div
     class="bottom-line"
     [ngStyle]="{
       'background-color':
-        property.listingType == listingType.SELL ? '#f07070' : '#8dcc8e'
+        property.listingType == listingType.SELL ? '#f07070' : '#79a450'
     }"
   ></div>
 </div>

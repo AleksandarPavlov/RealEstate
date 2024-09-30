@@ -18,6 +18,8 @@ export class PropertyResponse {
     public floorNumber: boolean,
     public numberOfRooms: number,
     public coordinates: Coordinates,
-    public images: string[]
+    public images: string[],
+    public description: string,
+    public pricePerMmSquared: number
   ) {}
 }

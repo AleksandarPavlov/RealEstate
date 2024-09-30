@@ -37,7 +37,8 @@ namespace RealEstate.API.Controllers
              apartmentRequest.IsFurnished,
              apartmentRequest.FloorNumber,
              apartmentRequest.NumberOfRooms,
-             images
+             images,
+             apartmentRequest.Description
              ), cancellationToken);
 
             return result.Match<ActionResult>(
@@ -65,7 +66,8 @@ namespace RealEstate.API.Controllers
              houseRequest.IsFurnished,
              houseRequest.FloorNumber,
              houseRequest.NumberOfRooms,
-             images
+             images,
+             houseRequest.Description
              ), cancellationToken);
 
             return result.Match<ActionResult>(
@@ -89,7 +91,8 @@ namespace RealEstate.API.Controllers
              landRequest.Price,
              landRequest.SizeInMmSquared,
              landRequest.IsPremium,
-             images
+             images,
+             landRequest.Description
              ), cancellationToken);
 
             return result.Match<ActionResult>(

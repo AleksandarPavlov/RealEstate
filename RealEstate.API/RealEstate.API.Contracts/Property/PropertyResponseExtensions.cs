@@ -1,5 +1,6 @@
 ﻿
 using RealEstate.API.Contracts.Coordinates;
+using RealEstate.Domain.Common.Enums;
 using DomainProperty = RealEstate.Domain.Property.Property;
 
 namespace RealEstate.API.Contracts.Property
@@ -22,10 +23,14 @@ namespace RealEstate.API.Contracts.Property
                 property.IsPremium,
                 property.IsFurnished,
                 property.FloorNumber,
-                property.NumberOfRooms?.Value ?? null,
+                property.NumberOfRooms?.Value,
                 CoordinatesResponseExtensions.ToContract(property.Coordinates),
-                property.Images
-            ); ;
+                property.Images,
+                property.Description?.Value,
+                property.ListingType == PropertyListingType.SELL
+                ? (int?)(property.Price.Value / property.SizeInMmSquared.Value)
+                : null
+            );
         
         }
     }

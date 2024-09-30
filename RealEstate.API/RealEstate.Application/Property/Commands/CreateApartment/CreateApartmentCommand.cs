@@ -17,7 +17,8 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
         bool IsFurnished,
         string FloorNumber,
         int NumberOfRooms,
-        IEnumerable<IFormFile>? Images
+        IEnumerable<IFormFile>? Images,
+        string? Description
         ) : IRequest<Result<DomainProperty>>;
 
 }
