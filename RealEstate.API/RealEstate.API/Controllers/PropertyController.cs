@@ -1,11 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RealEstate.API.Contracts.Coordinates;
 using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
+using RealEstate.Application.Property.Queries.FetchLatestProperties;
 using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
 using RealEstate.Application.Property.Queries.FetchPropertyById;
+using RealEstate.Application.Property.Queries.FindNearbyProperties;
 
 namespace RealEstate.API.Controllers
 {
@@ -137,6 +140,37 @@ namespace RealEstate.API.Controllers
 
             return result.Match<ActionResult>(
                 success => Ok(PropertyResponseExtensions.ToContract(success)),
+                failure => NotFound(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
+
+        [HttpGet("latest/{amount}")]
+        [ActionName(nameof(GetLatest))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PropertyResponse>))]
+        public async Task<ActionResult<IEnumerable<PropertyResponse>>> GetLatest(int amount)
+        {
+            var result = await _mediator
+                .Send(new FetchLatestPropertiesQuery(amount));
+
+            return result.Match<ActionResult>(
+                success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),
+                failure => NotFound(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
+
+        [HttpGet("find-nearby")]
+        [ActionName(nameof(FindNearbyProperties))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PropertyResponse>))]
+        public async Task<ActionResult<IEnumerable<PropertyResponse>>> FindNearbyProperties([FromQuery] FindNearbyPropertiesRequest findNearbyRequest)
+        {
+            var result = await _mediator
+                .Send(new FindNearbyPropertiesQuery(
+                    findNearbyRequest.Lat, 
+                    findNearbyRequest.Lon, 
+                    findNearbyRequest.Distance));
+
+            return result.Match<ActionResult>(
+                success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),
                 failure => NotFound(new ErrorResponse(failure.Code, failure.Description))
             );
         }

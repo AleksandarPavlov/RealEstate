@@ -22,7 +22,7 @@ export function listingTypeToSerbianLanguage(value: ListingType): string {
     case ListingType.SELL:
       return 'Prodaja';
     case ListingType.RENT:
-      return 'Iznajmljivanje';
+      return 'Izdavanje';
     default:
       return 'Prodaja';
   }

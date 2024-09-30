@@ -1,13 +1,14 @@
-.table{
-    width: 80%;
-    margin: auto;
+.table {
+  width: 80%;
+  margin: auto;
+  border-top: 1px solid rgb(239, 239, 239);
 }
-.property-image{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.property-image {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.name-image{
-    cursor: pointer;
+.name-image {
+  cursor: pointer;
 }
-.map-wrapper{
-    transition:0.4s;
+.map-wrapper {
+  transition: 0.4s;
 }

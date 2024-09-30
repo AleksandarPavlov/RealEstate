@@ -1,48 +1,86 @@
-<div class="card relative flex w-full max-w-[26rem] flex-col rounded-md bg-clip-border text-gray-700" routerLink = "/property/{{property.id}}">
+<div
+  class="card relative flex w-full max-w-[26rem] flex-col rounded-md bg-clip-border text-gray-700"
+  routerLink="/property/{{ property.id }}"
+>
+  <div
+    class="relative overflow-hidden text-white rounded-t-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
+  >
+    <img
+      src="{{ property.images[0] }}"
+      alt="ui/ux review check"
+      class="card-image"
+    />
     <div
-      class="relative  overflow-hidden text-white rounded-t-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
-      <img
-        src="{{property.image}}"
-        alt="ui/ux review check"
-        class="card-image" />
+      class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60"
+    ></div>
+
+    <span class="absolute top-4 right-3">
       <div
-        class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60">
+        class="relative grid select-none items-center whitespace-nowrap rounded-md py-1.5 px-3 text-xs font-bold text-white"
+        [ngStyle]="{
+          'background-color':
+            property.listingType == listingType.SELL ? '#f07070' : '#79a450'
+        }"
+      >
+        <span>{{
+          property.listingType == listingType.RENT ? "Izdavanje" : "Prodaja"
+        }}</span>
       </div>
-
-        <span class="absolute top-4 right-3">
-            <div class="relative grid select-none items-center whitespace-nowrap rounded-md py-1.5 px-3 text-xs font-bold text-white"   [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#79a450'}">
-            <span>{{ property.isForRent ? 'Izdavanje' : 'Prodaja' }}</span>
-          </div>
-        </span>
-
+    </span>
+  </div>
+  <div class="p-4 bg-white">
+    <div class="flex items-center justify-between mb-1">
+      <h5
+        class="block text-sm antialiased font-medium leading-snug tracking-normal text-gray-900 truncate"
+      >
+        {{ property.name }}
+      </h5>
     </div>
-    <div class="p-4 bg-white">
-      <div class="flex items-center justify-between mb-1">
-        <h5 class="block text-sm antialiased font-medium leading-snug tracking-normal text-gray-900 truncate">
-           {{property.propertyName}}
-          </h5>
-      </div>
-      <p class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg">
-        {{property.address}}
+    <p
+      class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg"
+    >
+      {{ property.address }} {{ property.city }}
     </p>
-    <p class="block text-xs antialiased font-semibold leading-normal mt-3 text-gray-900 max-w-lg">
-        {{property.sizeInMmSquared}}m² | Broj soba: {{property.numberOfRooms}} | Sprat: {{property.floorNumber}}
+    <p
+      class="block text-xs antialiased font-semibold leading-normal mt-3 text-gray-900 max-w-lg"
+    >
+      {{ property.sizeInMmSquared }}m² | Broj soba:
+      <span class="font-semibold">{{
+        property.numberOfRooms !== null ? property.numberOfRooms : "/"
+      }}</span>
+      | Sprat:
+      <span class="font-semibold">{{
+        property.floorNumber !== null ? property.floorNumber : "/"
+      }}</span>
     </p>
-    <p class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg">
-        {{property.isFurnished ? 'Namešten' : 'Prazan'}}
+    <p
+      class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg"
+    >
+      {{ property.isFurnished ? "Namešten" : "Prazan" }}
     </p>
-    <p class="block text-md antialiased font-semibold leading-normal mt-3 max-w-lg"  [ngStyle]="{'color': !property.isForRent ? '#f07070' : '#79a450'}">
-        {{property.price}} € 
+    <p
+      class="block text-md antialiased font-semibold leading-normal mt-3 max-w-lg"
+      [ngStyle]="{
+        color: property.listingType == listingType.SELL ? '#f07070' : '#79a450'
+      }"
+    >
+      {{ property.price }} €
     </p>
-    <p class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg" >
-       {{ property.pricePerMmSquared ? property.pricePerMmSquared + ' € / m²' : '/' }}
+    <p
+      class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg"
+    >
+      {{
+        property.pricePerMmSquared
+          ? property.pricePerMmSquared + " € / m²"
+          : "Izdavanje"
+      }}
     </p>
-    </div>
-    <div class="bottom-line"  [ngStyle]="{'background-color': !property.isForRent ? '#f07070' : '#79a450'}">
-
-    </div>
-  </div> 
-
-
-
-
+  </div>
+  <div
+    class="bottom-line"
+    [ngStyle]="{
+      'background-color':
+        property.listingType == listingType.SELL ? '#f07070' : '#79a450'
+    }"
+  ></div>
+</div>

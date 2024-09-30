@@ -50,7 +50,8 @@
     <p
       class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Adresa: </span>{{ property.address }}<span *ngIf="property.address">,</span> 
+      <span class="font-bold">Adresa: </span>{{ property.address
+      }}<span *ngIf="property.address">,</span>
       {{ property.city }}
     </p>
     <p
@@ -96,12 +97,14 @@
     <p
       class="block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Cena po m²:</span> {{property.pricePerMmSquared}} €
+      <span class="font-bold">Cena po m²:</span>
+      {{ property.pricePerMmSquared }} €
     </p>
     <p
       class="limit-text block text-sm antialiased font-normal leading-normal mt-4 text-gray-900 max-w-lg"
     >
-      <span class="font-bold">Opis:</span> {{property.description}}.
+      <span class="font-bold">Opis:</span>
+      {{ property.description != null ? property.description : "/" }}
     </p>
   </div>
   <div

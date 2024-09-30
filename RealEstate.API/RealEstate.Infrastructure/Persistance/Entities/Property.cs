@@ -1,7 +1,6 @@
 ﻿
 using RealEstate.Domain.Common.Enums;
 using RealEstate.Domain.Common.Errors;
-using RealEstate.Domain.Property.ValueObjects;
 using DomainProperty = RealEstate.Domain.Property.Property;
 
 namespace RealEstate.Infrastructure.Persistance.Entities
@@ -21,7 +20,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public int? NumberOfRooms { get; private set; }
-        public string? Coordinates { get; private set; }
+        public double? Lat { get; private set; }
+        public double? Lon { get; private set; }
         public ICollection<PropertyImage>? Images { get; private set; }
         public string? Description { get; private set; }
 
@@ -39,7 +39,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             bool? isFurnished,
             string? floorNumber,
             int? numberOfRooms,
-            string? coordinates,
+            double? lat,
+            double? lon,
             string? description)
         {
             Id = id;
@@ -55,12 +56,12 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             IsFurnished = isFurnished;
             FloorNumber = floorNumber;
             NumberOfRooms = numberOfRooms;
-            Coordinates = coordinates?.ToString();
+            Lat = lat;
+            Lon = lon;
             Description = description;
         }
         public static Result<DomainProperty> ToDomain(Property entity) 
         {
-            var coordinates = PropertyCoordinates.CreateCoordinatesFromString(entity.Coordinates);
 
             switch (entity.Type)
             {
@@ -79,8 +80,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.IsFurnished ?? false,
                         entity.FloorNumber ?? string.Empty,
                         entity.NumberOfRooms ?? 0,
-                        coordinates.Latitude,
-                        coordinates.Longitude,
+                        entity.Lat,
+                        entity.Lon,
                         entity.Images?.Select(image => image.Url),
                         entity.Description
                         );
@@ -100,8 +101,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.IsFurnished ?? false,
                         entity.FloorNumber ?? string.Empty,
                         entity.NumberOfRooms ?? 0,
-                        coordinates.Latitude,
-                        coordinates.Longitude,
+                        entity.Lat,
+                        entity.Lon,
                         entity.Images?.Select(image => image.Url),
                         entity.Description
                         );
@@ -118,8 +119,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.SizeInMmSquared,
                         entity.CreationTime,
                         entity.IsPremium,
-                        coordinates.Latitude,
-                        coordinates.Longitude,
+                        entity.Lat,
+                        entity.Lon,
                         entity.Images?.Select(image => image.Url),
                         entity.Description
                         );
@@ -147,7 +148,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                 entity.IsFurnished,
                 entity.FloorNumber,
                 entity.NumberOfRooms?.Value,
-                entity.Coordinates?.ToString(),
+                entity.Coordinates?.Latitude,
+                entity.Coordinates?.Longitude,
                 entity.Description?.Value
                 );
 

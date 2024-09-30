@@ -5,6 +5,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
 import { PropertyPageComponent } from './pages/property-page/property-page.component';
+import { MapSearchPageComponent } from './pages/map-search-page/map-search-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'property/:id', component: PropertyPageComponent },
   { path: 'list', component: PropertyListPageComponent },
   { path: 'post-property', component: FormPageComponent },
+  { path: 'map-search', component: MapSearchPageComponent },
   { path: 'not-found', component: NotFoundPageComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];

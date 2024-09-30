@@ -15,7 +15,6 @@ export class SearchInputGroupComponent {
   typeSelectOptions: SelectOption[] = [
     { label: 'Stan', value: 'Apartment' },
     { label: 'Kuća', value: 'House' },
-    { label: 'Parking', value: 'Parking' },
     { label: 'Zemljište', value: 'Land' },
   ];
 }

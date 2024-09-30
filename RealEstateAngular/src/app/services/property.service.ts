@@ -34,4 +34,22 @@ export class PropertyService {
       'http://localhost:5157/property/' + id
     );
   }
+
+  fetchLatest(amount: number) {
+    return this.httpClient.get<PropertyResponse[]>(
+      'http://localhost:5157/property/latest/' + amount
+    );
+  }
+
+  fetchNearby(lat: number, lon: number, distance: number) {
+    let params = new HttpParams()
+      .set('lat', lat.toString())
+      .set('lon', lon.toString())
+      .set('distance', distance);
+
+    return this.httpClient.get<PropertyResponse[]>(
+      'http://localhost:5157/property/find-nearby',
+      { params }
+    );
+  }
 }

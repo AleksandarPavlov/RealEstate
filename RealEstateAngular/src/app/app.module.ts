@@ -28,6 +28,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
 import { PropertyPageComponent } from './pages/property-page/property-page.component';
+import { MapSearchPageComponent } from './pages/map-search-page/map-search-page.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { PropertyPageComponent } from './pages/property-page/property-page.compo
     FormComponent,
     RadioComponent,
     TextareaComponent,
+    MapSearchPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

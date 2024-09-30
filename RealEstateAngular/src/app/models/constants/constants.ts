@@ -1,0 +1,1 @@
+export const LATEST_PROPERTIES_AMOUNT = 4;

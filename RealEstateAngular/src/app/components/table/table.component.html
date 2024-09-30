@@ -1,154 +1,256 @@
-<div class="table relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md bg-clip-border">
-    <div class="p-6 px-0 ">
-      <table class="w-full mt-4 text-left table-auto min-w-max">
-        <thead>
-          <tr style="background-color: #FCE4E4;" class="text-center">
-            <th class="p-4 border-y border-blue-gray-50 ">
-                <p class="block  text-xs antialiased font-semibold leading-none text-gray-900 ">
-                  Naziv nekretnine
-                </p>
-              </th>
-            <th class="p-4 border-y border-blue-gray-50">
-              <p class="block  text-xs antialiased font-semibold leading-none text-gray-900 ">
-                Informacije
-              </p>
-            </th>
-            <th class="p-4 border-y border-blue-gray-50">
-              <p class="block  text-xs antialiased font-semibold leading-none text-gray-900 ">
-                Tip
-              </p>
-            </th>
-            <th class="p-4 border-y border-blue-gray-50">
-              <p class="block  text-xs antialiased font-semibold leading-none text-gray-900 ">
-                Datum
-              </p>
-            </th>
-            <th class="p-4 border-y border-blue-gray-50">
-              <p class="block  text-xs antialiased font-semibold leading-none text-gray-900 ">
-              </p>
-            </th>
-          </tr>
-        </thead>
-        <tbody *ngIf="properties && properties.length > 0">
-          <tr *ngFor="let property of properties"  
-              [ngStyle]="{
-                'background': property.isPremium && property.listingType === listingType.RENT ? '#edf8ed' : 
-                              (property.isPremium ? '#fff8f9' : 'none'),
-                'box-shadow': property.isPremium && property.listingType === listingType.RENT ? '0 0 8px #79a450' : 
-                              (property.isPremium ? '0 0 8px #f07070' : 'none')
-              }">
-              <td class="name-image p-4 border-b border-blue-gray-50" routerLink='/property/{{property.id}}'>
-                <div class="relative flex items-center gap-8">
-                  <div class="relative"> 
-                    <img *ngIf="property.images[0] && property.images.length > 0" 
-                      [src]="property.images[0]" 
-                      alt="Property Image" 
-                      class="property-image relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
-                    
-                    <img *ngIf="!property.images[0] || property.images.length === 0" 
-                      src="../../../assets/images/image-placeholder.png" 
-                      alt="Default Image" 
-                      class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center" />
-                    
-                    <span class="absolute top-2 left-2">
-                      <div class="relative grid select-none items-center whitespace-nowrap rounded-sm py-1 px-2.5 text-xs font-medium text-white"  
-                        [ngStyle]="{'background-color': property.listingType != listingType.RENT ? '#f07070' : '#79a450'}">
-                        <span *ngIf="property.listingType == listingType.SELL">{{property.pricePerMmSquared}}€ / m²</span>
-                        <span *ngIf="property.listingType == listingType.RENT">{{property.price}}€</span>
-                      </div>
-                    </span>
+<div
+  class="table relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md bg-clip-border"
+>
+  <div class="p-6 px-0">
+    <table class="w-full mt-4 text-left table-auto min-w-max">
+      <thead>
+        <tr style="background-color: #fce4e4" class="text-center">
+          <th class="p-4 border-y border-blue-gray-50">
+            <p
+              class="block text-xs antialiased font-semibold leading-none text-gray-900"
+            >
+              Naziv nekretnine
+            </p>
+          </th>
+          <th class="p-4 border-y border-blue-gray-50">
+            <p
+              class="block text-xs antialiased font-semibold leading-none text-gray-900"
+            >
+              Informacije
+            </p>
+          </th>
+          <th class="p-4 border-y border-blue-gray-50">
+            <p
+              class="block text-xs antialiased font-semibold leading-none text-gray-900"
+            >
+              Tip
+            </p>
+          </th>
+          <th class="p-4 border-y border-blue-gray-50">
+            <p
+              class="block text-xs antialiased font-semibold leading-none text-gray-900"
+            >
+              Datum
+            </p>
+          </th>
+          <th class="p-4 border-y border-blue-gray-50">
+            <p
+              class="block text-xs antialiased font-semibold leading-none text-gray-900"
+            ></p>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="properties && properties.length > 0">
+        <tr
+          *ngFor="let property of properties"
+          [ngStyle]="{
+            background:
+              property.isPremium && property.listingType === listingType.RENT
+                ? '#edf8ed'
+                : property.isPremium
+                ? '#fff8f9'
+                : 'none',
+            'box-shadow':
+              property.isPremium && property.listingType === listingType.RENT
+                ? '0 0 8px #79a450'
+                : property.isPremium
+                ? '0 0 8px #f07070'
+                : 'none'
+          }"
+        >
+          <td
+            class="name-image p-4 border-b border-blue-gray-50"
+            routerLink="/property/{{ property.id }}"
+          >
+            <div class="relative flex items-center gap-8">
+              <div class="relative">
+                <img
+                  *ngIf="property.images[0] && property.images.length > 0"
+                  [src]="property.images[0]"
+                  alt="Property Image"
+                  class="property-image relative inline-block h-36 w-52 !rounded-sm object-cover object-center"
+                />
+
+                <img
+                  *ngIf="!property.images[0] || property.images.length === 0"
+                  src="../../../assets/images/image-placeholder.png"
+                  alt="Default Image"
+                  class="relative inline-block h-36 w-52 !rounded-sm object-cover object-center"
+                />
+
+                <span class="absolute top-2 left-2">
+                  <div
+                    class="relative grid select-none items-center whitespace-nowrap rounded-sm py-1 px-2.5 text-xs font-medium text-white"
+                    [ngStyle]="{
+                      'background-color':
+                        property.listingType != listingType.RENT
+                          ? '#f07070'
+                          : '#79a450'
+                    }"
+                  >
+                    <span *ngIf="property.listingType == listingType.SELL"
+                      >{{ property.pricePerMmSquared }}€ / m²</span
+                    >
+                    <span *ngIf="property.listingType == listingType.RENT"
+                      >{{ property.price }}€</span
+                    >
                   </div>
-                  
-                  <div class="flex flex-col">
-                    <p class="block text-sm antialiased font-semibold leading-normal text-gray-900">
-                      {{property.name}}
-                    </p>
-                    <p class="block text-xs antialiased font-normal leading-normal">
-                      {{property.address}} {{property.city}} 
-                    </p>
-                    <p class="block text-sm antialiased font-semibold leading-normal text-gray-900"
-                      [ngStyle]="{'color': property.listingType == listingType.SELL ? '#f07070' : '#79a450'}">
-                      <span class="text-xs antialiased font-normal leading-normal text-gray-700">Cena: </span>{{property.price}} €
-                    </p>
-                  </div>
-                </div>
-              </td>
-            <td class="p-4 border-b border-blue-gray-50">
+                </span>
+              </div>
+
               <div class="flex flex-col">
-                <p class="block text-xs antialiased font-normal leading-normal text-gray-900">
-                  <span class="font-semibold">{{ property.sizeInMmSquared }}m²</span> | 
-                  Broj soba: <span class="font-semibold">{{ property.numberOfRooms !== null ? property.numberOfRooms : '/' }}</span> | 
-                  Sprat: <span class="font-semibold">{{ property.floorNumber !== null ? property.floorNumber : '/' }}</span> | 
-                  Nameštaj: <span class="font-semibold">{{ property.isFurnished !== null ? (property.isFurnished ? 'Da' : 'Ne') : '/' }}</span>
+                <p
+                  class="block text-sm antialiased font-semibold leading-normal text-gray-900"
+                >
+                  {{ property.name }}
+                </p>
+                <p class="block text-xs antialiased font-normal leading-normal">
+                  {{ property.address }} {{ property.city }}
+                </p>
+                <p
+                  class="block text-sm antialiased font-semibold leading-normal text-gray-900"
+                  [ngStyle]="{
+                    color:
+                      property.listingType == listingType.SELL
+                        ? '#f07070'
+                        : '#79a450'
+                  }"
+                >
+                  <span
+                    class="text-xs antialiased font-normal leading-normal text-gray-700"
+                    >Cena: </span
+                  >{{ property.price }} €
                 </p>
               </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="w-max">
-                <div class="relative grid items-center px-2 py-1 text-xs font-bold text-gray-50 rounded-md select-none whitespace-nowrap"
-                  [ngStyle]="{'background-color': property.listingType == listingType.SELL ? '#f07070' : '#79a450'}">
-                  <span class="">{{ property.listingType == listingType.SELL ? 'Prodaja' : 'Izdavanje' }}</span>
-                </div>
-              </div>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <p class="block text-xs antialiased font-medium leading-normal text-gray-900">
-                  {{ property.creationTime | date: 'dd/MM/yyyy' }}
+            </div>
+          </td>
+          <td class="p-4 border-b border-blue-gray-50">
+            <div class="flex flex-col">
+              <p
+                class="block text-xs antialiased font-normal leading-normal text-gray-900"
+              >
+                <span class="font-semibold"
+                  >{{ property.sizeInMmSquared }}m²</span
+                >
+                | Broj soba:
+                <span class="font-semibold">{{
+                  property.numberOfRooms !== null ? property.numberOfRooms : "/"
+                }}</span>
+                | Sprat:
+                <span class="font-semibold">{{
+                  property.floorNumber !== null ? property.floorNumber : "/"
+                }}</span>
+                | Nameštaj:
+                <span class="font-semibold">{{
+                  property.isFurnished !== null
+                    ? property.isFurnished
+                      ? "Da"
+                      : "Ne"
+                    : "/"
+                }}</span>
               </p>
-            </td>
-            <td class="p-4 border-b border-blue-gray-50">
-              <div class="relative group inline-block">
-                <button class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                        type="button">
-                  <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    <i class="fa-solid fa-map-location-dot text-lg text-gray-800"></i>
-                  </span>
-                </button>
-                <div class="map-wrapper opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute right-full -translate-y-1/2 top-5 w-64 h-40 bg-white text-gray-800 border border-gray-300">
-                  <app-map [mapId]="'map' + property.id"
-                           [mapWidth]="'100%'"
-                           [mapHeight]="'100%'"
-                           [lat]="property.coordinates ? property.coordinates.lat : null"
-                           [lon]="property.coordinates ? property.coordinates.lon : null" >
-                  </app-map>
-                </div>
+            </div>
+          </td>
+          <td class="p-4 border-b border-blue-gray-50">
+            <div class="w-max">
+              <div
+                class="relative grid items-center px-2 py-1 text-xs font-bold text-gray-50 rounded-md select-none whitespace-nowrap"
+                [ngStyle]="{
+                  'background-color':
+                    property.listingType == listingType.SELL
+                      ? '#f07070'
+                      : '#79a450'
+                }"
+              >
+                <span class="">{{
+                  property.listingType == listingType.SELL
+                    ? "Prodaja"
+                    : "Izdavanje"
+                }}</span>
               </div>
-            </td>
-          </tr>
-        </tbody>
-        
-        <tbody *ngIf="properties && properties.length === 0">
-          <tr>
-            <td colspan="5" class="p-2 pt-6 text-center">
-              <div class="flex justify-center items-center flex-col">
-                <img src="../../../assets/images/empty-table3.png" alt="No Results Found" class="h-40 w-50"/>
-                <div>
-                  <p class="text-md font-bold text-gray-900">Nema rezultata</p>
-                  <p class="text-xs font-normal text-gray-700">Pokušajte promeniti filtere ili pretražiti ponovo.</p>
-                </div>
+            </div>
+          </td>
+          <td class="p-4 border-b border-blue-gray-50">
+            <p
+              class="block text-xs antialiased font-medium leading-normal text-gray-900"
+            >
+              {{ property.creationTime | date : "dd/MM/yyyy" }}
+            </p>
+          </td>
+          <td class="p-4 border-b border-blue-gray-50">
+            <div class="relative group inline-block">
+              <button
+                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                type="button"
+              >
+                <span
+                  class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                >
+                  <i
+                    class="fa-solid fa-map-location-dot text-lg text-gray-800"
+                  ></i>
+                </span>
+              </button>
+              <div
+                class="map-wrapper opacity-0 invisible group-hover:opacity-100 group-hover:visible absolute right-full -translate-y-1/2 top-5 w-64 h-40 bg-white text-gray-800 border border-gray-300"
+              >
+                <app-map
+                  [mapId]="'map' + property.id"
+                  [mapWidth]="'100%'"
+                  [mapHeight]="'100%'"
+                  [lat]="property.coordinates ? property.coordinates.lat : null"
+                  [lon]="property.coordinates ? property.coordinates.lon : null"
+                >
+                </app-map>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div *ngIf="properties && properties.length > 0" class="flex items-center justify-between p-4 border-t border-blue-gray-50">
-      <p class="block  text-sm antialiased font-normal leading-normal text-blue-gray-900">
-        Stranica 1 od 10
-      </p>
-      <div class="flex gap-2">
-        <button
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+      <tbody *ngIf="properties && properties.length === 0">
+        <tr>
+          <td colspan="5" class="p-2 pt-6 text-center">
+            <div class="flex justify-center items-center flex-col">
+              <img
+                src="../../../assets/images/empty-table3.png"
+                alt="No Results Found"
+                class="h-40 w-50"
+              />
+              <div>
+                <p class="text-md font-bold text-gray-900">Nema rezultata</p>
+                <p class="text-xs font-normal text-gray-700">
+                  Pokušajte promeniti filtere ili pretražiti ponovo.
+                </p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    *ngIf="properties && properties.length > 0"
+    class="flex items-center justify-between p-4 border-t border-blue-gray-50"
+  >
+    <p
+      class="block text-sm antialiased font-normal leading-normal text-blue-gray-900"
+    >
+      Stranica 1 od 10
+    </p>
+    <div class="flex gap-2">
+      <button
         class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
         type="button"
       >
         Prethodna
       </button>
       <button
-      class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-      type="button"
-    >
-      Sledeća
-    </button>
-      </div>
+        class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+        type="button"
+      >
+        Sledeća
+      </button>
     </div>
   </div>
+</div>

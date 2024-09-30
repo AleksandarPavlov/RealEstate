@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Property } from 'src/app/models/property.model';
+import { ListingType } from 'src/app/models/propertyListingType.enum';
+import { PropertyResponse } from 'src/app/models/propertyResponse.model';
+import { PropertyType } from 'src/app/models/propertyType.enum';
 
 @Component({
   selector: 'app-image-card',
@@ -7,5 +9,7 @@ import { Property } from 'src/app/models/property.model';
   styleUrls: ['./image-card.component.css'],
 })
 export class ImageCardComponent {
-  @Input() property!: Property;
+  @Input() property!: PropertyResponse;
+  listingType = ListingType;
+  propertyType = PropertyType;
 }

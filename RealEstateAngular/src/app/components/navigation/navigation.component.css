@@ -4,17 +4,16 @@ nav {
   max-width: 2000px;
   margin: auto;
 }
-.nav-wrapper{
+.nav-wrapper {
   z-index: 9999;
 }
-#logo{
-  text-shadow: 2px 3px 5px rgba(0,0,0,0.15);
+#logo {
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.15);
 }
-i{
-  text-shadow: 2px 3px 5px rgba(0,0,0,0.25);
+i {
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.25);
 }
 ul li a {
-  
   background-image: linear-gradient(
     to right,
     rgb(85, 85, 85),
@@ -31,8 +30,8 @@ ul li a {
   transition: all 0.25s ease-in-out;
 }
 
-ul li a:before{
-  content: '';
+ul li a:before {
+  content: "";
   background: rgb(85, 85, 85);
   display: block;
   position: absolute;
@@ -44,16 +43,16 @@ ul li a:before{
 }
 
 ul li a:hover {
- background-position: 0;
+  background-position: 0;
 }
 
-ul li a:hover::before{
+ul li a:hover::before {
   width: 100%;
 }
-ul li{
+ul li {
   cursor: pointer;
 }
-.prodaja-menu {
+.menu {
   width: 600px;
   position: absolute;
   left: 51.5%;

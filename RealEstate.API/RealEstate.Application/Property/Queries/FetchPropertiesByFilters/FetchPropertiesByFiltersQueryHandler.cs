@@ -11,7 +11,7 @@ namespace RealEstate.Application.Property.Queries.FetchPropertiesByFilters
     {
         private readonly IPropertyReadRepository _propertyRepository;
 
-        public FetchPropertiesByFiltersQueryHandler(IPropertyReadRepository propertyRepository, IUnitOfWork unitOfWork)
+        public FetchPropertiesByFiltersQueryHandler(IPropertyReadRepository propertyRepository)
         {
             _propertyRepository = propertyRepository;
         }
