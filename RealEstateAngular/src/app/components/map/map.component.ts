@@ -8,6 +8,7 @@ import * as L from 'leaflet';
 import { Subject, takeUntil } from 'rxjs';
 import { PropertyResponse } from 'src/app/models/propertyResponse.model';
 import { PropertyService } from 'src/app/services/property.service';
+import 'leaflet.bouncemarker';
 
 @Component({
   selector: 'app-map',
@@ -100,24 +101,23 @@ export class MapComponent implements AfterViewInit {
             property.coordinates.lon &&
             this.map
           ) {
-            const marker = L.marker([
-              Number.parseFloat(property.coordinates.lat),
-              Number.parseFloat(property.coordinates.lon),
-            ])
-              .addTo(this.map)
-              .bindPopup(property.name);
-
-            marker.on('click', () => {
-              if (this.map) {
-                this.map.setView(
-                  [
-                    Number.parseFloat(property.coordinates.lat),
-                    Number.parseFloat(property.coordinates.lon),
-                  ],
-                  13
-                );
+            const marker = L.marker(
+              [
+                Number.parseFloat(property.coordinates.lat),
+                Number.parseFloat(property.coordinates.lon),
+              ],
+              {
+                bounceOnAdd: true,
+                bounceOnAddOptions: { duration: 600, height: 200 },
               }
-            });
+            )
+              .addTo(this.map)
+              .bindPopup(
+                `<p ><strong>${property.name}</strong><br />
+                ${property.address} ${property.city}<br />
+                Veličina: <strong>${property.sizeInMmSquared}m²</strong><br />      
+                Cena: <strong>${property.price}€</strong></p>`
+              );
 
             this.currentMarkers.push(marker);
           }
