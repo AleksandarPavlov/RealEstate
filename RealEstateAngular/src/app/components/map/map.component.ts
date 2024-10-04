@@ -5,10 +5,17 @@ import {
   Input,
 } from '@angular/core';
 import * as L from 'leaflet';
-import { Subject, takeUntil } from 'rxjs';
-import { PropertyResponse } from 'src/app/models/propertyResponse.model';
-import { PropertyService } from 'src/app/services/property.service';
 import 'leaflet.bouncemarker';
+import 'leaflet.sidepanel';
+import { Subject, takeUntil } from 'rxjs';
+import {
+  ListingType,
+  listingTypeToSerbianLanguage,
+  toListingType,
+} from 'src/app/models/propertyListingType.enum';
+import { PropertyResponse } from 'src/app/models/propertyResponse.model';
+import { SelectOption } from 'src/app/models/select-option.model';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-map',
@@ -25,12 +32,22 @@ export class MapComponent implements AfterViewInit {
 
   areCoordinatesValid: boolean = false;
   properties: PropertyResponse[] = [];
+  currentProperty: PropertyResponse | undefined = undefined;
+  isPanelOpen: boolean = false;
+  distance: number = 5;
+  selectedListingType: string | null = null;
 
   private map: L.Map | undefined;
   private popup: L.Popup | undefined;
   private currentMarkers: L.Marker[] = [];
   private currentMarker: L.Marker | undefined;
   private unsubscribe$ = new Subject<void>();
+  private panel: L.Control.SidePanel | undefined;
+
+  listingSelectOptions: SelectOption[] = [
+    { label: listingTypeToSerbianLanguage(ListingType.RENT), value: 'Rent' },
+    { label: listingTypeToSerbianLanguage(ListingType.SELL), value: 'Sell' },
+  ];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -67,6 +84,19 @@ export class MapComponent implements AfterViewInit {
 
         if (this.setView) {
           this.map.on('click', this.onMapClick.bind(this));
+          this.panel = L.control
+            .sidepanel('panelID', {
+              panelPosition: 'left',
+              hasTabs: false,
+              tabsPosition: 'top',
+              pushControls: true,
+              darkMode: false,
+              defaultTab: 'tab-5',
+              onToggle: (opened) => {
+                this.isPanelOpen = opened;
+              },
+            })
+            .addTo(this.map!);
         }
       }
     }
@@ -82,13 +112,26 @@ export class MapComponent implements AfterViewInit {
       const lat = e.latlng.lat;
       const lon = e.latlng.lng;
 
-      this.fetchNearbyProperties(lat, lon, 5);
+      this.fetchNearbyProperties(
+        lat,
+        lon,
+        this.distance,
+        this.selectedListingType
+          ? toListingType(this.selectedListingType)
+          : undefined
+      );
     }
   }
 
-  fetchNearbyProperties(lat: number, lon: number, distance: number) {
+  fetchNearbyProperties(
+    lat: number,
+    lon: number,
+    distance: number,
+    selectedListingType?: ListingType
+  ) {
+    console.log(distance + ' ' + selectedListingType?.toString());
     this.propertyService
-      .fetchNearby(lat, lon, distance)
+      .fetchNearby(lat, lon, distance, selectedListingType)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((response) => {
         this.properties = response;
@@ -110,14 +153,15 @@ export class MapComponent implements AfterViewInit {
                 bounceOnAdd: true,
                 bounceOnAddOptions: { duration: 600, height: 200 },
               }
-            )
-              .addTo(this.map)
-              .bindPopup(
-                `<p ><strong>${property.name}</strong><br />
-                ${property.address} ${property.city}<br />
-                Veličina: <strong>${property.sizeInMmSquared}m²</strong><br />      
-                Cena: <strong>${property.price}€</strong></p>`
-              );
+            ).addTo(this.map);
+
+            marker.on('click', () => {
+              this.fetchCurrentProperty(property.id);
+              this.cdr.detectChanges();
+              if (this.panel) {
+                this.panel.open();
+              }
+            });
 
             this.currentMarkers.push(marker);
           }
@@ -134,6 +178,24 @@ export class MapComponent implements AfterViewInit {
       });
       this.currentMarkers = [];
     }
+  }
+
+  fetchCurrentProperty(id: number) {
+    this.propertyService
+      .fetchById(id)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((response) => {
+        this.currentProperty = response;
+      });
+  }
+
+  onDistanceChange(newDistance: number) {
+    this.distance = newDistance;
+    console.log(newDistance);
+  }
+
+  onListingTypeChange(newListingType: string | null) {
+    this.selectedListingType = newListingType;
   }
 
   ngOnDestroy(): void {

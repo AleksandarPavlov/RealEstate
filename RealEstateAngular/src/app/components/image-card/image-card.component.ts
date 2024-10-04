@@ -10,6 +10,10 @@ import { PropertyType } from 'src/app/models/propertyType.enum';
 })
 export class ImageCardComponent {
   @Input() property!: PropertyResponse;
+  @Input() fontSize: 'medium' | 'large' = 'medium';
+  @Input() hasButton: boolean = false;
+  @Input() hasDescription: boolean = false;
+
   listingType = ListingType;
   propertyType = PropertyType;
 }

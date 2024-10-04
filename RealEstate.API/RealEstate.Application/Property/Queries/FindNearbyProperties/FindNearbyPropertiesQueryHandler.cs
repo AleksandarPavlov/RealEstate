@@ -23,7 +23,7 @@ namespace RealEstate.Application.Property.Queries.FindNearbyProperties
        
             }
 
-            return await _propertyRepository.FindNearbyProperties(request.Distance, lat, lon);
+            return await _propertyRepository.FindNearbyProperties(request.Distance, lat, lon, request.ListingType);
         }
     }
 }

@@ -1,5 +1,5 @@
 <div
-  class="card relative flex w-full max-w-[26rem] flex-col rounded-md bg-clip-border text-gray-700"
+  class="card relative flex w-full h-full max-w-[26rem] flex-col rounded-md bg-clip-border text-gray-700"
   routerLink="/property/{{ property.id }}"
 >
   <div
@@ -28,59 +28,97 @@
       </div>
     </span>
   </div>
-  <div class="p-4 bg-white">
-    <div class="flex items-center justify-between mb-1">
-      <h5
-        class="block text-sm antialiased font-medium leading-snug tracking-normal text-gray-900 truncate"
+  <div class="flex flex-col justify-between h-full p-4 bg-white">
+    <div>
+      <div class="flex items-center justify-between mb-1">
+        <h5
+          class="block antialiased font-medium leading-snug tracking-normal text-gray-900 truncate"
+          [ngClass]="{
+            'text-sm': fontSize === 'medium',
+            'text-lg': fontSize === 'large'
+          }"
+        >
+          {{ property.name }}
+        </h5>
+      </div>
+      <p
+        class="block antialiased font-light leading-normal mt-3 text-gray-900 max-w-lg"
+        [ngClass]="{
+          'text-xs': fontSize === 'medium',
+          'text-sm': fontSize === 'large'
+        }"
       >
-        {{ property.name }}
-      </h5>
-    </div>
-    <p
-      class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg"
-    >
-      {{ property.address }} {{ property.city }}
-    </p>
-    <p
-      class="block text-xs antialiased font-semibold leading-normal mt-3 text-gray-900 max-w-lg"
-    >
-      {{ property.sizeInMmSquared }}m² | Broj soba:
-      <span class="font-semibold">{{
-        property.numberOfRooms !== null ? property.numberOfRooms : "/"
-      }}</span>
-      | Sprat:
-      <span class="font-semibold">{{
-        property.floorNumber !== null ? property.floorNumber : "/"
-      }}</span>
-    </p>
-    <p
-      class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg"
-    >
-      {{ property.isFurnished ? "Namešten" : "Prazan" }}
-    </p>
-    <p
+        {{ property.address }} {{ property.city }}
+      </p>
+      <p
       class="block text-md antialiased font-semibold leading-normal mt-3 max-w-lg"
       [ngStyle]="{
         color: property.listingType == listingType.SELL ? '#f07070' : '#79a450'
       }"
+      [ngClass]="{
+        'text-xs': fontSize === 'medium',
+        'text-lg': fontSize === 'large'
+      }"
     >
       {{ property.price }} €
     </p>
-    <p
-      class="block text-xs antialiased font-light leading-normal mt-3 text-gray-800 max-w-lg"
+      <p
+        class="block antialiased font-semibold leading-normal mt-3 text-gray-900 max-w-lg"
+        [ngClass]="{
+          'text-xs': fontSize === 'medium',
+          'text-sm': fontSize === 'large'
+        }"
+      >
+        {{ property.sizeInMmSquared }}m² | Broj soba:
+        <span class="font-semibold">{{
+          property.numberOfRooms !== null ? property.numberOfRooms : "/"
+        }}</span>
+      </p>
+      <p
+        class="block text-xs antialiased font-light leading-normal mt-3 text-gray-900 max-w-lg"
+        [ngClass]="{
+          'text-xs': fontSize === 'medium',
+          'text-sm': fontSize === 'large'
+        }"
+      >
+        {{ property.isFurnished ? "Namešten" : "Prazan" }}
+      </p>
+      <p
+        class="block text-xs antialiased font-light leading-normal mt-3 text-gray-900 max-w-lg"
+        [ngClass]="{
+          'text-xs': fontSize === 'medium',
+          'text-sm': fontSize === 'large'
+        }"
+      >
+        {{
+          property.pricePerMmSquared
+            ? property.pricePerMmSquared + " € / m²"
+            : "Izdavanje"
+        }}
+      </p>
+      <p
+      class="block text-sm antialiased font-light leading-normal mt-3 text-gray-900 max-w-lg"
+      *ngIf="hasButton"
     >
-      {{
-        property.pricePerMmSquared
-          ? property.pricePerMmSquared + " € / m²"
-          : "Izdavanje"
-      }}
+    <span class = "font-medium">Opis: </span>
+      {{property.description}}
     </p>
+    </div>
+
+    <button
+      *ngIf="hasButton"
+      class="align-middle mt-7 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+      type="button"
+    >
+      Pogledaj Detaljnije
+    </button>
   </div>
-  <div
-    class="bottom-line"
-    [ngStyle]="{
-      'background-color':
-        property.listingType == listingType.SELL ? '#f07070' : '#79a450'
-    }"
-  ></div>
 </div>
+
+<div
+  class="bottom-line"
+  [ngStyle]="{
+    'background-color':
+      property.listingType == listingType.SELL ? '#f07070' : '#79a450'
+  }"
+></div>

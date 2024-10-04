@@ -1,6 +1,7 @@
 ﻿
 using RealEstate.Application.Property.Dtos;
 using RealEstate.Domain.Common.Dtos;
+using RealEstate.Domain.Common.Enums;
 using DomainProperty = RealEstate.Domain.Property.Property;
 
 namespace RealEstate.Domain.Persistance.Read
@@ -10,6 +11,6 @@ namespace RealEstate.Domain.Persistance.Read
         Task<Result<IEnumerable<DomainProperty>>> FetchPropertiesByFilters(PropertyFilters filters);
         Task<Result<DomainProperty>> FetchPropertyById(long id);
         Task<Result<IEnumerable<DomainProperty>>> FetchLatestProperties(int amount);
-        Task<Result<IEnumerable<DomainProperty>>> FindNearbyProperties(int distance, double lat, double lon);
+        Task<Result<IEnumerable<DomainProperty>>> FindNearbyProperties(int distance, double lat, double lon, PropertyListingType? ListingType);
     }
 }

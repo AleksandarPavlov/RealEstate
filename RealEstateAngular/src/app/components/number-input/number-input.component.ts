@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-number-input',
@@ -9,4 +9,20 @@ export class NumberInputComponent {
   @Input() icon: string = '';
   @Input() placeholder: string = '';
   @Input() marginTop: boolean = false;
+  @Input() placeholderSize: 'small' | 'medium' = 'medium';
+  @Input() width: 'small' | 'medium' | 'large' = 'medium';
+
+  value: number = 0;
+  @Output() valueChange = new EventEmitter<number>();
+
+  onValueChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input && input.value) {
+      const newValue = Number(input.value);
+      if (!isNaN(newValue)) {
+        this.value = newValue;
+        this.valueChange.emit(this.value);
+      }
+    }
+  }
 }

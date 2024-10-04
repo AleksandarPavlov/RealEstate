@@ -167,7 +167,8 @@ namespace RealEstate.API.Controllers
                 .Send(new FindNearbyPropertiesQuery(
                     findNearbyRequest.Lat, 
                     findNearbyRequest.Lon, 
-                    findNearbyRequest.Distance));
+                    findNearbyRequest.Distance,
+                    findNearbyRequest.ListingType));
 
             return result.Match<ActionResult>(
                 success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),

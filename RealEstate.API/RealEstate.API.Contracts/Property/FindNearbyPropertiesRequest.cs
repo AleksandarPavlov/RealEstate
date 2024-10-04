@@ -1,10 +1,13 @@
 ﻿
+using RealEstate.Domain.Common.Enums;
+
 namespace RealEstate.API.Contracts.Property
 {
     public record FindNearbyPropertiesRequest
     (
         string Lat,
         string Lon,
-        int Distance  
+        int Distance,
+        PropertyListingType? ListingType
     );
 }

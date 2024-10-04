@@ -1,4 +1,9 @@
-<div class="w-[150px] max-w-sm relative {{ marginTop ? 'mt-4' : '' }}">
+<div class="w-[150px] max-w-sm relative {{ marginTop ? 'mt-4' : '' }}"
+[ngClass]="{
+  'w-[50px]': width === 'small',
+  'w-[150px]': width  === 'medium',
+  'w-[200px]': width === 'large'
+}">
   <div class="relative">
     <i
       [ngClass]="icon"
@@ -8,8 +13,13 @@
     <input
       type="number"
       class="w-full pl-8 h-10 pr-3 py-2 bg-transparent placeholder:text-slate-700 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+      [ngClass]="{
+        'placeholder:text-xs': placeholderSize === 'small',
+        'placeholder:text-sm': placeholderSize  === 'medium'
+      }"
       placeholder="{{ placeholder }}"
-      value="{{ placeholder }}"
+      [(ngModel)]="value"
+      (input)="onValueChange($event)"
     />
   </div>
 </div>

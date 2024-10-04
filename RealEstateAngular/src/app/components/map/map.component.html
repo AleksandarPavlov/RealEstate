@@ -1,11 +1,62 @@
 <div *ngIf="areCoordinatesValid" 
-       id={{mapId}} 
-       [style.height]="mapHeight" 
-       [style.width]="mapWidth">
+     id={{mapId}} 
+     [style.height]="mapHeight" 
+     [style.width]="mapWidth"
+     class="map relative">
+     
+     <app-number-input 
+        *ngIf="setView"
+        class="input-field absolute top-5 left-16 z-[9997] bg-white"
+        [icon]="'fa-solid fa-ruler'"
+        [placeholder]="'Udaljenost od tačke (km)'"
+        [placeholderSize]="'small'"
+        [width]="'large'"
+        [ngClass]="{ 'hidden': isPanelOpen }"
+        (valueChange)="onDistanceChange($event)" 
+        (click)="$event.stopPropagation()">
+   </app-number-input>
+   
+   <app-select
+        *ngIf="setView"
+        class="input-field absolute top-1 left-72 z-[9997]"
+        [placeholder]="'Tip oglasa'"
+        [icon]="'fa-solid fa-bars'"
+        [options]="listingSelectOptions"
+        [fontSize]="'small'"
+        [ngClass]="{ 'hidden': isPanelOpen }"
+        (selectionChange)="onListingTypeChange($event)"
+        (click)="$event.stopPropagation()">
+   </app-select>
+
+
+     <div *ngIf="setView" id="panelID" class="sidepanel  z-[9998]" aria-label="side panel" aria-hidden="false">
+        <div class="sidepanel-inner-wrapper p-4">            
+            <div class="flex flex-col w-full h-full" *ngIf="currentProperty != undefined">
+                <app-image-card [property]="currentProperty" [fontSize]="'large'" [hasButton]="true" [hasDescription]="true"></app-image-card>
+            </div>
+            <div class="sidepanel-content-wrapper">
+                <div class="sidepanel-content">
+                    <div class="sidepanel-tab-content" data-tab-content="tab-1">
+                        <p>Content 1.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidepanel-toggle-container">
+            <button
+                class="sidepanel-toggle-button"
+                type="button"
+                aria-label="toggle side panel"
+                [ngStyle]="{
+                    'display': currentProperty == undefined ? 'none' : 'block'
+                }"
+            ></button>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="!areCoordinatesValid" class="broken-map" 
-       [style.width]="mapWidth" 
-       [style.height]="mapHeight">
+     [style.width]="mapWidth" 
+     [style.height]="mapHeight">
     <p>Map data not available</p>
-  </div>
+</div>

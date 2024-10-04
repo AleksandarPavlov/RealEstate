@@ -1,5 +1,6 @@
 ﻿using DomainProperty = RealEstate.Domain.Property.Property;
 using MediatR;
+using RealEstate.Domain.Common.Enums;
 
 namespace RealEstate.Application.Property.Queries.FindNearbyProperties
 {
@@ -7,8 +8,9 @@ namespace RealEstate.Application.Property.Queries.FindNearbyProperties
     (
         string Lat,
         string Lon,
-        int Distance
-             
+        int Distance,
+        PropertyListingType? ListingType
+
     ) : IRequest<Result<IEnumerable<DomainProperty>>>;
 
 }

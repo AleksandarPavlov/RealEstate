@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using RealEstate.Application.Property.Dtos;
 using RealEstate.Domain.Common.Dtos;
+using RealEstate.Domain.Common.Enums;
 using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance.Read;
 using RealEstate.Infrastructure.Persistance.Entities;
@@ -98,23 +99,32 @@ namespace RealEstate.Infrastructure.Persistance.Read
             return Result<IEnumerable<DomainProperty>>.Success(domainProperties);
         }
 
-        public async Task<Result<IEnumerable<DomainProperty>>> FindNearbyProperties(int distance, double lat, double lon)
+        public async Task<Result<IEnumerable<DomainProperty>>> FindNearbyProperties(int distance, double lat, double lon, PropertyListingType? ListingType)
         {
-    
             var sql = @"
             SELECT *
             FROM Property
             WHERE
             (6371 * acos(cos(radians(@lat)) * cos(radians(Lat)) * cos(radians(Lon) - radians(@lon)) + sin(radians(@lat)) * sin(radians(Lat)))) <= @distance";
 
-            var parameters = new[]
+            if (ListingType.HasValue)
+            {
+                sql += " AND ListingType = @listingType";
+            }
+
+            var parameters = new List<SqlParameter>
             {
                 new SqlParameter("@lat", lat),
                 new SqlParameter("@lon", lon),
                 new SqlParameter("@distance", distance)
             };
 
-            var properties = await _context.Property.FromSqlRaw(sql, parameters).ToListAsync();
+            if (ListingType.HasValue)
+            {
+                parameters.Add(new SqlParameter("@listingType", ListingType.Value.ToString()));
+            }
+
+            var properties = await _context.Property.FromSqlRaw(sql, parameters.ToArray()).ToListAsync();
 
             var domainProperties = properties
                 .Select(Property.ToDomain)
@@ -123,5 +133,6 @@ namespace RealEstate.Infrastructure.Persistance.Read
 
             return Result<IEnumerable<DomainProperty>>.Success(domainProperties);
         }
+
     }
 }

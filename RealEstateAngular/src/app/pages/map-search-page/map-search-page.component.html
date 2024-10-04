@@ -1,4 +1,11 @@
 <app-navigation></app-navigation>
+<div class="body-wrapper">
+<div class ="title-section mt-10">
+  <h1 class=" block antialiased tracking-normal text-center text-gray-900 font-extrabold text-3xl">Pronađi budući dom sa jednim klikom.</h1>
+  <p class="block text-sm antialiased text-center font-light leading-normal mt-3 text-gray-800 max-w-lg">
+  Klikni na željenu lokaciju na mapi, definiši udaljenost i tip oglasa, a zatim pogledaj sve nekretnine u okolini.
+</p>
+</div>
 <div class="map-wrapper">
   <app-map
     [mapWidth]="'100%'"
@@ -9,4 +16,9 @@
     [setView]="true"
   >
   </app-map>
+</div>
+</div>
+<app-footer></app-footer>
+<div class="bottom-skyline">
+
 </div>
