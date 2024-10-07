@@ -106,23 +106,20 @@ namespace RealEstate.Infrastructure.Persistance.Read
             FROM Property
             WHERE
             (6371 * acos(cos(radians(@lat)) * cos(radians(Lat)) * cos(radians(Lon) - radians(@lon)) + sin(radians(@lat)) * sin(radians(Lat)))) <= @distance";
-
-            if (ListingType.HasValue)
-            {
-                sql += " AND ListingType = @listingType";
-            }
-
+            
             var parameters = new List<SqlParameter>
             {
                 new SqlParameter("@lat", lat),
                 new SqlParameter("@lon", lon),
                 new SqlParameter("@distance", distance)
             };
-
+            
             if (ListingType.HasValue)
             {
-                parameters.Add(new SqlParameter("@listingType", ListingType.Value.ToString()));
+                sql += " AND ListingType = @listingType";
+                parameters.Add(new SqlParameter("@listingType", (int)ListingType.Value));
             }
+            
 
             var properties = await _context.Property.FromSqlRaw(sql, parameters.ToArray()).ToListAsync();
 

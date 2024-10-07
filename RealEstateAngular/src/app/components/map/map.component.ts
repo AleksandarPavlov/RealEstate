@@ -129,7 +129,6 @@ export class MapComponent implements AfterViewInit {
     distance: number,
     selectedListingType?: ListingType
   ) {
-    console.log(distance + ' ' + selectedListingType?.toString());
     this.propertyService
       .fetchNearby(lat, lon, distance, selectedListingType)
       .pipe(takeUntil(this.unsubscribe$))
@@ -191,7 +190,6 @@ export class MapComponent implements AfterViewInit {
 
   onDistanceChange(newDistance: number) {
     this.distance = newDistance;
-    console.log(newDistance);
   }
 
   onListingTypeChange(newListingType: string | null) {

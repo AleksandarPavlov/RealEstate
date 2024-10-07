@@ -11,13 +11,13 @@ using RealEstate.Infrastructure.Persistance.Write;
 using RealEstate.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    options.AddPolicy(name: myAllowSpecificOrigins,
                       builder =>
                       {
                           builder.WithOrigins("http://localhost:4200")
@@ -41,7 +41,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Creat
 
 
 var app = builder.Build();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(myAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

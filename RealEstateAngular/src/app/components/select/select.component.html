@@ -8,9 +8,10 @@
       class="w-full h-10 bg-white text-slate-700 text-sm border border-slate-200 rounded px-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
       [ngClass]="{
         'text-xs': fontSize === 'small',
-        'text-sm': fontSize  === 'medium',
+        'text-sm': fontSize === 'medium',
         'text-md': fontSize === 'large'
       }"
+      (change)="handleSelectionChange($event)" 
     >
       <option value="" disabled selected hidden>
         {{ placeholder }}

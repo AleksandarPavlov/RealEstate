@@ -4,6 +4,8 @@
     [buttonClass]="
       'absolute py-1.5 text-white text-sm right-1 top-1 my-auto px-3 flex items-center rounded hover:bg-slate-700'
     "
+    (inputChange)="handleSearchInput($event)"
+    [suggestions]="suggestions"
     [buttonColor]="'#f07070'"
   ></app-search-bar>
 
@@ -30,5 +32,13 @@
       [icon]="'fa-solid fa-euro-sign'"
       [marginTop] = "true"
     ></app-number-input>
+    <button
+    class="select-none rounded-md  mt-4 py-3 px-8 text-center align-middle text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+    type="button"
+    style="background-color: #f07070;"
+    routerLink="/post-property"
+  >
+    <span>Pretraži oglase</span>
+  </button>
   </div>
 </div>

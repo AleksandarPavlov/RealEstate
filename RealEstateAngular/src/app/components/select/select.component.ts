@@ -16,8 +16,9 @@ export class SelectComponent {
 
   @Output() selectionChange = new EventEmitter<string | null>();
 
-  handleSelectionChange(event: any) {
-    this.selectedOption = event.target.value;
+  handleSelectionChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedOption = selectElement.value;
     this.selectionChange.emit(this.selectedOption);
   }
 }
