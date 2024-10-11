@@ -13,6 +13,7 @@ namespace RealEstate.Infrastructure.Persistance
 
         public DbSet<Property> Property { get; set; } = null!;
         public DbSet<PropertyImage> PropertyImage { get; set; } = null!;
+        public DbSet<Advertiser> Advertiser { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,7 +22,12 @@ namespace RealEstate.Infrastructure.Persistance
               .WithOne(img => img.Property)
               .HasForeignKey(img => img.PropertyId) 
               .OnDelete(DeleteBehavior.Cascade); 
-
+            
+            modelBuilder.Entity<Property>()
+                .HasOne(p => p.Advertiser)  
+                .WithOne(a => a.Property)  
+                .HasForeignKey<Advertiser>(a => a.PropertyId) 
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

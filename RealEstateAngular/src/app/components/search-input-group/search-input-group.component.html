@@ -1,5 +1,6 @@
 <div class="input-wrapper flex flex-wrap gap-4 justify-center items-center">
   <app-search-bar
+    #searchBar
     [placeholder]="'Pretraži lokaciju'"
     [buttonClass]="
       'absolute py-1.5 text-white text-sm right-1 top-1 my-auto px-3 flex items-center rounded hover:bg-slate-700'
@@ -10,35 +11,39 @@
   ></app-search-bar>
 
   <app-select
+    #listingSelect
     [placeholder]="'Tip oglasa'"
     [icon]="'fa-solid fa-bars'"
     [options]="listingSelectOptions"
   ></app-select>
 
-
-    <app-select
+  <app-select
+    #propertyTypeSelect
     [placeholder]="'Nekretnina'"
     [icon]="'fa-solid fa-building'"
-    [options]="typeSelectOptions">
-    </app-select>
+    [options]="typeSelectOptions"
+  ></app-select>
 
   <div class="flex justify-center items-center gap-4">
-    <app-number-input [placeholder]="'m² od'" 
-      [icon]="'fa-solid fa-maximize'"
-      [marginTop] = "true">
-    </app-number-input>
     <app-number-input
+      #sizeFromInput
+      [placeholder]="'m² od'"
+      [icon]="'fa-solid fa-maximize'"
+      [marginTop]="true"
+    ></app-number-input>
+    <app-number-input
+      #priceToInput
       [placeholder]="'Cena do €'"
       [icon]="'fa-solid fa-euro-sign'"
-      [marginTop] = "true"
+      [marginTop]="true"
     ></app-number-input>
     <button
-    class="select-none rounded-md  mt-4 py-3 px-8 text-center align-middle text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
-    type="button"
-    style="background-color: #f07070;"
-    routerLink="/post-property"
-  >
-    <span>Pretraži oglase</span>
-  </button>
+      class="select-none rounded-md mt-4 py-3 px-8 text-center align-middle text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+      type="button"
+      style="background-color: #f07070;"
+      (click)="onSearchClick()"
+    >
+      <span>Pretraži oglase</span>
+    </button>
   </div>
 </div>

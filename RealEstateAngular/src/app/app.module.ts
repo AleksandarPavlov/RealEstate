@@ -29,6 +29,8 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
 import { PropertyPageComponent } from './pages/property-page/property-page.component';
 import { MapSearchPageComponent } from './pages/map-search-page/map-search-page.component';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { MapSearchPageComponent } from './pages/map-search-page/map-search-page.
     RadioComponent,
     TextareaComponent,
     MapSearchPageComponent,
+    SkeletonComponent,
+    TooltipComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

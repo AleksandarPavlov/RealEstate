@@ -1,5 +1,6 @@
 ﻿
 using RealEstate.Domain.Common.Enums;
+using DomainAdvertiser = RealEstate.Domain.Advertiser.Advertiser;
 using RealEstate.Domain.Property.ValueObjects;
 
 namespace RealEstate.Domain.Property
@@ -15,6 +16,7 @@ namespace RealEstate.Domain.Property
         public PropertySize SizeInMmSquared { get; private set; }
         public DateTime CreationTime { get; private set; }
         public bool IsPremium { get; private set; }
+        public DomainAdvertiser? Advertiser { get; private set; }
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public PropertyNumberOfRooms? NumberOfRooms { get; private set; }
@@ -31,6 +33,7 @@ namespace RealEstate.Domain.Property
             PropertySize sizeInMmSquared,
             DateTime creationTime,
             bool isPremium,
+            DomainAdvertiser? advertiser,
             bool? isFurnished,
             string? floorNumber,
             PropertyNumberOfRooms? numberOfRooms,
@@ -47,6 +50,7 @@ namespace RealEstate.Domain.Property
             SizeInMmSquared = sizeInMmSquared;
             CreationTime = creationTime;
             IsPremium = isPremium;
+            Advertiser = advertiser;
             IsFurnished = isFurnished;
             FloorNumber = floorNumber;
             NumberOfRooms = numberOfRooms;

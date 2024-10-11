@@ -6,10 +6,17 @@
     class="relative overflow-hidden text-white rounded-t-md bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
   >
     <img
+      *ngIf="property.images[0]"
       src="{{ property.images[0] }}"
-      alt="ui/ux review check"
+      alt="No image preview"
       class="card-image"
     />
+    <img
+    *ngIf="!property.images[0]"
+    src="../../../assets/images/image-placeholder.png"
+    alt="No image preview"
+    class="card-image"
+  />
     <div
       class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60"
     ></div>

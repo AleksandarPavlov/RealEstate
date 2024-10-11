@@ -40,6 +40,15 @@
           </th>
         </tr>
       </thead>
+      <tbody *ngIf="!properties.length && isFetching">
+        <tr>
+          <td colspan="5" class="p-2">
+            <div class="flex justify-center">
+              <app-skeleton></app-skeleton>
+            </div>
+          </td>
+        </tr>
+      </tbody>
       <tbody *ngIf="properties && properties.length > 0">
         <tr
           *ngFor="let property of properties"
@@ -208,7 +217,7 @@
         </tr>
       </tbody>
 
-      <tbody *ngIf="properties && properties.length === 0">
+      <tbody *ngIf="properties && properties.length === 0 && !isFetching">
         <tr>
           <td colspan="5" class="p-2 pt-6 text-center">
             <div class="flex justify-center items-center flex-col">
@@ -254,3 +263,5 @@
     </div>
   </div>
 </div>
+        
+        

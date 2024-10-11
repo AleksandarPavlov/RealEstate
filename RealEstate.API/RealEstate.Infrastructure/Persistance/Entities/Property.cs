@@ -17,6 +17,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public double SizeInMmSquared { get; private set; }
         public DateTime CreationTime { get; private set; }
         public bool IsPremium { get; private set; } = false;
+        public Advertiser? Advertiser { get; private set; }
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public int? NumberOfRooms { get; private set; }
@@ -62,7 +63,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         }
         public static Result<DomainProperty> ToDomain(Property entity) 
         {
-
+            
             switch (entity.Type)
             {
                 case PropertyType.APARTMENT:
@@ -77,7 +78,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.SizeInMmSquared,
                         entity.CreationTime,
                         entity.IsPremium,
-                        entity.IsFurnished ?? false,
+                        entity.IsFurnished ?? false, 
+                        entity.Advertiser != null ? Advertiser.ToDomain(entity.Advertiser).Value : null,
                         entity.FloorNumber ?? string.Empty,
                         entity.NumberOfRooms ?? 0,
                         entity.Lat,
@@ -99,6 +101,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.CreationTime,
                         entity.IsPremium,
                         entity.IsFurnished ?? false,
+                        entity.Advertiser != null ? Advertiser.ToDomain(entity.Advertiser).Value : null,
                         entity.FloorNumber ?? string.Empty,
                         entity.NumberOfRooms ?? 0,
                         entity.Lat,
@@ -119,6 +122,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.SizeInMmSquared,
                         entity.CreationTime,
                         entity.IsPremium,
+                        entity.Advertiser != null ? Advertiser.ToDomain(entity.Advertiser).Value : null,
                         entity.Lat,
                         entity.Lon,
                         entity.Images?.Select(image => image.Url),
@@ -156,6 +160,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             if (entity.Images != null && entity.Images.Any()) {
                 property.Images = entity.Images.Select(image => new PropertyImage(image)).ToList();
             }
+
+            property.Advertiser = entity.Advertiser != null ? Advertiser.FromDomain(entity.Advertiser).Value : null;
 
             return property;
         }

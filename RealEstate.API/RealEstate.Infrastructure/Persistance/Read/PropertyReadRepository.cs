@@ -2,7 +2,6 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using RealEstate.Application.Property.Dtos;
-using RealEstate.Domain.Common.Dtos;
 using RealEstate.Domain.Common.Enums;
 using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance.Read;
@@ -76,6 +75,7 @@ namespace RealEstate.Infrastructure.Persistance.Read
         {
             var property = await _context.Property
                                 .Include(p => p.Images) 
+                                .Include(p => p.Advertiser)
                                 .SingleOrDefaultAsync(p => p.Id == id);
 
             return property is not null

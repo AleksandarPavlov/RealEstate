@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,5 +24,18 @@ export class SearchBarComponent {
   onInputChange(value: string) {
     this.searchInputValue = value;
     this.inputChange.emit(this.searchInputValue);
+  }
+
+  onSuggestionClick(suggestion: string) {
+    this.searchInputValue = suggestion;
+    this.suggestions = [];
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  onClick(targetElement: HTMLElement) {
+    const clickedInside = targetElement.closest('.search-bar-wrapper');
+    if (!clickedInside) {
+      this.suggestions = [];
+    }
   }
 }

@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RealEstate.API.Contracts.Coordinates;
 using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
+using RealEstate.Application.Property.Dtos;
 using RealEstate.Application.Property.Queries.FetchLatestProperties;
 using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
 using RealEstate.Application.Property.Queries.FetchPropertyById;
@@ -37,6 +37,12 @@ namespace RealEstate.API.Controllers
              apartmentRequest.Price,
              apartmentRequest.SizeInMmSquared,
              apartmentRequest.IsPremium,
+             new AdvertiserData(
+                 apartmentRequest.AdvertiserFullName,
+                 apartmentRequest.AdvertiserContact,
+                 apartmentRequest.AdvertiserEmailAddress,
+                 apartmentRequest.AdvertiserSocialMediaLink
+             ),
              apartmentRequest.IsFurnished,
              apartmentRequest.FloorNumber,
              apartmentRequest.NumberOfRooms,
@@ -66,6 +72,12 @@ namespace RealEstate.API.Controllers
              houseRequest.Price,
              houseRequest.SizeInMmSquared,
              houseRequest.IsPremium,
+             new AdvertiserData(
+                 houseRequest.AdvertiserFullName,
+                 houseRequest.AdvertiserContact,
+                 houseRequest.AdvertiserEmailAddress,
+                 houseRequest.AdvertiserSocialMediaLink
+             ),
              houseRequest.IsFurnished,
              houseRequest.FloorNumber,
              houseRequest.NumberOfRooms,
@@ -94,6 +106,12 @@ namespace RealEstate.API.Controllers
              landRequest.Price,
              landRequest.SizeInMmSquared,
              landRequest.IsPremium,
+             new AdvertiserData(
+                 landRequest.AdvertiserFullName,
+                 landRequest.AdvertiserContact,
+                 landRequest.AdvertiserEmailAddress,
+                 landRequest.AdvertiserSocialMediaLink
+             ),
              images,
              landRequest.Description
              ), cancellationToken);

@@ -1,15 +1,16 @@
-<div class="gallery">
-  <div class="gallery__item" *ngFor="let image of images">
-    <input
-      type="radio"
-      id="{{ image }}-id"
-      checked
-      name="gallery"
-      class="gallery__selector"
-    />
-    <img class="gallery__img" src="{{ image }}" alt="" />
-    <label for="{{ image }}-id" class="gallery__thumb"
-      ><img src="{{ image }}" alt=""
-    /></label>
-  </div>
+<div class="gallery" *ngIf="images.length > 0">
+    <div class="gallery__item" *ngFor="let image of images">
+      <input
+        type="radio"
+        id="{{ image }}-id"
+        checked
+        name="gallery"
+        class="gallery__selector"
+      />
+      <img class="gallery__img" src="{{ image }}" alt="" />
+      <label for="{{ image }}-id" class="gallery__thumb"
+        ><img src="{{ image }}" alt=""
+      /></label>
+    </div>
 </div>
+<img *ngIf = "images.length == 0" class="placeholder-image" src ="../../../assets/images/image-placeholder.png">

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { LATEST_PROPERTIES_AMOUNT } from 'src/app/models/constants/constants';
-import { Property } from 'src/app/models/property.model';
 import { PropertyResponse } from 'src/app/models/propertyResponse.model';
 import { PropertyService } from 'src/app/services/property.service';
 

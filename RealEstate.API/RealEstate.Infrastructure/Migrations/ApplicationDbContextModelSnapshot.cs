@@ -22,6 +22,39 @@ namespace RealEstate.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.Advertiser", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("PropertyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("SocialMediaLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PropertyId")
+                        .IsUnique();
+
+                    b.ToTable("Advertiser");
+                });
+
             modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.Property", b =>
                 {
                     b.Property<long>("Id")
@@ -104,6 +137,17 @@ namespace RealEstate.Infrastructure.Migrations
                     b.ToTable("PropertyImage");
                 });
 
+            modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.Advertiser", b =>
+                {
+                    b.HasOne("RealEstate.Infrastructure.Persistance.Entities.Property", "Property")
+                        .WithOne("Advertiser")
+                        .HasForeignKey("RealEstate.Infrastructure.Persistance.Entities.Advertiser", "PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Property");
+                });
+
             modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.PropertyImage", b =>
                 {
                     b.HasOne("RealEstate.Infrastructure.Persistance.Entities.Property", "Property")
@@ -117,6 +161,9 @@ namespace RealEstate.Infrastructure.Migrations
 
             modelBuilder.Entity("RealEstate.Infrastructure.Persistance.Entities.Property", b =>
                 {
+                    b.Navigation("Advertiser")
+                        .IsRequired();
+
                     b.Navigation("Images");
                 });
 #pragma warning restore 612, 618

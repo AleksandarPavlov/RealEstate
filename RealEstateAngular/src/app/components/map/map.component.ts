@@ -34,7 +34,7 @@ export class MapComponent implements AfterViewInit {
   properties: PropertyResponse[] = [];
   currentProperty: PropertyResponse | undefined = undefined;
   isPanelOpen: boolean = false;
-  distance: number = 5;
+  distance: number | null = 5;
   selectedListingType: string | null = null;
 
   private map: L.Map | undefined;
@@ -115,7 +115,7 @@ export class MapComponent implements AfterViewInit {
       this.fetchNearbyProperties(
         lat,
         lon,
-        this.distance,
+        this.distance ? this.distance : 5,
         this.selectedListingType
           ? toListingType(this.selectedListingType)
           : undefined
@@ -188,7 +188,7 @@ export class MapComponent implements AfterViewInit {
       });
   }
 
-  onDistanceChange(newDistance: number) {
+  onDistanceChange(newDistance: number | null) {
     this.distance = newDistance;
   }
 

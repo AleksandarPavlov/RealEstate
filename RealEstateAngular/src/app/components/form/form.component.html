@@ -1,128 +1,172 @@
 <div class="relative flex w-full flex-col rounded-md bg-white bg-clip-border shadow-md">
-  <div
-    class="banner relative grid px-4 py-8 m-0 overflow-hidden text-center text-white bg-gray-900 place-items-center rounded-t-md bg-clip-border shadow-gray-900/20">
-    <div class="h-20 p-6 mb-4 text-white">
-    </div>
-    <h5 class="block  text-xl antialiased font-semibold leading-snug tracking-normal text-white">
-      Postavi Oglas
-    </h5>
+  <div class="banner relative grid px-4 py-8 m-0 overflow-hidden text-center text-white bg-gray-900 place-items-center rounded-t-md bg-clip-border shadow-gray-900/20">
+    <img [src]="currentBanner" alt="Banner" class="absolute top-0 left-0 w-full h-full object-cover rounded-t-md z-0" />
+    <div class="h-20 p-6 mb-4 text-white"></div>
+    <h5 class="block z-30 text-xl antialiased font-semibold leading-snug tracking-normal text-white">Postavi Oglas</h5>
   </div>
+  
   <div class="p-6">
-    <div class="block overflow-visible">
-      <div class="w-full">
+    <div class="step-wrap block overflow-visible">
+      <div *ngIf = "currentStep === 1"class="w-full">
         <div class="tabs relative right-0">
           <ul class="relative flex flex-wrap px-1.5 py-1.5 list-none rounded-md" role="list" style="background-color: #fce4e4;">
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.APARTMENT}"
-            (click)="selectTab(propertyType.APARTMENT)"
-            role="tab">
-              <a class="tab text-gray-900 text-sm font-semibold">
-                Stan
-              </a>
+            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.APARTMENT}" (click)="selectTab(propertyType.APARTMENT)" role="tab">
+              <a class="tab text-gray-900 text-sm font-semibold">Stan</a>
             </li>
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.HOUSE}"
-            (click)="selectTab(propertyType.HOUSE)"
-            role="tab">
-              <a class="tab text-gray-900 text-sm font-semibold">
-                Kuća
-              </a>
+            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.HOUSE}" (click)="selectTab(propertyType.HOUSE)" role="tab">
+              <a class="tab text-gray-900 text-sm font-semibold">Kuća</a>
             </li>
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.LAND}"
-            (click)="selectTab(propertyType.LAND)"
-            role="tab">
-              <a class="tab text-gray-900 text-sm font-semibold">
-                Zemljište
-              </a>
+            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.LAND}" (click)="selectTab(propertyType.LAND)" role="tab">
+              <a class="tab text-gray-900 text-sm font-semibold">Zemljište</a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="relative block w-full overflow-hidden !overflow-x-hidden !overflow-y-visible bg-transparent">
-        <div role="tabpanel"
-          class="w-full p-0  text-base antialiased font-light leading-relaxed text-gray-700 h-max"
-          data-value="card">
+      
+      <div class="step relative block w-full overflow-hidden !overflow-x-hidden !overflow-y-visible bg-transparent">
+        <div *ngIf="currentStep === 1" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
           <form class="flex flex-col gap-2 mt-10">
             <div>
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">
-                  Naziv oglasa
-              </p>
+              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Naziv oglasa</p>
               <div class="relative h-8 w-full mb-3 min-w-[200px]">
-                  <input type="text" placeholder="Naziv oglasa" 
-                      class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent !border-t-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
+                <input type="text" placeholder="Naziv oglasa" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
               </div>
               
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">
-                  Grad
-              </p>
-              <div class="relative h-8 w-full  mb-3 min-w-[200px]">
-                  <input type="text" placeholder="Grad" 
-                      class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent !border-t-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
+              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Grad</p>
+              <div class="relative h-8 w-full mb-3 min-w-[200px]">
+                <input type="text" placeholder="Grad" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
               </div>
               
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">
-                  Adresa nekretnine
-              </p>
-              <div class="relative h-8 w-full  min-w-[200px]">
-                  <input type="text" placeholder="Adresa nekretnine" 
-                      class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent !border-t-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700" />
+              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Adresa nekretnine</p>
+              <div class="relative h-8 w-full min-w-[200px]">
+                <input type="text" placeholder="Adresa nekretnine" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700" />
               </div>
-          </div>
-          <div class="my-1">
-            <div class="flex items-center gap-4 my-4">
-              <div class="flex flex-row items-center gap-4">
+            </div>
+
+            <div class="my-1">
+              <div class="flex items-center gap-4 my-4">
                 <div>
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
-                    Veličina u m²
-                  </p>
+                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Veličina u m²</p>
                   <app-number-input [placeholder]="''" [icon]="'fa-solid fa-maximize'"></app-number-input>
                 </div>
                 <div>
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
-                    Cena u €
-                  </p>
+                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Cena u €</p>
                   <app-number-input [placeholder]="''" [icon]="'fa-solid fa-euro-sign'"></app-number-input>
                 </div>
                 <div *ngIf="activeTab !== propertyType.LAND">
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
-                    Sprat
-                  </p>
+                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Sprat</p>
                   <app-number-input [placeholder]="''" [icon]="'fa-solid fa-arrow-up'"></app-number-input>
                 </div>
-                <div *ngIf="activeTab != propertyType.LAND">
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
-                    Broj Soba
-                  </p>
+                <div *ngIf="activeTab !== propertyType.LAND">
+                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Broj Soba</p>
                   <app-number-input [placeholder]="''" [icon]="'fa-solid fa-person-shelter'"></app-number-input>
                 </div>
-                <div *ngIf="activeTab != propertyType.LAND">
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">
-                    Namešten
-                  </p>
-                  <app-radio [options] = "isFurnishedOptions" [name] = "'IsFurnished'" [size] = "radioSize.Small"></app-radio>
-                </div>
-              </div>
-            </div>
-          </div>
-            
-            <div class="flex items-center mt-5 mb-8">
-              <app-textarea class="w-1/2" [label]="'Opis Nekretnine'"></app-textarea>
-              <div class="w-1/3 flex items-center justify-center">
-                <div class="flex flex-col items-center">
-                  <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">
-                    Tip Oglasa
-                  </p>
-                  <app-radio [options] = "sellOrRentOptions" [name] = "'SellOrRent'" [size] = "radioSize.Medium"></app-radio>
+                <div *ngIf="activeTab !== propertyType.LAND">
+                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Namešten</p>
+                  <app-radio [options]="isFurnishedOptions" [name]="'IsFurnished'" [size]="radioSize.Small"></app-radio>
                 </div>
               </div>
             </div>
 
-            <button
-              class="select-none rounded-lg bg-gray-900 py-3.5 px-7 text-center align-middle  text-sm font-bold  text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-              type="button"
-              >
-              Postavi Oglas
-            </button>
+            <div class="flex items-center mt-5 mb-8">
+              <app-textarea class="w-1/2" [label]="'Opis Nekretnine'"></app-textarea>
+              <div class="w-1/3 flex items-center justify-center">
+                <div class="flex flex-col items-center">
+                  <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Tip Oglasa</p>
+                  <app-radio [options]="sellOrRentOptions" [name]="'SellOrRent'" [size]="radioSize.Medium"></app-radio>
+                </div>
+              </div>
+            </div>
           </form>
         </div>
+
+        <div *ngIf="currentStep === 2" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
+          <form class="flex flex-col gap-2">
+          <div class="step-header text-center mt-2">
+            <i class=" fa-solid fa-user-pen text-3xl text-gray-900"></i>
+            <p class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900">Informacije o oglasivaču</p>
+          </div>
+            <div>
+              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Ime i prezime</p>
+              <div class="relative h-8 w-full mb-5 min-w-[200px]">
+                <input type="text" placeholder="Ime i prezime" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
+              </div>
+              
+              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Kontakt telefon</p>
+              <div class="relative h-8 w-full mb-5 min-w-[200px]">
+                <input type="text" placeholder="Kontakt telefon" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
+              </div>
+              
+              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Email adresa</p>
+              <div class="relative h-8 w-full mb-5 min-w-[200px]">
+                <input type="text" placeholder="Email adresa" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
+              </div>
+
+              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Link do društvene mreže</p>
+              <div class="relative h-8 w-full min-w-[200px]">
+                <input type="text" placeholder="Link do društvene mreže" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700" />
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Step 3: Empty -->
+        <div *ngIf="currentStep === 3" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
+          <!-- Empty Step -->
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="controls w-full px-40 py-6">
+      <div class="relative flex items-center justify-between w-full">
+
+        <div class="absolute left-0 top-2/4 h-0.5 w-full -translate-y-2/4 bg-gray-300"></div>
+        <div class="absolute left-0 top-2/4 h-0.5 -translate-y-2/4 bg-gray-900 transition-all duration-500" [ngClass]="{
+          'w-0': currentStep === 1,
+          'w-2/4': currentStep === 2,
+          'w-full': currentStep === 3
+        }"></div>
+
+        <div class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
+        [ngClass]="{'bg-gray-900 text-white': currentStep >= 1, 'bg-gray-300 text-gray-900': currentStep < 1}">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-4 h-4">
+       <path stroke-linecap="round" stroke-linejoin="round"
+             d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path>
+     </svg>
+   </div>
+   
+   <div class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
+        [ngClass]="{'bg-gray-900 text-white': currentStep >= 2, 'bg-gray-300 text-gray-900': currentStep < 2}">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-4 h-4">
+       <path stroke-linecap="round" stroke-linejoin="round"
+             d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+     </svg>
+   </div>
+   
+   <div class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
+        [ngClass]="{'bg-gray-900 text-white': currentStep >= 3, 'bg-gray-300 text-gray-900': currentStep < 3}">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-4 h-4">
+       <path stroke-linecap="round" stroke-linejoin="round"
+             d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"></path>
+     </svg>
+   </div>
+   
+      </div>
+
+      <div class="flex justify-between items-center w-full mt-4">
+        <button class="select-none rounded-lg bg-gray-900 py-2 px-4 text-center text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="button" (click)="prevStep()" [disabled]="currentStep === 1">
+            Prethodno
+        </button>
+
+        <button class="select-none rounded-lg bg-gray-900 py-2 px-4 text-center text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="button" (click)="nextStep()" [disabled]="currentStep === 3">
+            Sledeće
+        </button>
       </div>
     </div>
   </div>

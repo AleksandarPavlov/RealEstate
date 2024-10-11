@@ -62,3 +62,9 @@ img {
 .gallery__selector:checked ~ .gallery__thumb > img {
   box-shadow: 0 0 0 3px #f07070;
 }
+
+.placeholder-image{
+  width: 80%;
+  height: 100%;
+  margin: auto;
+}

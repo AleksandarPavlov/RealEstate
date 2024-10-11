@@ -1,6 +1,5 @@
 ﻿
 using RealEstate.Application.Property.Dtos;
-using RealEstate.Domain.Common.Dtos;
 using RealEstate.Domain.Common.Enums;
 using DomainProperty = RealEstate.Domain.Property.Property;
 

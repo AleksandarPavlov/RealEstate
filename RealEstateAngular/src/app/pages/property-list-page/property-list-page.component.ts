@@ -24,6 +24,7 @@ export class PropertyListPageComponent {
   propertyTypeName?: string = '';
   listingTypeName?: string = '';
   cityName?: string = '';
+  isFetching = false;
 
   constructor(
     private propertyService: PropertyService,
@@ -66,14 +67,20 @@ export class PropertyListPageComponent {
   }
 
   fetchProperties(queryParams: PropertyQueryParams) {
+    this.isFetching = true;
     this.propertyService
       .fetchProperties(queryParams)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => {
-        this.properties = response;
-      });
+      .subscribe(
+        (response) => {
+          this.properties = response;
+          this.isFetching = false;
+        },
+        () => {
+          this.isFetching = false;
+        }
+      );
   }
-
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

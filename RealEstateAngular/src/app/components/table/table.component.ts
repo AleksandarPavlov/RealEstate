@@ -9,5 +9,6 @@ import { PropertyResponse } from 'src/app/models/propertyResponse.model';
 })
 export class TableComponent {
   @Input() properties: PropertyResponse[] = [];
+  @Input() isFetching: boolean = false;
   listingType = ListingType;
 }

@@ -1,5 +1,7 @@
 ﻿
 using MediatR;
+using RealEstate.Domain.Advertiser;
+using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance;
 using RealEstate.Domain.Persistance.Write;
 using RealEstate.Domain.Services;
@@ -40,7 +42,19 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
                 ? await _imageStorageService.UploadToExternalApi(request.Images) 
                 : null;
 
-            
+            var advertiserResult = Advertiser.CreateAdvertiser(
+                0,
+                request.AdvertiserData.FullName,
+                request.AdvertiserData.ContactNumber,
+                request.AdvertiserData.EmailAddress,
+                request.AdvertiserData.SocialMediaLink
+            );
+
+            if (advertiserResult.IsFailure)
+            {
+                Result<DomainProperty>.Failure(new Error("Advertiser", "Error creating advertiser"));
+            }
+
             var apartmentResult = DomainProperty.CreateApartmentProperty(
                 0,
                 request.Name,
@@ -52,6 +66,7 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
                 DateTime.Now,
                 request.IsPremium,
                 request.IsFurnished,
+                advertiserResult.Value,
                 request.FloorNumber,
                 request.NumberOfRooms,
                 latitude,

@@ -2,6 +2,7 @@
 using RealEstate.Domain.Common.Enums;
 using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Property.ValueObjects;
+using DomainAdvertiser = RealEstate.Domain.Advertiser.Advertiser;
 
 namespace RealEstate.Domain.Property
 {
@@ -18,6 +19,7 @@ namespace RealEstate.Domain.Property
             DateTime creationTime,
             bool isFurnished,
             bool isPremium,
+            DomainAdvertiser? advertiser,
             string floorNumber,
             int numberOfRooms,
             double? latitude,
@@ -29,7 +31,7 @@ namespace RealEstate.Domain.Property
             var locationResult = PropertyLocation.Create(city, address);
             var priceResult = PropertyPrice.Create(price);
             var sizeInMmSquaredResult = PropertySize.Create(sizeInMmSquared);
-            var propertyType = PropertyType.HOUSE;
+            const PropertyType propertyType = PropertyType.HOUSE;
             var numberOfRoomsResult = PropertyNumberOfRooms.Create(numberOfRooms);
             var coordinatesResult = PropertyCoordinates.Create(latitude, longitude);
             var descriptionResult = PropertyDescription.Create(description);
@@ -60,6 +62,7 @@ namespace RealEstate.Domain.Property
                      propertySize, 
                      creationTime,
                      isPremium, 
+                     advertiser,
                      isFurnished, 
                      floorNumber, 
                      propertyNumberOfRooms, 

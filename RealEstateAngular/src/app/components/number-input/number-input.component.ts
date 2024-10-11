@@ -12,17 +12,22 @@ export class NumberInputComponent {
   @Input() placeholderSize: 'small' | 'medium' = 'medium';
   @Input() width: 'small' | 'medium' | 'large' = 'medium';
 
-  value: number = 0;
-  @Output() valueChange = new EventEmitter<number>();
+  value: number | null = null;
+
+  @Output() valueChange = new EventEmitter<number | null>();
 
   onValueChange(event: Event) {
     const input = event.target as HTMLInputElement;
+
     if (input && input.value) {
       const newValue = Number(input.value);
       if (!isNaN(newValue)) {
         this.value = newValue;
         this.valueChange.emit(this.value);
       }
+    } else {
+      this.value = null;
+      this.valueChange.emit(this.value);
     }
   }
 }
