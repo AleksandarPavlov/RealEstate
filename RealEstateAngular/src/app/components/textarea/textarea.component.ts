@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-textarea',
@@ -7,4 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class TextareaComponent {
   @Input() label: string = '';
+  @Input() hasAiIcon: boolean = false;
+  @Input() isLoading: boolean = false;
+  @Input() text: string | undefined = '';
+
+  @Output() tooltipIconClick = new EventEmitter<void>();
+
+  handleTooltipClick() {
+    this.tooltipIconClick.emit();
+  }
 }

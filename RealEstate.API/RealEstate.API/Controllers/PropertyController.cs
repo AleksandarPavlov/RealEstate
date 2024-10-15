@@ -4,6 +4,7 @@ using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
+using RealEstate.Application.Property.Commands.GenerateDescription;
 using RealEstate.Application.Property.Dtos;
 using RealEstate.Application.Property.Queries.FetchLatestProperties;
 using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
@@ -191,6 +192,26 @@ namespace RealEstate.API.Controllers
             return result.Match<ActionResult>(
                 success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),
                 failure => NotFound(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
+        
+        [HttpPost("generate-description")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
+        public async Task<ActionResult<string?>> GenerateDescriptionAsync([FromBody] GenerateDescriptionRequest descriptionRequest, CancellationToken cancellationToken)
+        {
+
+            var result = await _mediator.Send(new GenerateDescriptionCommand
+            (
+                descriptionRequest.PropertyType,
+                descriptionRequest.ListingType,
+                descriptionRequest.Size,
+                descriptionRequest.Address
+            ), cancellationToken);
+
+            return result.Match<ActionResult>(
+                success => Ok(success),
+                failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
             );
         }
     }

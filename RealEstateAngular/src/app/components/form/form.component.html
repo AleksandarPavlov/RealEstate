@@ -69,7 +69,7 @@
             </div>
 
             <div class="flex items-center mt-5 mb-8">
-              <app-textarea class="w-1/2" [label]="'Opis Nekretnine'"></app-textarea>
+              <app-textarea class="w-1/2" [label]="'Opis Nekretnine'" [hasAiIcon]="true" (tooltipIconClick)="onTooltipClick()" [text]="generatedDescription" [isLoading]="isLoading"></app-textarea>
               <div class="w-1/3 flex items-center justify-center">
                 <div class="flex flex-col items-center">
                   <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Tip Oglasa</p>
@@ -82,10 +82,11 @@
 
         <div *ngIf="currentStep === 2" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
           <form class="flex flex-col gap-2">
-          <div class="step-header text-center mt-2">
+          <div class="step-header text-center mt-2 mb-4">
             <i class=" fa-solid fa-user-pen text-3xl text-gray-900"></i>
             <p class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900">Informacije o oglasivaču</p>
           </div>
+          <hr>
             <div>
               <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Ime i prezime</p>
               <div class="relative h-8 w-full mb-5 min-w-[200px]">
@@ -111,9 +112,65 @@
           </form>
         </div>
 
-        <!-- Step 3: Empty -->
         <div *ngIf="currentStep === 3" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
-          <!-- Empty Step -->
+          <form class="flex flex-col gap-2">
+            <div class="step-header text-center mt-2 mb-4">
+              <i class="fa-solid fa-list-check text-3xl text-gray-900"></i>
+              <p class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900">Pregled Unetih informacija</p>
+            </div>
+            <hr>
+            <div class="flex flex-wrap justify-center gap-32 mt-2">
+              <div class="flex flex-col">
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Tip nekretnine: </span> Stan
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Naziv oglasa: </span> Beograd na vodi stan
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Grad: </span> Beograd
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Adresa: </span> Bulevar Vudroa Vilsona 12
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Veličina u m²: </span> 55m²
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Cena u €: </span> 147000€
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Sprat: </span> 7
+                </p>
+              </div>
+            
+              <div class="flex flex-col">
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Broj soba: </span> 3
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Namešten: </span> Da
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Tip oglasa: </span> Prodaja
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Ime i prezime: </span> Aleksandar Pavlov
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Kontakt telefon: </span> 0611856934
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Email adresa: </span> aleksandar.pavlov@gmail.com
+                </p>
+                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
+                  <span class="font-bold">Link do društvene mreže: </span> /
+                </p>
+              </div>
+            </div>
+            
+            <button class="w-1/3 mx-auto mt-10 rounded-md  py-2 px-4 shadow-md  text-sm text-white font-bold" style="background-color: #79a450;">Postavi Oglas</button>
+            </form>
         </div>
       </div>
     </div>

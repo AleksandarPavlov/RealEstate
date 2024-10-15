@@ -1,6 +1,10 @@
 <div class="tooltip-container relative inline-block">
-    <i class="fa-solid fa-circle-question text-xl"></i>
+    <i class="{{icon}} animate-pulse"
+    [ngClass]="{
+        'text-xl': size === 'large',
+        'text-md': size === 'medium'
+      }"></i>
     <div class="tooltip-content absolute z-[9998] whitespace-normal break-words rounded-lg bg-gray-600 py-1.5 px-3 text-xs font-light text-white focus:outline-none hidden">
-      Klikom na mapu možete pogledati sve nekretine <br> u udaljenosti koju ste definisali u polju ispod.<br> Takođe možete izabrati tip oglasa koji želite<br> da pretražujete. Klikom na marker koji se <br>pojavi možete pogledati detalje o nekretnini.
+    {{text}}    
     </div>
   </div>

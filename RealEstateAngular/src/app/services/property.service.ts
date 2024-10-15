@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GenerateDescriptionRequest } from '../models/generateDescriptionRequest.model';
 import { PropertyQueryParams } from '../models/propertyFilterParams.model';
 import { ListingType } from '../models/propertyListingType.enum';
 import { PropertyResponse } from '../models/propertyResponse.model';
@@ -60,6 +61,14 @@ export class PropertyService {
     return this.httpClient.get<PropertyResponse[]>(
       'http://localhost:5157/property/find-nearby',
       { params }
+    );
+  }
+
+  generateDescription(generateDescriptionRequest: GenerateDescriptionRequest) {
+    return this.httpClient.post(
+      'http://localhost:5157/property/generate-description',
+      generateDescriptionRequest,
+      { responseType: 'text' }
     );
   }
 }

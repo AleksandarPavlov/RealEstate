@@ -1,0 +1,11 @@
+.tooltip-container:hover .tooltip-content {
+    display: block;
+  }
+  
+.tooltip-content {
+    display: none;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}

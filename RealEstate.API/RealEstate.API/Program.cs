@@ -36,6 +36,7 @@ builder.Services.AddScoped<IPropertyReadRepository, PropertyReadRepository>();
 builder.Services.AddScoped<IPropertyWriteRepository, PropertyWriteRepository>();
 builder.Services.AddScoped<ICoordinatesService, CoordinatesService>();
 builder.Services.AddScoped<IImageStorageService, ImageStorageService>();
+builder.Services.AddScoped<IOpenAiService, OpenAiService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateApartmentCommandHandler).Assembly));
 
 
