@@ -68,12 +68,9 @@ export class FormComponent {
         (response: string) => {
           this.generatedDescription = response;
           this.isLoading = false;
-          console.log('Generated Description:', response);
         },
-        (error) => {
-          console.log('I am here');
+        () => {
           this.isLoading = false;
-          console.error('Error:', error);
         }
       );
   }
