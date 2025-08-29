@@ -16,7 +16,7 @@ namespace RealEstate.Domain.Property.ValueObjects
             if (!value.HasValue) { 
                 return Result<PropertyNumberOfRooms>.Success(new PropertyNumberOfRooms(null));
             }
-            return value < 0
+            return value < 0 || value > 999
                ? Result<PropertyNumberOfRooms>.Failure(new Error("PropertyNumberOfRooms", $"Invalid value '{value}' for PropertyNumberOfRooms"))
                : Result<PropertyNumberOfRooms>.Success(new PropertyNumberOfRooms(value));
         }

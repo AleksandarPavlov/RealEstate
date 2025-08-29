@@ -33,10 +33,10 @@ namespace RealEstate.Infrastructure.Services;
             
             var requestBody = new
             {
-                model = "gpt-3.5-turbo", 
+                model = "deepseek/deepseek-chat-v3-0324:free", 
                 messages = new[]
                 {
-                    new { role = "user", content = $"Write a professional property description in Serbian language of max 200 characters. This is the given property: address is {address}, size is {size}, listing type is {listingType} and property type is {propertyType}." }
+                    new { role = "user", content = $"Write a professional property description in Serbian language of max 200 characters. This is the given property: address is {address}, size is {size}, listing type is {listingType} and property type is {propertyType}. Exclude metadata such as number of characters and information about the text so it can be used directly as an advertisement" }
                 }
             };
             

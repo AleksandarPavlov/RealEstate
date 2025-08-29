@@ -9,4 +9,5 @@ export class TooltipComponent {
   @Input() icon: string = '';
   @Input() text: string = '';
   @Input() size: 'large' | 'medium' = 'large';
+  @Input() disabled: boolean = false;
 }

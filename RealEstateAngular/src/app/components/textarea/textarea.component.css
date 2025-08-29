@@ -1,11 +1,15 @@
 .tooltip-container:hover .tooltip-content {
-    display: block;
-  }
-  
+  display: block;
+}
+
 .tooltip-content {
-    display: none;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
+  display: none;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.pointer-events-none {
+  pointer-events: none;
 }

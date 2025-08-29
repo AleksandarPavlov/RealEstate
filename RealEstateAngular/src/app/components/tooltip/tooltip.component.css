@@ -1,7 +1,7 @@
 .tooltip-container:hover .tooltip-content {
     display: block;
-  }
-  
+}
+
 .tooltip-content {
     display: none;
     top: 100%;
@@ -10,6 +10,11 @@
     width: 200px;
     text-align: center;
 }
-i{
+
+i {
     cursor: pointer;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed !important;
 }

@@ -1,1 +1,6 @@
 export const LATEST_PROPERTIES_AMOUNT = 4;
+export const MAX_PROPERTY_SIZE = 99999;
+export const MAX_PROPERTY_PRICE = 999999999;
+export const MAX_PROPERTY_FLOOR_NUMBER = 999;
+export const MAX_PROPERTY_NUMBER_OF_ROOMS = 999;
+export const MAX_FILES = 4;

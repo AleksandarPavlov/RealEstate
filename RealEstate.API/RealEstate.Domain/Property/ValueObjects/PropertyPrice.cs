@@ -13,7 +13,7 @@ namespace RealEstate.Domain.Property.ValueObjects
         public int Value { get; }
         public static Result<PropertyPrice> Create(int value)
         {
-            return value < 0 
+            return value < 0 || value > 999999999
                ? Result<PropertyPrice>.Failure(new Error("PropertyPrice", $"Invalid value '{value}' for PropertyPrice"))
                : Result<PropertyPrice>.Success(new PropertyPrice(value));
         }

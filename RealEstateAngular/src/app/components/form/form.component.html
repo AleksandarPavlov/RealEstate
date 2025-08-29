@@ -1,228 +1,769 @@
-<div class="relative flex w-full flex-col rounded-md bg-white bg-clip-border shadow-md">
-  <div class="banner relative grid px-4 py-8 m-0 overflow-hidden text-center text-white bg-gray-900 place-items-center rounded-t-md bg-clip-border shadow-gray-900/20">
-    <img [src]="currentBanner" alt="Banner" class="absolute top-0 left-0 w-full h-full object-cover rounded-t-md z-0" />
+<div
+  class="relative flex w-full flex-col rounded-md bg-white bg-clip-border shadow-md"
+>
+  <div
+    class="banner relative grid px-4 py-8 m-0 overflow-hidden text-center text-white bg-gray-900 place-items-center rounded-t-md bg-clip-border shadow-gray-900/20"
+  >
+    <img
+      [src]="currentBanner"
+      alt="Banner"
+      class="absolute top-0 left-0 w-full h-full object-cover rounded-t-md z-0"
+    />
     <div class="h-20 p-6 mb-4 text-white"></div>
-    <h5 class="block z-30 text-xl antialiased font-semibold leading-snug tracking-normal text-white">Postavi Oglas</h5>
+    <h5
+      class="block z-30 text-xl antialiased font-semibold leading-snug tracking-normal text-white"
+    >
+      Postavi Oglas
+    </h5>
   </div>
-  
+
   <div class="p-6">
     <div class="step-wrap block overflow-visible">
-      <div *ngIf = "currentStep === 1"class="w-full">
+      <div *ngIf="currentStep === 1" class="w-full">
         <div class="tabs relative right-0">
-          <ul class="relative flex flex-wrap px-1.5 py-1.5 list-none rounded-md" role="list" style="background-color: #fce4e4;">
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.APARTMENT}" (click)="selectTab(propertyType.APARTMENT)" role="tab">
+          <ul
+            class="relative flex flex-wrap px-1.5 py-1.5 list-none rounded-md"
+            role="list"
+            style="background-color: #fce4e4"
+          >
+            <li
+              class="z-30 flex-auto text-center"
+              [ngClass]="{
+                'bg-white text-slate-700 rounded-md shadow-lg':
+                  activeTab === propertyType.APARTMENT
+              }"
+              (click)="selectTab(propertyType.APARTMENT)"
+              role="tab"
+            >
               <a class="tab text-gray-900 text-sm font-semibold">Stan</a>
             </li>
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.HOUSE}" (click)="selectTab(propertyType.HOUSE)" role="tab">
+            <li
+              class="z-30 flex-auto text-center"
+              [ngClass]="{
+                'bg-white text-slate-700 rounded-md shadow-lg':
+                  activeTab === propertyType.HOUSE
+              }"
+              (click)="selectTab(propertyType.HOUSE)"
+              role="tab"
+            >
               <a class="tab text-gray-900 text-sm font-semibold">Kuća</a>
             </li>
-            <li class="z-30 flex-auto text-center" [ngClass]="{'bg-white text-slate-700 rounded-md shadow-lg': activeTab === propertyType.LAND}" (click)="selectTab(propertyType.LAND)" role="tab">
+            <li
+              class="z-30 flex-auto text-center"
+              [ngClass]="{
+                'bg-white text-slate-700 rounded-md shadow-lg':
+                  activeTab === propertyType.LAND
+              }"
+              (click)="selectTab(propertyType.LAND)"
+              role="tab"
+            >
               <a class="tab text-gray-900 text-sm font-semibold">Zemljište</a>
             </li>
           </ul>
         </div>
       </div>
-      
-      <div class="step relative block w-full overflow-hidden !overflow-x-hidden !overflow-y-visible bg-transparent">
-        <div *ngIf="currentStep === 1" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
-          <form class="flex flex-col gap-2 mt-10">
+
+      <div
+        class="step relative block w-full overflow-hidden !overflow-x-hidden !overflow-y-visible bg-transparent"
+      >
+        <div
+          *ngIf="currentStep === 1"
+          role="tabpanel"
+          class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max"
+        >
+          <form class="flex flex-col gap-2 mt-10" [formGroup]="propertyForm">
             <div>
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Naziv oglasa</p>
-              <div class="relative h-8 w-full mb-3 min-w-[200px]">
-                <input type="text" placeholder="Naziv oglasa" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
+              <p
+                class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900 required"
+              >
+                Naziv oglasa
+              </p>
+              <div class="relative h-8 w-full mb-6 min-w-[200px]">
+                <input
+                  type="text"
+                  formControlName="advertismentName"
+                  placeholder="Naziv oglasa"
+                  [ngClass]="{
+                    'bg-red-50 border-red-200 placeholder-red-400 mb-1':
+                      propertyForm.get('advertismentName')?.invalid &&
+                      propertyForm.get('advertismentName')?.touched,
+                    'mb-4': !(
+                      propertyForm.get('advertismentName')?.invalid &&
+                      propertyForm.get('advertismentName')?.touched
+                    )
+                  }"
+                  class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700"
+                />
+                <p
+                  *ngIf="
+                    propertyForm.get('advertismentName')?.invalid &&
+                    propertyForm.get('advertismentName')?.touched
+                  "
+                  class="mt-0 text-xs text-red-600 dark:text-red-500 error-description"
+                >
+                  <span class="font-medium">Naziv oglasa</span> je neophodan.
+                </p>
               </div>
-              
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Grad</p>
-              <div class="relative h-8 w-full mb-3 min-w-[200px]">
-                <input type="text" placeholder="Grad" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
+
+              <p
+                class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900 required"
+              >
+                Grad
+              </p>
+              <div class="relative h-8 w-full mb-6 min-w-[200px]">
+                <input
+                  type="text"
+                  placeholder="Grad"
+                  formControlName="city"
+                  [ngClass]="{
+                    'bg-red-50 border-red-200 placeholder-red-400 mb-1':
+                      propertyForm.get('city')?.invalid &&
+                      propertyForm.get('city')?.touched,
+                    'mb-4': !(
+                      propertyForm.get('city')?.invalid &&
+                      propertyForm.get('city')?.touched
+                    )
+                  }"
+                  class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4"
+                />
+                <p
+                  *ngIf="
+                    propertyForm.get('city')?.invalid &&
+                    propertyForm.get('city')?.touched
+                  "
+                  class="mt-0 text-xs text-red-600 dark:text-red-500 error-description"
+                >
+                  <span class="font-medium">Grad</span> je neophodan.
+                </p>
               </div>
-              
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Adresa nekretnine</p>
+
+              <p
+                class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900"
+              >
+                Adresa nekretnine
+              </p>
               <div class="relative h-8 w-full min-w-[200px]">
-                <input type="text" placeholder="Adresa nekretnine" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700" />
+                <input
+                  type="text"
+                  formControlName="address"
+                  placeholder="Adresa nekretnine"
+                  class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700"
+                />
               </div>
             </div>
 
             <div class="my-1">
               <div class="flex items-center gap-4 my-4">
-                <div>
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Veličina u m²</p>
-                  <app-number-input [placeholder]="''" [icon]="'fa-solid fa-maximize'"></app-number-input>
+                <div class="flex flex-col min-h-[5.5rem]">
+                  <p
+                    class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2 required"
+                  >
+                    Veličina u m²
+                  </p>
+                  <app-number-input
+                    [placeholder]="''"
+                    [icon]="'fa-solid fa-maximize'"
+                    formControlName="sizeInMmSquared"
+                  ></app-number-input>
+                  <p
+                    *ngIf="
+                      propertyForm.get('sizeInMmSquared')?.touched &&
+                      propertyForm.get('sizeInMmSquared')?.invalid
+                    "
+                    class="text-xs text-red-600 dark:text-red-500 error-description mt-1"
+                  >
+                    <ng-container
+                      *ngIf="propertyForm.get('sizeInMmSquared')?.errors?.['required']"
+                    >
+                      <span class="font-medium">Veličina</span> je neophodna.
+                    </ng-container>
+                    <ng-container
+                      *ngIf="propertyForm.get('sizeInMmSquared')?.errors?.['min'] || propertyForm.get('sizeInMmSquared')?.errors?.['max']"
+                    >
+                      <span class="font-medium">Uneta veličina</span> nije
+                      ispravna.
+                    </ng-container>
+                  </p>
                 </div>
-                <div>
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Cena u €</p>
-                  <app-number-input [placeholder]="''" [icon]="'fa-solid fa-euro-sign'"></app-number-input>
+                <div class="flex flex-col min-h-[5.5rem]">
+                  <p
+                    class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2 required"
+                  >
+                    Cena u €
+                  </p>
+                  <app-number-input
+                    [placeholder]="''"
+                    [icon]="'fa-solid fa-euro-sign'"
+                    formControlName="price"
+                  ></app-number-input>
+                  <p
+                    *ngIf="
+                      propertyForm.get('price')?.touched &&
+                      propertyForm.get('price')?.invalid
+                    "
+                    class="text-xs text-red-600 dark:text-red-500 error-description mt-1"
+                  >
+                    <ng-container
+                      *ngIf="propertyForm.get('price')?.errors?.['required']"
+                    >
+                      <span class="font-medium">Cena</span> je neophodna.
+                    </ng-container>
+                    <ng-container
+                      *ngIf="propertyForm.get('price')?.errors?.['min'] || propertyForm.get('price')?.errors?.['max']"
+                    >
+                      <span class="font-medium">Uneta cena</span> nije ispravna.
+                    </ng-container>
+                  </p>
                 </div>
-                <div *ngIf="activeTab !== propertyType.LAND">
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Sprat</p>
-                  <app-number-input [placeholder]="''" [icon]="'fa-solid fa-arrow-up'"></app-number-input>
+                <div
+                  *ngIf="activeTab !== propertyType.LAND"
+                  class="flex flex-col min-h-[5.5rem]"
+                >
+                  <p
+                    class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2 required"
+                  >
+                    Sprat
+                  </p>
+                  <app-number-input
+                    [placeholder]="''"
+                    [icon]="'fa-solid fa-arrow-up'"
+                    formControlName="floorNumber"
+                  ></app-number-input>
+                  <p
+                    *ngIf="
+                      propertyForm.get('floorNumber')?.touched &&
+                      propertyForm.get('floorNumber')?.invalid
+                    "
+                    class="text-xs text-red-600 dark:text-red-500 error-description mt-1"
+                  >
+                    <ng-container
+                      *ngIf="propertyForm.get('floorNumber')?.errors?.['required']"
+                    >
+                      <span class="font-medium">Broj sprata</span> je neophodan.
+                    </ng-container>
+                    <ng-container
+                      *ngIf="propertyForm.get('floorNumber')?.errors?.['min'] || propertyForm.get('floorNumber')?.errors?.['max']"
+                    >
+                      <span class="font-medium">Unet broj sprata</span> nije
+                      ispravan.
+                    </ng-container>
+                  </p>
                 </div>
-                <div *ngIf="activeTab !== propertyType.LAND">
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Broj Soba</p>
-                  <app-number-input [placeholder]="''" [icon]="'fa-solid fa-person-shelter'"></app-number-input>
+                <div
+                  *ngIf="activeTab !== propertyType.LAND"
+                  class="flex flex-col min-h-[5.5rem]"
+                >
+                  <p
+                    class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2 required"
+                  >
+                    Broj Soba
+                  </p>
+                  <app-number-input
+                    [placeholder]="''"
+                    [icon]="'fa-solid fa-person-shelter'"
+                    formControlName="numberOfRooms"
+                  ></app-number-input>
+                  <p
+                    *ngIf="
+                      propertyForm.get('numberOfRooms')?.touched &&
+                      propertyForm.get('numberOfRooms')?.invalid
+                    "
+                    class="text-xs text-red-600 dark:text-red-500 error-description mt-1"
+                  >
+                    <ng-container
+                      *ngIf="propertyForm.get('numberOfRooms')?.errors?.['required']"
+                    >
+                      <span class="font-medium">Broj soba</span> je neophodan.
+                    </ng-container>
+                    <ng-container
+                      *ngIf="propertyForm.get('numberOfRooms')?.errors?.['min'] || propertyForm.get('numberOfRooms')?.errors?.['max']"
+                    >
+                      <span class="font-medium">Unet broj soba</span> nije
+                      ispravan.
+                    </ng-container>
+                  </p>
                 </div>
-                <div *ngIf="activeTab !== propertyType.LAND">
-                  <p class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2">Namešten</p>
-                  <app-radio [options]="isFurnishedOptions" [name]="'IsFurnished'" [size]="radioSize.Small"></app-radio>
+                <div
+                  *ngIf="activeTab !== propertyType.LAND"
+                  class="flex flex-col min-h-[5.5rem]"
+                >
+                  <p
+                    class="block text-xs antialiased text-center font-medium leading-normal text-blue-gray-900 mb-2 required"
+                  >
+                    Namešten
+                  </p>
+                  <app-radio
+                    [options]="isFurnishedOptions"
+                    [name]="'isFurnished'"
+                    formControlName="isFurnished"
+                    [size]="radioSize.Small"
+                  ></app-radio>
                 </div>
               </div>
             </div>
 
             <div class="flex items-center mt-5 mb-8">
-              <app-textarea class="w-1/2" [label]="'Opis Nekretnine'" [hasAiIcon]="true" (tooltipIconClick)="onTooltipClick()" [text]="generatedDescription" [isLoading]="isLoading"></app-textarea>
+              <app-textarea
+                class="w-1/2"
+                [label]="'Opis Nekretnine'"
+                [hasAiIcon]="true"
+                (tooltipIconClick)="onTooltipClick()"
+                [isLoading]="isLoading"
+                formControlName="description"
+                [isIconDisabled]="isAiTooltipDisabled()"
+              ></app-textarea>
               <div class="w-1/3 flex items-center justify-center">
                 <div class="flex flex-col items-center">
-                  <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Tip Oglasa</p>
-                  <app-radio [options]="sellOrRentOptions" [name]="'SellOrRent'" [size]="radioSize.Medium"></app-radio>
+                  <p
+                    class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900 required"
+                  >
+                    Tip Oglasa
+                  </p>
+                  <app-radio
+                    [options]="sellOrRentOptions"
+                    [name]="'SellOrRent'"
+                    [size]="radioSize.Medium"
+                    formControlName="sellOrRent"
+                  ></app-radio>
                 </div>
               </div>
             </div>
           </form>
         </div>
 
-        <div *ngIf="currentStep === 2" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
+        <div
+          *ngIf="currentStep === 2"
+          role="tabpanel"
+          class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max"
+        >
           <form class="flex flex-col gap-2">
-          <div class="step-header text-center mt-2 mb-4">
-            <i class=" fa-solid fa-user-pen text-3xl text-gray-900"></i>
-            <p class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900">Informacije o oglasivaču</p>
-          </div>
-          <hr>
-            <div>
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Ime i prezime</p>
-              <div class="relative h-8 w-full mb-5 min-w-[200px]">
-                <input type="text" placeholder="Ime i prezime" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
-              </div>
-              
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Kontakt telefon</p>
-              <div class="relative h-8 w-full mb-5 min-w-[200px]">
-                <input type="text" placeholder="Kontakt telefon" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
-              </div>
-              
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Email adresa</p>
-              <div class="relative h-8 w-full mb-5 min-w-[200px]">
-                <input type="text" placeholder="Email adresa" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4" />
-              </div>
-
-              <p class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900">Link do društvene mreže</p>
-              <div class="relative h-8 w-full min-w-[200px]">
-                <input type="text" placeholder="Link do društvene mreže" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700" />
-              </div>
+            <div class="step-header text-center mt-2 mb-4">
+              <i class="fa-solid fa-images text-3xl text-gray-900"></i>
+              <p
+                class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900"
+              >
+                Postavljanje fotografija
+              </p>
             </div>
-
+            <hr />
+            <div class="file-drag-wrapper">
+              <p
+                class="block mb-6 text-xs text-center antialiased font-medium leading-normal text-blue-gray-900"
+              >
+                Unesite maksimum 4 željene fotografije prevlačenjem ili klikom
+                na polje ispod.
+              </p>
+              <app-file-drag-input
+                (filesChanged)="onFilesChanged($event)"
+                [selectedFiles]="propertyImages"
+              ></app-file-drag-input>
+            </div>
           </form>
         </div>
 
-        <div *ngIf="currentStep === 3" role="tabpanel" class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max">
+        <div
+          *ngIf="currentStep === 3"
+          role="tabpanel"
+          class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max"
+        >
+          <form class="flex flex-col gap-2" [formGroup]="advertiserForm">
+            <div class="step-header text-center mt-2 mb-4">
+              <i class="fa-solid fa-user-pen text-3xl text-gray-900"></i>
+              <p
+                class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900"
+              >
+                Informacije o oglasivaču
+              </p>
+            </div>
+            <hr />
+            <div class="advertiser-info-wrapper">
+              <p
+                class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900 required"
+              >
+                Ime i prezime
+              </p>
+              <div class="relative h-8 w-full mb-6 min-w-[200px]">
+                <input
+                  type="text"
+                  placeholder="Ime i prezime"
+                  formControlName="advertiserName"
+                  [ngClass]="{
+                    'bg-red-50 border-red-200 placeholder-red-400 mb-1':
+                      advertiserForm.get('advertiserName')?.invalid &&
+                      advertiserForm.get('advertiserName')?.touched,
+                    'mb-4': !(
+                      advertiserForm.get('advertiserName')?.invalid &&
+                      advertiserForm.get('advertiserName')?.touched
+                    )
+                  }"
+                  class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4"
+                />
+                <p
+                  *ngIf="
+                    advertiserForm.get('advertiserName')?.touched &&
+                    advertiserForm.get('advertiserName')?.invalid
+                  "
+                  class="text-xs text-red-600 dark:text-red-500 error-description mt-0"
+                >
+                  <ng-container
+                    *ngIf="advertiserForm.get('advertiserName')?.errors?.['required']"
+                  >
+                    <span class="font-medium">Ime i prezime</span> su neophodni.
+                  </ng-container>
+                </p>
+              </div>
+
+              <p
+                class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900 required"
+              >
+                Kontakt telefon
+              </p>
+              <div class="relative h-8 w-full mb-6 min-w-[200px]">
+                <input
+                  type="text"
+                  formControlName="phoneNumber"
+                  placeholder="Kontakt telefon"
+                  [ngClass]="{
+                    'bg-red-50 border-red-200 placeholder-red-400 mb-1':
+                      advertiserForm.get('phoneNumber')?.invalid &&
+                      advertiserForm.get('phoneNumber')?.touched,
+                    'mb-4': !(
+                      advertiserForm.get('phoneNumber')?.invalid &&
+                      advertiserForm.get('phoneNumber')?.touched
+                    )
+                  }"
+                  class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4"
+                />
+                <p
+                  *ngIf="
+                    advertiserForm.get('phoneNumber')?.touched &&
+                    advertiserForm.get('phoneNumber')?.invalid
+                  "
+                  class="text-xs text-red-600 dark:text-red-500 error-description mt-0"
+                >
+                  <ng-container
+                    *ngIf="advertiserForm.get('phoneNumber')?.errors?.['required']"
+                  >
+                    <span class="font-medium">Kontakt telefon</span> je
+                    neophodan.
+                  </ng-container>
+                  <ng-container
+                    *ngIf="advertiserForm.get('phoneNumber')?.errors?.['pattern']"
+                  >
+                    <span class="font-medium">Uneti kontakt telefon</span> nije
+                    ispravan.
+                  </ng-container>
+                </p>
+              </div>
+
+              <p
+                class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900"
+              >
+                Email adresa
+              </p>
+              <div class="relative h-8 w-full mb-6 min-w-[200px]">
+                <input
+                  type="text"
+                  formControlName="emailAddress"
+                  [ngClass]="{
+                    'bg-red-50 border-red-200 placeholder-red-400 mb-1':
+                      advertiserForm.get('emailAddress')?.invalid &&
+                      advertiserForm.get('emailAddress')?.touched,
+                    'mb-4': !(
+                      advertiserForm.get('emailAddress')?.invalid &&
+                      advertiserForm.get('emailAddress')?.touched
+                    )
+                  }"
+                  placeholder="Email adresa"
+                  class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700 mb-4"
+                />
+                <p
+                  *ngIf="
+                    advertiserForm.get('emailAddress')?.touched &&
+                    advertiserForm.get('emailAddress')?.invalid
+                  "
+                  class="text-xs text-red-600 dark:text-red-500 error-description mt-0"
+                >
+                  <ng-container
+                    *ngIf="advertiserForm.get('emailAddress')?.errors?.['pattern']"
+                  >
+                    <span class="font-medium">Uneta email adresa</span> nije
+                    ispravna.
+                  </ng-container>
+                </p>
+              </div>
+
+              <p
+                class="block mb-2 text-xs antialiased font-medium leading-normal text-blue-gray-900"
+              >
+                Link do društvene mreže
+              </p>
+              <div class="relative h-8 w-full min-w-[200px]">
+                <input
+                  type="text"
+                  formControlName="socialMediaLink"
+                  placeholder="Link do društvene mreže"
+                  class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 text-sm font-normal text-blue-gray-700"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div
+          *ngIf="currentStep === 4"
+          role="tabpanel"
+          class="w-full p-0 text-base antialiased font-light leading-relaxed text-gray-700 h-max"
+        >
           <form class="flex flex-col gap-2">
             <div class="step-header text-center mt-2 mb-4">
               <i class="fa-solid fa-list-check text-3xl text-gray-900"></i>
-              <p class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900">Pregled Unetih informacija</p>
+              <p
+                class="block text-md mt-2 antialiased font-semibold leading-normal text-gray-900"
+              >
+                Pregled Unetih informacija
+              </p>
             </div>
-            <hr>
+            <hr />
             <div class="flex flex-wrap justify-center gap-32 mt-2">
               <div class="flex flex-col">
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Tip nekretnine: </span> Stan
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Tip nekretnine: </span>
+                  {{ selectedPropertyType || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Naziv oglasa: </span> Beograd na vodi stan
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Naziv oglasa: </span>
+                  {{ propertyForm.get("advertismentName")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Grad: </span> Beograd
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Grad: </span>
+                  {{ propertyForm.get("city")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Adresa: </span> Bulevar Vudroa Vilsona 12
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Adresa: </span>
+                  {{ propertyForm.get("address")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Veličina u m²: </span> 55m²
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Veličina u m²: </span>
+                  {{ propertyForm.get("sizeInMmSquared")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Cena u €: </span> 147000€
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Cena u €: </span>
+                  {{ propertyForm.get("price")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Sprat: </span> 7
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Sprat: </span>
+                  {{ propertyForm.get("floorNumber")?.value || "/" }}
                 </p>
               </div>
-            
+
               <div class="flex flex-col">
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Broj soba: </span> 3
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Broj soba: </span>
+                  {{ propertyForm.get("numberOfRooms")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Namešten: </span> Da
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Namešten: </span>
+                  {{ propertyForm.get("isFurnished")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Tip oglasa: </span> Prodaja
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Tip oglasa: </span>
+                  {{ propertyForm.get("sellOrRent")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Ime i prezime: </span> Aleksandar Pavlov
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Ime i prezime: </span>
+                  {{ advertiserForm.get("advertiserName")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Kontakt telefon: </span> 0611856934
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Kontakt telefon: </span>
+                  {{ advertiserForm.get("phoneNumber")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Email adresa: </span> aleksandar.pavlov@gmail.com
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Email adresa: </span>
+                  {{ advertiserForm.get("emailAddress")?.value || "/" }}
                 </p>
-                <p class="block text-sm antialiased font-normal leading-normal mt-7 text-gray-900 max-w-lg">
-                  <span class="font-bold">Link do društvene mreže: </span> /
+                <p
+                  class="block text-sm font-normal leading-normal mt-7 text-gray-900 max-w-lg"
+                >
+                  <span class="font-bold">Link do društvene mreže: </span>
+                  {{ advertiserForm.get("socialMediaLink")?.value || "/" }}
                 </p>
               </div>
             </div>
-            
-            <button class="w-1/3 mx-auto mt-10 rounded-md  py-2 px-4 shadow-md  text-sm text-white font-bold" style="background-color: #79a450;">Postavi Oglas</button>
-            </form>
+
+            <button
+              class="w-1/3 mx-auto mt-10 rounded-md py-2 px-4 shadow-md text-sm text-white font-bold"
+              style="background-color: #79a450"
+              (click)="handleSubmit()"
+            >
+              Postavi Oglas
+            </button>
+          </form>
         </div>
       </div>
     </div>
-    <hr>
+    <hr />
     <div class="controls w-full px-40 py-6">
       <div class="relative flex items-center justify-between w-full">
+        <div
+          class="absolute left-0 top-2/4 h-0.5 w-full -translate-y-2/4 bg-gray-300"
+        ></div>
+        <div
+          class="absolute left-0 top-2/4 h-0.5 -translate-y-2/4 bg-gray-900 transition-all duration-500"
+          [ngClass]="{
+            'w-0': currentStep === 1,
+            'w-2/6': currentStep === 2,
+            'w-4/6': currentStep === 3,
+            'w-full': currentStep === 4
+          }"
+        ></div>
 
-        <div class="absolute left-0 top-2/4 h-0.5 w-full -translate-y-2/4 bg-gray-300"></div>
-        <div class="absolute left-0 top-2/4 h-0.5 -translate-y-2/4 bg-gray-900 transition-all duration-500" [ngClass]="{
-          'w-0': currentStep === 1,
-          'w-2/4': currentStep === 2,
-          'w-full': currentStep === 3
-        }"></div>
+        <div
+          class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
+          [ngClass]="{
+            'bg-gray-900 text-white': currentStep >= 1,
+            'bg-gray-300 text-gray-900': currentStep < 1
+          }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            ></path>
+          </svg>
+        </div>
 
-        <div class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
-        [ngClass]="{'bg-gray-900 text-white': currentStep >= 1, 'bg-gray-300 text-gray-900': currentStep < 1}">
-     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-4 h-4">
-       <path stroke-linecap="round" stroke-linejoin="round"
-             d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path>
-     </svg>
-   </div>
-   
-   <div class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
-        [ngClass]="{'bg-gray-900 text-white': currentStep >= 2, 'bg-gray-300 text-gray-900': currentStep < 2}">
-     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-4 h-4">
-       <path stroke-linecap="round" stroke-linejoin="round"
-             d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
-     </svg>
-   </div>
-   
-   <div class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
-        [ngClass]="{'bg-gray-900 text-white': currentStep >= 3, 'bg-gray-300 text-gray-900': currentStep < 3}">
-     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-4 h-4">
-       <path stroke-linecap="round" stroke-linejoin="round"
-             d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"></path>
-     </svg>
-   </div>
-   
+        <div
+          class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
+          [ngClass]="{
+            'bg-gray-900 text-white': currentStep >= 2,
+            'bg-gray-300 text-gray-900': currentStep < 2
+          }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 4.5A1.5 1.5 0 014.5 3h15A1.5 1.5 0 0121 4.5v15a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 19.5v-15z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 16.5l4.5-6 4.5 6 3-4 6 8"
+            />
+            <circle cx="15.5" cy="8.5" r="1.5" fill="currentColor" />
+          </svg>
+        </div>
+
+        <div
+          class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
+          [ngClass]="{
+            'bg-gray-900 text-white': currentStep >= 3,
+            'bg-gray-300 text-gray-900': currentStep < 3
+          }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+            ></path>
+          </svg>
+        </div>
+
+        <div
+          class="relative z-10 grid w-8 h-8 font-bold transition-all duration-300 rounded-full place-items-center"
+          [ngClass]="{
+            'bg-gray-900 text-white': currentStep >= 4,
+            'bg-gray-300 text-gray-900': currentStep < 4
+          }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
+            ></path>
+          </svg>
+        </div>
       </div>
 
       <div class="flex justify-between items-center w-full mt-4">
-        <button class="select-none rounded-lg bg-gray-900 py-2 px-4 text-center text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        type="button" (click)="prevStep()" [disabled]="currentStep === 1">
-            Prethodno
+        <button
+          class="select-none rounded-lg bg-gray-900 py-2 px-4 text-center text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+          (click)="prevStep()"
+          [disabled]="currentStep === 1"
+        >
+          Prethodno
         </button>
 
-        <button class="select-none rounded-lg bg-gray-900 py-2 px-4 text-center text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        type="button" (click)="nextStep()" [disabled]="currentStep === 3">
-            Sledeće
+        <button
+          class="select-none rounded-lg bg-gray-900 py-2 px-4 text-center text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="button"
+          (click)="nextStep()"
+          [disabled]="
+            (currentStep === 1 && propertyForm.invalid) ||
+            (currentStep === 3 && advertiserForm.invalid) ||
+            currentStep === 4
+          "
+        >
+          Sledeće
         </button>
       </div>
     </div>
