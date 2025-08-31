@@ -6,14 +6,21 @@ import {
   MAX_PROPERTY_PRICE,
   MAX_PROPERTY_SIZE,
 } from 'src/app/models/constants/constants';
+import { CreateApartmentRequest } from 'src/app/models/createApartmentRequest';
+import { CreateHouseRequest } from 'src/app/models/createHouseRequest';
+import { CreateLandRequest } from 'src/app/models/createLandRequest';
 import { GenerateDescriptionRequest } from 'src/app/models/generateDescriptionRequest.model';
-import { ListingType } from 'src/app/models/propertyListingType.enum';
+import {
+  ListingType,
+  toListingType,
+} from 'src/app/models/propertyListingType.enum';
 import {
   PropertyType,
   propertyTypeToSerbianLanguage,
 } from 'src/app/models/propertyType.enum';
 import { RadioSize } from 'src/app/models/radioSize.enum';
 import { EMAIL_REGEX, PHONE_NUMBER_REGEX } from 'src/app/models/regex/regex';
+import { ToastType } from 'src/app/models/toastType.enum';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
@@ -37,6 +44,9 @@ export class FormComponent {
   advertiserForm: FormGroup;
   propertyImages: File[] = [];
   selectedPropertyType: string = propertyTypeToSerbianLanguage(this.activeTab);
+  toastMessage = '';
+  toastVisible = false;
+  toastType: ToastType = ToastType.Success;
 
   constructor(
     private propertyService: PropertyService,
@@ -140,11 +150,12 @@ export class FormComponent {
   }
 
   onTooltipClick() {
+    const form = this.propertyForm;
     var generateDescriptionRequest = new GenerateDescriptionRequest(
-      '55m²',
-      'Mise Dimitrijevica 24, Novi Sad',
-      ListingType.SELL,
-      PropertyType.APARTMENT
+      form.get('sizeInMmSquared')?.value + 'm²',
+      form.get('address')?.value + ',' + form.get('city')?.value,
+      toListingType(form.get('sellOrRent')?.value),
+      this.activeTab
     );
     this.isLoading = true;
     this.propertyService
@@ -160,5 +171,58 @@ export class FormComponent {
       );
   }
 
-  handleSubmit() {}
+  handleSubmit() {
+    switch (this.activeTab) {
+      case PropertyType.APARTMENT:
+        this.propertyService
+          .createApartment(
+            CreateApartmentRequest.fromForm(
+              this.propertyForm,
+              this.advertiserForm
+            ),
+            this.propertyImages
+          )
+          .subscribe({
+            next: () => this.showSuccessToast(),
+            error: () => this.showErrorToast(),
+          });
+        break;
+
+      case PropertyType.HOUSE:
+        this.propertyService
+          .createHouse(
+            CreateHouseRequest.fromForm(this.propertyForm, this.advertiserForm),
+            this.propertyImages
+          )
+          .subscribe({
+            next: () => this.showSuccessToast(),
+            error: () => this.showErrorToast(),
+          });
+        break;
+
+      case PropertyType.LAND:
+        this.propertyService
+          .createLand(
+            CreateLandRequest.fromForm(this.propertyForm, this.advertiserForm),
+            this.propertyImages
+          )
+          .subscribe({
+            next: () => this.showSuccessToast(),
+            error: () => this.showErrorToast(),
+          });
+        break;
+    }
+  }
+
+  private showSuccessToast() {
+    this.toastMessage = 'Uspešno ste postavili oglas!';
+    this.toastType = ToastType.Success;
+    this.toastVisible = true;
+  }
+
+  private showErrorToast() {
+    this.toastMessage = 'Došlo je do greške prilikom postavljanja oglasa.';
+    this.toastType = ToastType.Danger;
+    this.toastVisible = true;
+  }
 }

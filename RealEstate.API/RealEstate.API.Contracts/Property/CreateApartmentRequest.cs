@@ -1,5 +1,4 @@
 ﻿using RealEstate.Domain.Common.Enums;
-using RealEstate.Application.Property.Dtos;
 
 namespace RealEstate.API.Contracts.Property;
 

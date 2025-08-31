@@ -4,6 +4,9 @@ import { GenerateDescriptionRequest } from '../models/generateDescriptionRequest
 import { PropertyQueryParams } from '../models/propertyFilterParams.model';
 import { ListingType } from '../models/propertyListingType.enum';
 import { PropertyResponse } from '../models/propertyResponse.model';
+import { CreateApartmentRequest } from '../models/createApartmentRequest';
+import { CreateHouseRequest } from '../models/createHouseRequest';
+import { CreateLandRequest } from '../models/createLandRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +72,63 @@ export class PropertyService {
       'http://localhost:5157/property/generate-description',
       generateDescriptionRequest,
       { responseType: 'text' }
+    );
+  }
+
+  createApartment(createApartmentRequest: any, propertyImages: File[]) {
+    const formData = new FormData();
+
+    Object.entries(createApartmentRequest).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        formData.append(`apartmentRequest.${key}`, value.toString());
+      }
+    });
+
+    propertyImages.forEach((file) => {
+      formData.append('images', file, file.name);
+    });
+
+    return this.httpClient.post(
+      'http://localhost:5157/property/create-apartment',
+      formData
+    );
+  }
+
+  createHouse(createHouseRequest: CreateHouseRequest, propertyImages: File[]) {
+    const formData = new FormData();
+
+    Object.entries(createHouseRequest).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        formData.append(`houseRequest.${key}`, value.toString());
+      }
+    });
+
+    propertyImages.forEach((file) => {
+      formData.append('images', file, file.name);
+    });
+
+    return this.httpClient.post(
+      'http://localhost:5157/property/create-house',
+      formData
+    );
+  }
+
+  createLand(createLandRequest: CreateLandRequest, propertyImages: File[]) {
+    const formData = new FormData();
+
+    Object.entries(createLandRequest).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        formData.append(`landRequest.${key}`, value.toString());
+      }
+    });
+
+    propertyImages.forEach((file) => {
+      formData.append('images', file, file.name);
+    });
+
+    return this.httpClient.post(
+      'http://localhost:5157/property/create-land',
+      formData
     );
   }
 }

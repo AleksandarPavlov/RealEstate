@@ -25,6 +25,8 @@ export class PropertyListPageComponent {
   listingTypeName?: string = '';
   cityName?: string = '';
   isFetching = false;
+  currentFilters: Partial<PropertyQueryParams> = {};
+  currentPage = 0;
 
   constructor(
     private propertyService: PropertyService,
@@ -32,15 +34,15 @@ export class PropertyListPageComponent {
   ) {}
 
   ngOnInit() {
-    window.scroll(0, 0);
-
     this.route.queryParams.subscribe((params) => {
       this.propertyTypeName = undefined;
       this.listingTypeName = undefined;
       this.cityName = undefined;
 
-      const queryParams = new PropertyQueryParams({
-        City: params['City'] ? params['City'] : undefined,
+      this.currentPage = params['Page'] ? +params['Page'] : 0;
+
+      this.currentFilters = {
+        City: params['City'] || undefined,
         ListingType: params['ListingType']
           ? toListingType(params['ListingType'])
           : undefined,
@@ -53,17 +55,29 @@ export class PropertyListPageComponent {
         NumberOfRooms: params['NumberOfRooms']
           ? +params['NumberOfRooms']
           : undefined,
-      });
+      };
 
-      this.fetchProperties(queryParams);
-      this.propertyTypeName = propertyTypeToSerbianLanguage(
-        toPropertyType(params['PropertyType'])
-      );
-      this.listingTypeName = listingTypeToSerbianLanguage(
-        toListingType(params['ListingType'])
-      );
+      this.propertyTypeName = params['PropertyType']
+        ? propertyTypeToSerbianLanguage(toPropertyType(params['PropertyType']))
+        : undefined;
+
+      this.listingTypeName = params['ListingType']
+        ? listingTypeToSerbianLanguage(toListingType(params['ListingType']))
+        : undefined;
       this.cityName = params['City'];
+
+      this.fetchCurrentPage();
     });
+  }
+
+  fetchCurrentPage() {
+    window.scroll(0, 0);
+    const queryParams = new PropertyQueryParams({
+      ...this.currentFilters,
+      Page: this.currentPage,
+    });
+
+    this.fetchProperties(queryParams);
   }
 
   fetchProperties(queryParams: PropertyQueryParams) {
@@ -81,6 +95,19 @@ export class PropertyListPageComponent {
         }
       );
   }
+
+  handleNextPage() {
+    this.currentPage++;
+    this.fetchCurrentPage();
+  }
+
+  handlePreviousPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.fetchCurrentPage();
+    }
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

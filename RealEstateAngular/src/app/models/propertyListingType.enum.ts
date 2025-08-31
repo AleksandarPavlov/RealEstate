@@ -7,9 +7,11 @@ export enum ListingType {
 export function toListingType(value: string): ListingType {
   switch (value.toUpperCase()) {
     case '0':
+    case 'PRODAJA':
     case 'SELL':
       return ListingType.SELL;
     case '1':
+    case 'IZDAVANJE':
     case 'RENT':
       return ListingType.RENT;
     default:

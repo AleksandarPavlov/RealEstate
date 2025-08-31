@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ListingType } from 'src/app/models/propertyListingType.enum';
 import { PropertyResponse } from 'src/app/models/propertyResponse.model';
 
@@ -10,5 +10,16 @@ import { PropertyResponse } from 'src/app/models/propertyResponse.model';
 export class TableComponent {
   @Input() properties: PropertyResponse[] = [];
   @Input() isFetching: boolean = false;
+  @Input() currentPage: number = 0;
+  @Output() nextPage = new EventEmitter<void>();
+  @Output() previousPage = new EventEmitter<void>();
   listingType = ListingType;
+
+  handleNextPage() {
+    this.nextPage.emit();
+  }
+
+  handlePreviousPage() {
+    this.previousPage.emit();
+  }
 }

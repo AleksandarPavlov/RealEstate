@@ -235,6 +235,16 @@
             </div>
           </td>
         </tr>
+        <div class="flex gap-2 ml-4" *ngIf="currentPage != 0">
+          <button
+            class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+            type="button"
+            [disabled]="isFetching"
+            (click)="handlePreviousPage()"
+          >
+            Prethodna
+          </button>
+        </div>
       </tbody>
     </table>
   </div>
@@ -245,23 +255,25 @@
     <p
       class="block text-sm antialiased font-normal leading-normal text-blue-gray-900"
     >
-      Stranica 1 od 10
+      Stranica {{ currentPage + 1 }}
     </p>
     <div class="flex gap-2">
       <button
         class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
         type="button"
+        [disabled]="isFetching"
+        (click)="handlePreviousPage()"
       >
         Prethodna
       </button>
       <button
         class="align-middle mt-2 select-none font-bold text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-2 px-4 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
         type="button"
+        [disabled]="isFetching"
+        (click)="handleNextPage()"
       >
         Sledeća
       </button>
     </div>
   </div>
 </div>
-        
-        

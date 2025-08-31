@@ -9,6 +9,7 @@ export class PropertyQueryParams {
   PriceTo?: number;
   GroundFloor?: boolean;
   NumberOfRooms?: number;
+  Page?: number = 0;
 
   constructor(params?: Partial<PropertyQueryParams>) {
     if (params) {
@@ -19,6 +20,7 @@ export class PropertyQueryParams {
       this.PriceTo = params.PriceTo;
       this.GroundFloor = params.GroundFloor;
       this.NumberOfRooms = params.NumberOfRooms;
+      this.Page = params.Page;
     }
   }
 }
