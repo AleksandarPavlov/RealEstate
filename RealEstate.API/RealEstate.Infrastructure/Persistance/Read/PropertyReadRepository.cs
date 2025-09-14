@@ -57,6 +57,8 @@ namespace RealEstate.Infrastructure.Persistance.Read
                 query = query.Where(p => p.NumberOfRooms != null && p.NumberOfRooms == filters.NumberOfRooms);
             }
 
+            query = query.Where(p => p.PropertyStatus == PropertyStatus.APPROVED);
+
             var properties = await query.Skip(filters.Page * filters.PageSize)
                                .Take(filters.PageSize)
                                .Include(p => p.Images)
@@ -86,6 +88,7 @@ namespace RealEstate.Infrastructure.Persistance.Read
         public async Task<Result<IEnumerable<DomainProperty>>> FetchLatestProperties(int amount)
         {
             var properties = await _context.Property
+                                  .Where(p => p.PropertyStatus == PropertyStatus.APPROVED)
                                   .OrderByDescending(p => p.CreationTime)
                                   .Take(amount) 
                                   .Include(p => p.Images)
@@ -105,13 +108,15 @@ namespace RealEstate.Infrastructure.Persistance.Read
             SELECT *
             FROM Property
             WHERE
-            (6371 * acos(cos(radians(@lat)) * cos(radians(Lat)) * cos(radians(Lon) - radians(@lon)) + sin(radians(@lat)) * sin(radians(Lat)))) <= @distance";
+            (6371 * acos(cos(radians(@lat)) * cos(radians(Lat)) * cos(radians(Lon) - radians(@lon)) + sin(radians(@lat)) * sin(radians(Lat)))) <= @distance
+            AND PropertyStatus = @approvedStatus";
             
             var parameters = new List<SqlParameter>
             {
                 new SqlParameter("@lat", lat),
                 new SqlParameter("@lon", lon),
-                new SqlParameter("@distance", distance)
+                new SqlParameter("@distance", distance),
+                new SqlParameter("@approvedStatus", (int)PropertyStatus.APPROVED)
             };
             
             if (ListingType.HasValue)

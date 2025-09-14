@@ -18,15 +18,15 @@ namespace RealEstate.Infrastructure.Persistance
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Property>()
-              .HasMany(p => p.Images) 
-              .WithOne(img => img.Property)
-              .HasForeignKey(img => img.PropertyId) 
-              .OnDelete(DeleteBehavior.Cascade); 
-            
-            modelBuilder.Entity<Property>()
-                .HasOne(p => p.Advertiser)  
-                .WithOne(a => a.Property)  
-                .HasForeignKey<Advertiser>(a => a.PropertyId) 
+                .HasMany(p => p.Images) 
+                .WithOne(img => img.Property)
+                .HasForeignKey(img => img.PropertyId) 
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Advertiser>()
+                .HasMany(a => a.Properties)
+                .WithOne(p => p.Advertiser)
+                .HasForeignKey(p => p.AdvertiserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

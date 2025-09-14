@@ -16,13 +16,14 @@ namespace RealEstate.Domain.Property
         public PropertySize SizeInMmSquared { get; private set; }
         public DateTime CreationTime { get; private set; }
         public bool IsPremium { get; private set; }
-        public DomainAdvertiser? Advertiser { get; private set; }
+        public DomainAdvertiser Advertiser { get; private set; }
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public PropertyNumberOfRooms? NumberOfRooms { get; private set; }
         public PropertyCoordinates? Coordinates { get; private set; }
         public IEnumerable<string>? Images { get; private set; }
         public PropertyDescription? Description { get; private set; }   
+        public PropertyStatus PropertyStatus { get; private set; }
         private Property(
             long id,
             PropertyName name,
@@ -33,13 +34,14 @@ namespace RealEstate.Domain.Property
             PropertySize sizeInMmSquared,
             DateTime creationTime,
             bool isPremium,
-            DomainAdvertiser? advertiser,
+            DomainAdvertiser advertiser,
             bool? isFurnished,
             string? floorNumber,
             PropertyNumberOfRooms? numberOfRooms,
             PropertyCoordinates? coordinates,
             IEnumerable<string>? images,
-            PropertyDescription? description)
+            PropertyDescription? description,
+            PropertyStatus propertyStatus)
         {
             Id = id;
             Name = name;
@@ -57,6 +59,7 @@ namespace RealEstate.Domain.Property
             Coordinates = coordinates;
             Images = images;
             Description = description;
+            PropertyStatus = propertyStatus;
         }
     }
 }

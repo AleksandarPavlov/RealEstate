@@ -25,7 +25,8 @@ namespace RealEstate.Domain.Property
             double? latitude,
             double? longitude,
             IEnumerable<string>? images,
-            string? description)
+            string? description,
+            PropertyStatus propertyStatus)
     {
             var nameResult = PropertyName.Create(name);
             var locationResult = PropertyLocation.Create(city, address);
@@ -35,7 +36,6 @@ namespace RealEstate.Domain.Property
             var numberOfRoomsResult = PropertyNumberOfRooms.Create(numberOfRooms);
             var coordinatesResult = PropertyCoordinates.Create(latitude, longitude);
             var descriptionResult = PropertyDescription.Create(description);
-            
 
             var combinedResult = ResultExtensions.CombineResults(
                nameResult,
@@ -56,7 +56,7 @@ namespace RealEstate.Domain.Property
                      id, 
                      propertyName, 
                      listingType, 
-                     propertyType, 
+                     propertyType,
                      propertyLocation, 
                      propertyPrice, 
                      propertySize, 
@@ -68,7 +68,8 @@ namespace RealEstate.Domain.Property
                      propertyNumberOfRooms, 
                      propertyCoordinates, 
                      images,
-                     propertyDescription);
+                     propertyDescription,
+                     propertyStatus);
 
                  return Result<Property>.Success(property);
              },

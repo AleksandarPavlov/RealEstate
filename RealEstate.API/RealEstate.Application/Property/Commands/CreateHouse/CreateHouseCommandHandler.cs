@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using RealEstate.Domain.Advertiser;
+using RealEstate.Domain.Common.Enums;
 using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance;
+using RealEstate.Domain.Persistance.Read;
 using RealEstate.Domain.Persistance.Write;
 using RealEstate.Domain.Services;
 using DomainProperty = RealEstate.Domain.Property.Property;
@@ -11,13 +13,15 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
     public class CreateHouseCommandHandler : IRequestHandler<CreateHouseCommand, Result<DomainProperty>>
     {
         private readonly IPropertyWriteRepository _propertyRepository;
+        private readonly IAdvertiserReadRepository _advertiserReadRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICoordinatesService _coordinatesService;
         private readonly IImageStorageService _imageStorageService;
 
-        public CreateHouseCommandHandler(IPropertyWriteRepository propertyRepository, IUnitOfWork unitOfWork, ICoordinatesService coordinatesService, IImageStorageService imageStorageService)
+        public CreateHouseCommandHandler(IPropertyWriteRepository propertyRepository, IAdvertiserReadRepository advertiserReadRepository, IUnitOfWork unitOfWork, ICoordinatesService coordinatesService, IImageStorageService imageStorageService)
         {
             _propertyRepository = propertyRepository;
+            _advertiserReadRepository = advertiserReadRepository;
             _unitOfWork = unitOfWork;
             _coordinatesService = coordinatesService;
             _imageStorageService = imageStorageService;
@@ -39,20 +43,14 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
             var imagesResult = (request.Images != null && request.Images.Any())
            ? await _imageStorageService.UploadToExternalApi(request.Images)
            : null;
-          
-            var advertiserResult = Advertiser.CreateAdvertiser(
-                0,
-                request.AdvertiserData.FullName,
-                request.AdvertiserData.ContactNumber,
-                request.AdvertiserData.EmailAddress,
-                request.AdvertiserData.SocialMediaLink
-            );
+
+            var advertiserResult = await _advertiserReadRepository.FetchAdvertiserByUsername(request.AdvertiserUsername);
 
             if (advertiserResult.IsFailure)
             {
-                Result<DomainProperty>.Failure(new Error("Advertiser", "Error creating advertiser"));
+                return Result<DomainProperty>.Failure(new Error("Advertiser", "Error fetching advertiser"));
             }
-            
+
             var houseResult = DomainProperty.CreateHouseProperty(
                 0,
                 request.Name,
@@ -70,7 +68,8 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
                 latitude,
                 longitude,
                 imagesResult?.Select(image => image.DisplayUrl),
-                request.Description
+                request.Description,
+                PropertyStatus.WAITING_APPROVAL
             );
 
             return await houseResult.Match(

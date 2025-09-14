@@ -17,7 +17,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public double SizeInMmSquared { get; private set; }
         public DateTime CreationTime { get; private set; }
         public bool IsPremium { get; private set; } = false;
-        public Advertiser? Advertiser { get; private set; }
+        public Advertiser Advertiser { get; private set; } = null!;
+        public long AdvertiserId { get; set; }
         public bool? IsFurnished { get; private set; }
         public string? FloorNumber { get; private set; }
         public int? NumberOfRooms { get; private set; }
@@ -25,6 +26,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public double? Lon { get; private set; }
         public ICollection<PropertyImage>? Images { get; private set; }
         public string? Description { get; private set; }
+        public PropertyStatus PropertyStatus { get; private set; } = PropertyStatus.WAITING_APPROVAL;
 
         public Property(
             long id,
@@ -42,7 +44,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             int? numberOfRooms,
             double? lat,
             double? lon,
-            string? description)
+            string? description,
+            PropertyStatus propertyStatus)
         {
             Id = id;
             Name = name;
@@ -58,8 +61,9 @@ namespace RealEstate.Infrastructure.Persistance.Entities
             FloorNumber = floorNumber;
             NumberOfRooms = numberOfRooms;
             Lat = lat;
-            Lon = lon;
+            Lon = lon;                  
             Description = description;
+            PropertyStatus = propertyStatus;
         }
         public static Result<DomainProperty> ToDomain(Property entity) 
         {
@@ -85,7 +89,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Lat,
                         entity.Lon,
                         entity.Images?.Select(image => image.Url),
-                        entity.Description
+                        entity.Description,
+                        entity.PropertyStatus
                         );
 
                 case PropertyType.HOUSE:
@@ -107,7 +112,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Lat,
                         entity.Lon,
                         entity.Images?.Select(image => image.Url),
-                        entity.Description
+                        entity.Description,
+                        entity.PropertyStatus
                         );
 
                 case PropertyType.LAND:
@@ -126,7 +132,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                         entity.Lat,
                         entity.Lon,
                         entity.Images?.Select(image => image.Url),
-                        entity.Description
+                        entity.Description,
+                        entity.PropertyStatus
                         );
 
                 default:
@@ -154,14 +161,15 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                 entity.NumberOfRooms?.Value,
                 entity.Coordinates?.Latitude,
                 entity.Coordinates?.Longitude,
-                entity.Description?.Value
+                entity.Description?.Value,
+                entity.PropertyStatus
                 );
 
             if (entity.Images != null && entity.Images.Any()) {
                 property.Images = entity.Images.Select(image => new PropertyImage(image)).ToList();
             }
 
-            property.Advertiser = entity.Advertiser != null ? Advertiser.FromDomain(entity.Advertiser).Value : null;
+            property.Advertiser = Advertiser.FromDomain(entity.Advertiser).Value;
 
             return property;
         }

@@ -1,11 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
 using RealEstate.Application.Property.Commands.GenerateDescription;
-using RealEstate.Application.Property.Dtos;
 using RealEstate.Application.Property.Queries.FetchLatestProperties;
 using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
 using RealEstate.Application.Property.Queries.FetchPropertyById;
@@ -24,10 +24,17 @@ namespace RealEstate.API.Controllers
         } 
 
         [HttpPost("create-apartment")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult> CreateApartmentAsync([FromForm] CreateApartmentRequest apartmentRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
+            var username = User.FindFirst("sub")?.Value;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized(new ErrorResponse("Authentication", "Invalid token."));
+            }
 
             var result = await _mediator.Send(new CreateApartmentCommand
             (
@@ -38,12 +45,7 @@ namespace RealEstate.API.Controllers
              apartmentRequest.Price,
              apartmentRequest.SizeInMmSquared,
              apartmentRequest.IsPremium,
-             new AdvertiserData(
-                 apartmentRequest.AdvertiserFullName,
-                 apartmentRequest.AdvertiserContact,
-                 apartmentRequest.AdvertiserEmailAddress,
-                 apartmentRequest.AdvertiserSocialMediaLink
-             ),
+             username,
              apartmentRequest.IsFurnished,
              apartmentRequest.FloorNumber,
              apartmentRequest.NumberOfRooms,
@@ -59,10 +61,17 @@ namespace RealEstate.API.Controllers
         }
 
         [HttpPost("create-house")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult> CreateHouseAsync([FromForm] CreateHouseRequest houseRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
+            var username = User.FindFirst("sub")?.Value;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized(new ErrorResponse("Authentication", "Invalid token."));
+            }
 
             var result = await _mediator.Send(new CreateHouseCommand
             (
@@ -72,13 +81,8 @@ namespace RealEstate.API.Controllers
              houseRequest.Address,
              houseRequest.Price,
              houseRequest.SizeInMmSquared,
-             houseRequest.IsPremium,
-             new AdvertiserData(
-                 houseRequest.AdvertiserFullName,
-                 houseRequest.AdvertiserContact,
-                 houseRequest.AdvertiserEmailAddress,
-                 houseRequest.AdvertiserSocialMediaLink
-             ),
+             houseRequest.IsPremium,      
+             username,
              houseRequest.IsFurnished,
              houseRequest.FloorNumber,
              houseRequest.NumberOfRooms,
@@ -93,10 +97,17 @@ namespace RealEstate.API.Controllers
         }
 
         [HttpPost("create-land")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult> CreateLandAsync([FromForm] CreateLandRequest landRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
+            var username = User.FindFirst("sub")?.Value;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized(new ErrorResponse("Authentication", "Invalid token."));
+            }
 
             var result = await _mediator.Send(new CreateLandCommand
             (
@@ -107,12 +118,7 @@ namespace RealEstate.API.Controllers
              landRequest.Price,
              landRequest.SizeInMmSquared,
              landRequest.IsPremium,
-             new AdvertiserData(
-                 landRequest.AdvertiserFullName,
-                 landRequest.AdvertiserContact,
-                 landRequest.AdvertiserEmailAddress,
-                 landRequest.AdvertiserSocialMediaLink
-             ),
+             username,
              images,
              landRequest.Description
              ), cancellationToken);
@@ -196,6 +202,7 @@ namespace RealEstate.API.Controllers
         }
         
         [HttpPost("generate-description")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult<string?>> GenerateDescriptionAsync([FromBody] GenerateDescriptionRequest descriptionRequest, CancellationToken cancellationToken)
