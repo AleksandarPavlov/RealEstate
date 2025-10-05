@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.API.Contracts.Error;
 using RealEstate.API.Contracts.Property;
+using RealEstate.Application.Property.Commands.ChangeStatus;
 using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
 using RealEstate.Application.Property.Commands.GenerateDescription;
@@ -214,6 +215,25 @@ namespace RealEstate.API.Controllers
                 descriptionRequest.ListingType,
                 descriptionRequest.Size,
                 descriptionRequest.Address
+            ), cancellationToken);
+
+            return result.Match<ActionResult>(
+                success => Ok(success),
+                failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
+
+        [HttpPost("change-status/{id}")]
+        [Authorize(Roles = "ADMIN")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
+        public async Task<ActionResult> ChangePropertyStatus(long id, [FromBody] ChangePropertyStatusRequest changePropertyStatusRequest, CancellationToken cancellationToken)
+        {
+
+            var result = await _mediator.Send(new ChangePropertyStatusCommand
+            (
+                id,
+                changePropertyStatusRequest.Status
             ), cancellationToken);
 
             return result.Match<ActionResult>(

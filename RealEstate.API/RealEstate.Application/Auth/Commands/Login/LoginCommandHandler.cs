@@ -58,7 +58,11 @@ namespace RealEstate.Application.Auth.Commands.Login
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                     new Claim("userId", user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role.ToString())
+                    new Claim(ClaimTypes.Role, user.Role.ToString()),
+                    new Claim("role", user.Role.ToString()),
+                    new Claim("fullName", user.FullName),
+                    new Claim("emailAddress", user.EmailAddress?.Value ?? string.Empty),
+                    new Claim("contactNumber", user.ContactNumber)
                 };
 
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

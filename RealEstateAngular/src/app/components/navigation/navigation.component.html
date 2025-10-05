@@ -56,12 +56,47 @@
                 Mapa
               </a>
             </li>
+            <ng-container *ngIf="!isLoggedIn">
+              <li
+                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              >
+                <a class="flex items-center" [routerLink]="['/login']"
+                  >Uloguj se</a
+                >
+              </li>
+              <li
+                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              >
+                <a class="flex items-center" [routerLink]="['/register']"
+                  >Registracija</a
+                >
+              </li>
+            </ng-container>
+
+            <ng-container *ngIf="isLoggedIn">
+              <li
+                *ngIf="userRole === 'ADMIN'"
+                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              >
+                <a class="flex items-center" [routerLink]="['/admin']"
+                  >Admin Stranica</a
+                >
+              </li>
+              <li
+                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              >
+                <a class="flex items-center cursor-pointer" (click)="logout()"
+                  >Izloguj se</a
+                >
+              </li>
+            </ng-container>
           </ul>
         </div>
       </div>
 
       <div class="flex items-center gap-x-1">
         <button
+          *ngIf="isLoggedIn"
           class="select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle text-xs font-bold text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
           type="button"
           routerLink="/post-property"
@@ -69,28 +104,43 @@
           <span>Postavi oglas</span>
         </button>
       </div>
-      <button
-        class="relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden"
-        type="button"
-      >
-        <span
-          class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+      <div *ngIf="isLoggedIn" class="relative inline-block">
+        <div
+          class="w-10 h-10 cursor-pointer overflow-hidden bg-gray-100 rounded-full flex items-center justify-center"
+          (click)="toggleProfile()"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </span>
-      </button>
+          <span class="font-medium text-gray-600 dark:text-gray-300">
+            {{ userInitials }}
+          </span>
+        </div>
+
+        <div
+          *ngIf="showProfile"
+          class="absolute top-full mt-2 left-1/2 transform -translate-x-1/2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+        >
+          <div class="px-4 py-3 text-center">
+            <h3 class="text-sm font-semibold text-gray-900">{{ fullName }}</h3>
+            <p class="text-xs text-gray-500 mb-2">Korisnički Detalji</p>
+
+            <dl
+              class="text-xs text-gray-700 text-left sm:divide-y sm:divide-gray-200"
+            >
+              <div class="flex justify-between py-2">
+                <dt class="text-xs font-medium text-gray-500">Ime i prezime</dt>
+                <dd>{{ fullName }}</dd>
+              </div>
+              <div class="flex justify-between py-2">
+                <dt class="text-xs font-medium text-gray-500">Email</dt>
+                <dd>{{ emailAddress }}</dd>
+              </div>
+              <div class="flex justify-between py-2">
+                <dt class="text-xs font-medium text-gray-500">Kontakt</dt>
+                <dd>{{ contactNumber }}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 

@@ -26,7 +26,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
         public double? Lon { get; private set; }
         public ICollection<PropertyImage>? Images { get; private set; }
         public string? Description { get; private set; }
-        public PropertyStatus PropertyStatus { get; private set; } = PropertyStatus.WAITING_APPROVAL;
+        public PropertyStatus PropertyStatus { get; internal set; } = PropertyStatus.WAITING_APPROVAL;
 
         public Property(
             long id,

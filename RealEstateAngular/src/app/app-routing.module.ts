@@ -6,15 +6,24 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
 import { PropertyPageComponent } from './pages/property-page/property-page.component';
 import { MapSearchPageComponent } from './pages/map-search-page/map-search-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: '', component: HomePageComponent },
   { path: 'property/:id', component: PropertyPageComponent },
   { path: 'list', component: PropertyListPageComponent },
-  { path: 'post-property', component: FormPageComponent },
+  {
+    path: 'post-property',
+    component: FormPageComponent,
+    canActivate: [authGuard],
+  },
   { path: 'map-search', component: MapSearchPageComponent },
   { path: 'not-found', component: NotFoundPageComponent },
+  { path: 'login', component: LoginPageComponent },
+  { path: 'register', component: RegisterPageComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
 

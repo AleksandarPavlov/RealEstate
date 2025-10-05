@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +33,9 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
 import { PropertyPageComponent } from './pages/property-page/property-page.component';
 import { ToastComponent } from './components/toast/toast.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { ToastComponent } from './components/toast/toast.component';
     TooltipComponent,
     FileDragInputComponent,
     ToastComponent,
+    LoginPageComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,9 @@ import { ToastComponent } from './components/toast/toast.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
