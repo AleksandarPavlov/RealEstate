@@ -1,4 +1,5 @@
 ﻿
+using RealEstate.API.Contracts.Advertiser;
 using RealEstate.API.Contracts.Coordinates;
 using RealEstate.Domain.Common.Enums;
 
@@ -20,6 +21,7 @@ public record PropertyResponse
     string? FloorNumber,
     int? NumberOfRooms,
     CoordinatesResponse? Coordinates,
+    AdvertiserResponse? Advertiser,
     IEnumerable<string>? Images,
     string? Description,
     int? PricePerMmSquared

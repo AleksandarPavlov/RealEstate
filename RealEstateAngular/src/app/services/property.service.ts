@@ -7,6 +7,7 @@ import { PropertyResponse } from '../models/propertyResponse.model';
 import { CreateApartmentRequest } from '../models/createApartmentRequest';
 import { CreateHouseRequest } from '../models/createHouseRequest';
 import { CreateLandRequest } from '../models/createLandRequest';
+import { ChangePropertyStatusRequest } from '../models/changePropertyStatusRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,26 @@ export class PropertyService {
 
     return this.httpClient.get<PropertyResponse[]>(
       'http://localhost:5157/property',
+      { params }
+    );
+  }
+
+  fetchPropertiesForApproval(queryParams?: PropertyQueryParams) {
+    let params = new HttpParams();
+
+    if (queryParams) {
+      for (const [key, value] of Object.entries(queryParams)) {
+        if (value !== undefined && value !== null) {
+          params = params.append(
+            key,
+            typeof value === 'boolean' ? value.toString() : value
+          );
+        }
+      }
+    }
+
+    return this.httpClient.get<PropertyResponse[]>(
+      'http://localhost:5157/property/waiting-approval',
       { params }
     );
   }
@@ -129,6 +150,17 @@ export class PropertyService {
     return this.httpClient.post(
       'http://localhost:5157/property/create-land',
       formData
+    );
+  }
+
+  changePropertyStatus(
+    changePropertyStatusRequest: ChangePropertyStatusRequest,
+    propertyId: number
+  ) {
+    return this.httpClient.post(
+      'http://localhost:5157/property/change-status/' + propertyId,
+      changePropertyStatusRequest,
+      { responseType: 'text' }
     );
   }
 }

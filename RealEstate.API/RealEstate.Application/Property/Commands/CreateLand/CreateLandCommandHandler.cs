@@ -50,7 +50,9 @@ namespace RealEstate.Application.Property.Commands.CreateLand
             {
                 return Result<DomainProperty>.Failure(new Error("Advertiser", "Error fetching advertiser"));
             }
-            
+
+            var efAdvertiserEntity = advertiserResult.Value;
+
             var landResult = DomainProperty.CreateLandProperty(
                 0,
                 request.Name,
@@ -61,7 +63,7 @@ namespace RealEstate.Application.Property.Commands.CreateLand
                 request.SizeInMmSquared,
                 DateTime.Now,
                 request.IsPremium,
-                advertiserResult.Value,
+                null,
                 latitude,
                 longitude,
                 imagesResult?.Select(image => image.DisplayUrl),
@@ -72,7 +74,7 @@ namespace RealEstate.Application.Property.Commands.CreateLand
             return await landResult.Match(
                 async land =>
                 {
-                    _propertyRepository.Add(land);
+                    _propertyRepository.Add(land, efAdvertiserEntity.Id);
                     await _unitOfWork.SaveChangesAsync(cancellationToken);
                     return Result<DomainProperty>.Success(land);
                 },

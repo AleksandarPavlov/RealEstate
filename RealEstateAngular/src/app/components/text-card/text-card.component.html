@@ -3,18 +3,28 @@
 >
   <div class="mx-3 mb-0 border-b border-slate-200 pt-3 pb-2 px-1">
     <div class="flex items-center gap-4">
-
-      <i class="fa-solid fa-circle-user text-3xl" ></i>
-      <div>
+      <i class="fa-solid fa-circle-user text-3xl"></i>
+      <div class="space-y-1">
         <h6
           class="block text-sm antialiased font-normal leading-relaxed tracking-normal text-gray-900"
         >
-          Aleksandar Pavlov
+          {{ property.advertiser.fullName }}
         </h6>
+
         <p
           class="block text-xs antialiased font-normal leading-normal text-gray-700"
         >
-          Izdavač oglasa
+          <a>
+            {{ property.advertiser.emailAddress }}
+          </a>
+        </p>
+
+        <p
+          class="block text-xs antialiased font-normal leading-normal text-gray-700"
+        >
+          <a>
+            {{ property.advertiser.contactNumber }}
+          </a>
         </p>
       </div>
       <span class="absolute top-4 right-3">

@@ -12,10 +12,6 @@ public record CreateApartmentRequest
     double SizeInMmSquared,
     bool IsPremium,
     bool IsFurnished,
-    string AdvertiserFullName,
-    string AdvertiserContact,
-    string AdvertiserEmailAddress,
-    string AdvertiserSocialMediaLink,
     string FloorNumber,
     int NumberOfRooms,
     string? Description

@@ -9,8 +9,10 @@ using RealEstate.Application.Property.Commands.CreateHouse;
 using RealEstate.Application.Property.Commands.GenerateDescription;
 using RealEstate.Application.Property.Queries.FetchLatestProperties;
 using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
+using RealEstate.Application.Property.Queries.FetchPropertiesForApproval;
 using RealEstate.Application.Property.Queries.FetchPropertyById;
 using RealEstate.Application.Property.Queries.FindNearbyProperties;
+using System.Security.Claims;
 
 namespace RealEstate.API.Controllers
 {
@@ -30,7 +32,7 @@ namespace RealEstate.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult> CreateApartmentAsync([FromForm] CreateApartmentRequest apartmentRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
-            var username = User.FindFirst("sub")?.Value;
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(username))
             {
@@ -67,7 +69,7 @@ namespace RealEstate.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult> CreateHouseAsync([FromForm] CreateHouseRequest houseRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
-            var username = User.FindFirst("sub")?.Value;
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(username))
             {
@@ -103,7 +105,7 @@ namespace RealEstate.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
         public async Task<ActionResult> CreateLandAsync([FromForm] CreateLandRequest landRequest, [FromForm] IEnumerable<IFormFile>? images, CancellationToken cancellationToken)
         {
-            var username = User.FindFirst("sub")?.Value;
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(username))
             {
@@ -238,6 +240,26 @@ namespace RealEstate.API.Controllers
 
             return result.Match<ActionResult>(
                 success => Ok(success),
+                failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
+
+        [HttpGet("waiting-approval")]
+        [ActionName(nameof(GetWaitingForApprovalAsync))]
+        [Authorize(Roles = "ADMIN")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PropertyResponse>))]
+        public async Task<ActionResult<IEnumerable<PropertyResponse>>> GetWaitingForApprovalAsync(
+        [FromQuery] PropertiesForApprovalRequest propertiesForApprovalRequest)
+        {
+            var result = await _mediator
+                .Send(new FetchPropertiesForApprovalQuery
+                (
+                    propertiesForApprovalRequest.Page,
+                    propertiesForApprovalRequest.PageSize
+                ));
+
+            return result.Match<ActionResult>(
+                success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),
                 failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
             );
         }

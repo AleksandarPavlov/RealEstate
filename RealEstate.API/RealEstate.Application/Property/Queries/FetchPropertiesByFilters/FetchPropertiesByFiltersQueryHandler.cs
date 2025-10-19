@@ -1,7 +1,6 @@
 ﻿
 using MediatR;
 using RealEstate.Application.Property.Dtos;
-using RealEstate.Domain.Persistance;
 using RealEstate.Domain.Persistance.Read;
 using DomainProperty = RealEstate.Domain.Property.Property;
 

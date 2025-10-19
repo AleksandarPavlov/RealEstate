@@ -11,9 +11,5 @@ public record CreateLandRequest
     int Price,
     double SizeInMmSquared,
     bool IsPremium,
-    string AdvertiserFullName,
-    string AdvertiserContact,
-    string AdvertiserEmailAddress,
-    string AdvertiserSocialMediaLink,
     string? Description
 );

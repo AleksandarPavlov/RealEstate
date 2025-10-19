@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using RealEstate.Domain.Advertiser;
 using RealEstate.Domain.Common.Enums;
 using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance;
@@ -51,6 +50,8 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
                 return Result<DomainProperty>.Failure(new Error("Advertiser", "Error fetching advertiser"));
             }
 
+            var efAdvertiserEntity = advertiserResult.Value;
+
             var houseResult = DomainProperty.CreateHouseProperty(
                 0,
                 request.Name,
@@ -62,7 +63,7 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
                 DateTime.Now,
                 request.IsFurnished,
                 request.IsPremium,
-                advertiserResult.Value,
+                null,
                 request.FloorNumber,
                 request.NumberOfRooms,
                 latitude,
@@ -76,7 +77,7 @@ namespace RealEstate.Application.Property.Commands.CreateHouse
 
                 async house =>
                 {
-                    _propertyRepository.Add(house);
+                    _propertyRepository.Add(house, efAdvertiserEntity.Id);
                     await _unitOfWork.SaveChangesAsync(cancellationToken);
                     return Result<DomainProperty>.Success(house);
                 },

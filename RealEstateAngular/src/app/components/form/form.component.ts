@@ -41,7 +41,6 @@ export class FormComponent {
   currentStep = 1;
   isLoading = false;
   propertyForm: FormGroup;
-  advertiserForm: FormGroup;
   propertyImages: File[] = [];
   selectedPropertyType: string = propertyTypeToSerbianLanguage(this.activeTab);
   toastMessage = '';
@@ -91,16 +90,6 @@ export class FormComponent {
       isFurnished: this.isFurnishedOptions[0],
       description: '',
       sellOrRent: this.sellOrRentOptions[0],
-    });
-
-    this.advertiserForm = this.fb.group({
-      advertiserName: ['', Validators.required],
-      phoneNumber: [
-        '',
-        [Validators.required, Validators.pattern(PHONE_NUMBER_REGEX)],
-      ],
-      emailAddress: ['', Validators.pattern(EMAIL_REGEX)],
-      socialMediaLink: '',
     });
   }
 
@@ -176,10 +165,7 @@ export class FormComponent {
       case PropertyType.APARTMENT:
         this.propertyService
           .createApartment(
-            CreateApartmentRequest.fromForm(
-              this.propertyForm,
-              this.advertiserForm
-            ),
+            CreateApartmentRequest.fromForm(this.propertyForm),
             this.propertyImages
           )
           .subscribe({
@@ -191,7 +177,7 @@ export class FormComponent {
       case PropertyType.HOUSE:
         this.propertyService
           .createHouse(
-            CreateHouseRequest.fromForm(this.propertyForm, this.advertiserForm),
+            CreateHouseRequest.fromForm(this.propertyForm),
             this.propertyImages
           )
           .subscribe({
@@ -203,7 +189,7 @@ export class FormComponent {
       case PropertyType.LAND:
         this.propertyService
           .createLand(
-            CreateLandRequest.fromForm(this.propertyForm, this.advertiserForm),
+            CreateLandRequest.fromForm(this.propertyForm),
             this.propertyImages
           )
           .subscribe({
@@ -215,7 +201,8 @@ export class FormComponent {
   }
 
   private showSuccessToast() {
-    this.toastMessage = 'Uspešno ste postavili oglas!';
+    this.toastMessage =
+      'Uspešno ste poslali zahtev za postavljanje oglasa, biće dostupan nakon odobrenja admina.';
     this.toastType = ToastType.Success;
     this.toastVisible = true;
   }

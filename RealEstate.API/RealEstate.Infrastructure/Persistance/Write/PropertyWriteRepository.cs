@@ -11,18 +11,23 @@ namespace RealEstate.Infrastructure.Persistance.Write
     public class PropertyWriteRepository : IPropertyWriteRepository
     {
         private readonly DbSet<Property> _dbSet;
+        private readonly ApplicationDbContext _dbContext;
 
         public PropertyWriteRepository(ApplicationDbContext dbContext)
         {
             _dbSet = dbContext.Set<Property>();
+            _dbContext = dbContext;
         }
 
-        public void Add(DomainProperty entity)
+        public void Add(DomainProperty entity, long advertiserId)
         {
-            var property = Property.FromDomain(entity);
+            var advertiser = _dbContext.Advertiser.First(a => a.Id == advertiserId);
+
+            var property = Property.FromDomain(entity, advertiser);
             _dbSet.Add(property);
 
         }
+
 
         public async Task<Result<DomainProperty>> ChangeStatus(PropertyStatus status, long id)
         {

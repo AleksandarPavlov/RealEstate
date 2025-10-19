@@ -9,6 +9,7 @@ import { MapSearchPageComponent } from './pages/map-search-page/map-search-page.
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { authGuard } from './guards/auth.guard';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -19,6 +20,12 @@ const routes: Routes = [
     path: 'post-property',
     component: FormPageComponent,
     canActivate: [authGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminPageComponent,
+    canActivate: [authGuard],
+    data: { roles: ['ADMIN'] },
   },
   { path: 'map-search', component: MapSearchPageComponent },
   { path: 'not-found', component: NotFoundPageComponent },

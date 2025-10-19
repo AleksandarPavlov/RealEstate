@@ -10,17 +10,10 @@ export class CreateLandRequest {
     public price: number,
     public sizeInMmSquared: number,
     public isPremium: boolean,
-    public advertiserFullName: string,
-    public advertiserContact: string,
-    public advertiserEmailAddress: string,
-    public advertiserSocialMediaLink: string,
     public description: string
   ) {}
 
-  static fromForm(
-    propertyForm: FormGroup,
-    advertiserForm: FormGroup
-  ): CreateLandRequest {
+  static fromForm(propertyForm: FormGroup): CreateLandRequest {
     return new CreateLandRequest(
       propertyForm.get('advertismentName')?.value,
       toListingType(propertyForm.get('sellOrRent')?.value),
@@ -29,10 +22,6 @@ export class CreateLandRequest {
       propertyForm.get('price')?.value,
       propertyForm.get('sizeInMmSquared')?.value,
       false,
-      advertiserForm.get('advertiserName')?.value,
-      advertiserForm.get('phoneNumber')?.value,
-      advertiserForm.get('emailAddress')?.value,
-      advertiserForm.get('socialMediaLink')?.value,
       propertyForm.get('description')?.value
     );
   }

@@ -1,6 +1,5 @@
 ﻿
 using MediatR;
-using RealEstate.Domain.Advertiser;
 using RealEstate.Domain.Common.Enums;
 using RealEstate.Domain.Common.Errors;
 using RealEstate.Domain.Persistance;
@@ -53,6 +52,8 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
                 return Result<DomainProperty>.Failure(new Error("Advertiser", "Error fetching advertiser"));
             }
 
+            var efAdvertiserEntity = advertiserResult.Value;
+
             var apartmentResult = DomainProperty.CreateApartmentProperty(
                 0,
                 request.Name,
@@ -64,7 +65,7 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
                 DateTime.Now,
                 request.IsPremium,
                 request.IsFurnished,
-                advertiserResult.Value,
+                null,
                 request.FloorNumber,
                 request.NumberOfRooms,
                 latitude,
@@ -77,7 +78,7 @@ namespace RealEstate.Application.Property.Commands.CreateApartment
             return await apartmentResult.Match(
                 async apartment =>
                 {
-                    _propertyRepository.Add(apartment);
+                    _propertyRepository.Add(apartment, efAdvertiserEntity.Id);
                     await _unitOfWork.SaveChangesAsync(cancellationToken);
                     return Result<DomainProperty>.Success(apartment);
                 },

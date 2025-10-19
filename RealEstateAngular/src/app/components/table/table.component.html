@@ -4,7 +4,7 @@
   <div class="p-6 px-0">
     <table class="w-full mt-4 text-left table-auto min-w-max">
       <thead>
-        <tr style="background-color: #fce4e4" class="text-center">
+        <tr [style.background-color]="backgroundColor" class="text-center">
           <th class="p-4 border-y border-blue-gray-50">
             <p
               class="block text-xs antialiased font-semibold leading-none text-gray-900"
@@ -73,13 +73,28 @@
           >
             <div class="relative flex items-center gap-8">
               <div class="relative">
+                <div
+                  *ngIf="
+                    adminView && property.images && property.images.length > 0
+                  "
+                  class="grid grid-cols-2 gap-1"
+                >
+                  <img
+                    *ngFor="let img of property.images | slice : 0 : 4"
+                    [src]="img"
+                    alt="Property Image"
+                    class="h-16 w-full rounded-sm object-cover object-center"
+                  />
+                </div>
+
                 <img
-                  *ngIf="property.images[0] && property.images.length > 0"
+                  *ngIf="
+                    !adminView && property.images && property.images.length > 0
+                  "
                   [src]="property.images[0]"
                   alt="Property Image"
                   class="property-image relative inline-block h-36 w-52 !rounded-sm object-cover object-center"
                 />
-
                 <img
                   *ngIf="!property.images[0] || property.images.length === 0"
                   src="../../../assets/images/image-placeholder.png"
@@ -187,7 +202,7 @@
             </p>
           </td>
           <td class="p-4 border-b border-blue-gray-50">
-            <div class="relative group inline-block">
+            <div *ngIf="!adminView" class="relative group inline-block">
               <button
                 class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
@@ -212,6 +227,21 @@
                 >
                 </app-map>
               </div>
+            </div>
+
+            <div *ngIf="adminView" class="flex gap-2 justify-center">
+              <button
+                class="px-3 py-1 rounded bg-red-500 text-white text-xs font-bold hover:bg-red-600"
+                (click)="declineProperty(property.id)"
+              >
+                Odbij
+              </button>
+              <button
+                class="px-3 py-1 rounded bg-green-500 text-white text-xs font-bold hover:bg-green-600"
+                (click)="approveProperty(property.id)"
+              >
+                Dozvoli
+              </button>
             </div>
           </td>
         </tr>

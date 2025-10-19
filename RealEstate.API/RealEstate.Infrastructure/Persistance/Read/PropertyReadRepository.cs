@@ -102,6 +102,25 @@ namespace RealEstate.Infrastructure.Persistance.Read
             return Result<IEnumerable<DomainProperty>>.Success(domainProperties);
         }
 
+        public async Task<Result<IEnumerable<DomainProperty>>> FetchPropertiesForApproval(PropertyFilters filters)
+        {
+            var query = _context.Property.AsQueryable();
+
+            query = query.Where(p => p.PropertyStatus == PropertyStatus.WAITING_APPROVAL);
+
+            var properties = await query.Skip(filters.Page * filters.PageSize)
+                               .Take(filters.PageSize)
+                               .Include(p => p.Images)
+                               .ToListAsync();
+
+            var domainProperties = properties
+            .Select(Property.ToDomain)
+            .Where(result => result.IsSuccess)
+            .Select(result => result.Value);
+
+            return Result<IEnumerable<DomainProperty>>.Success(domainProperties);
+        }
+
         public async Task<Result<IEnumerable<DomainProperty>>> FindNearbyProperties(int distance, double lat, double lon, PropertyListingType? ListingType)
         {
             var sql = @"

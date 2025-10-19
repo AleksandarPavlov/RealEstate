@@ -36,6 +36,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ToastComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    AdminPageComponent,
   ],
   imports: [
     BrowserModule,

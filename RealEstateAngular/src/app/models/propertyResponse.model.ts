@@ -1,3 +1,4 @@
+import { Advertiser } from './advertiser.model';
 import { Coordinates } from './coordinates.model';
 import { ListingType } from './propertyListingType.enum';
 import { PropertyType } from './propertyType.enum';
@@ -18,6 +19,7 @@ export class PropertyResponse {
     public floorNumber: boolean,
     public numberOfRooms: number,
     public coordinates: Coordinates,
+    public advertiser: Advertiser,
     public images: string[],
     public description: string,
     public pricePerMmSquared: number

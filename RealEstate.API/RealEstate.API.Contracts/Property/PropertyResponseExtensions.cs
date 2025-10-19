@@ -1,4 +1,5 @@
 ﻿
+using RealEstate.API.Contracts.Advertiser;
 using RealEstate.API.Contracts.Coordinates;
 using RealEstate.Domain.Common.Enums;
 using DomainProperty = RealEstate.Domain.Property.Property;
@@ -25,6 +26,7 @@ namespace RealEstate.API.Contracts.Property
                 property.FloorNumber,
                 property.NumberOfRooms?.Value,
                 CoordinatesResponseExtensions.ToContract(property.Coordinates),
+                AdvertiserResponseExtension.ToContract(property.Advertiser),
                 property.Images,
                 property.Description?.Value,
                 property.ListingType == PropertyListingType.SELL

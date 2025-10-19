@@ -142,7 +142,7 @@ namespace RealEstate.Infrastructure.Persistance.Entities
 
         }
 
-        public static Property FromDomain(DomainProperty entity) {
+        public static Property FromDomain(DomainProperty entity, Advertiser advertiser) {
 
             var property = new Property
                 (
@@ -169,7 +169,8 @@ namespace RealEstate.Infrastructure.Persistance.Entities
                 property.Images = entity.Images.Select(image => new PropertyImage(image)).ToList();
             }
 
-            property.Advertiser = Advertiser.FromDomain(entity.Advertiser).Value;
+            property.Advertiser = advertiser;
+            property.AdvertiserId = advertiser.Id;
 
             return property;
         }
