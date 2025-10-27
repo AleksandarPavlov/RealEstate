@@ -9,6 +9,7 @@ namespace RealEstate.Domain.Persistance.Read
     {
         Task<Result<IEnumerable<DomainProperty>>> FetchPropertiesByFilters(PropertyFilters filters);
         Task<Result<IEnumerable<DomainProperty>>> FetchPropertiesForApproval(PropertyFilters filters);
+        Task<Result<IEnumerable<DomainProperty>>> FetchMyAdvertisements(string username, PropertyFilters filters);
         Task<Result<DomainProperty>> FetchPropertyById(long id);
         Task<Result<IEnumerable<DomainProperty>>> FetchLatestProperties(int amount);
         Task<Result<IEnumerable<DomainProperty>>> FindNearbyProperties(int distance, double lat, double lon, PropertyListingType? ListingType);

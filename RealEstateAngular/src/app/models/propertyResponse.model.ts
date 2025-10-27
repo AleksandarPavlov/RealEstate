@@ -1,6 +1,7 @@
 import { Advertiser } from './advertiser.model';
 import { Coordinates } from './coordinates.model';
 import { ListingType } from './propertyListingType.enum';
+import { PropertyStatus } from './propertyStatus.enum';
 import { PropertyType } from './propertyType.enum';
 
 export class PropertyResponse {
@@ -9,6 +10,7 @@ export class PropertyResponse {
     public name: string,
     public listingType: ListingType,
     public type: PropertyType,
+    public status: PropertyStatus,
     public city: string,
     public address: string,
     public price: number,

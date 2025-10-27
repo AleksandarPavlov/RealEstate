@@ -8,6 +8,7 @@ using RealEstate.Application.Property.Commands.CreateApartment;
 using RealEstate.Application.Property.Commands.CreateHouse;
 using RealEstate.Application.Property.Commands.GenerateDescription;
 using RealEstate.Application.Property.Queries.FetchLatestProperties;
+using RealEstate.Application.Property.Queries.FetchMyAdvertisements;
 using RealEstate.Application.Property.Queries.FetchPropertiesByFilters;
 using RealEstate.Application.Property.Queries.FetchPropertiesForApproval;
 using RealEstate.Application.Property.Queries.FetchPropertyById;
@@ -256,6 +257,34 @@ namespace RealEstate.API.Controllers
                 (
                     propertiesForApprovalRequest.Page,
                     propertiesForApprovalRequest.PageSize
+                ));
+
+            return result.Match<ActionResult>(
+                success => Ok(success.Select(property => PropertyResponseExtensions.ToContract(property)).ToList()),
+                failure => BadRequest(new ErrorResponse(failure.Code, failure.Description))
+            );
+        }
+
+        [HttpGet("my-adds")]
+        [ActionName(nameof(GetMyAdvertisementsAsync))]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PropertyResponse>))]
+        public async Task<ActionResult<IEnumerable<PropertyResponse>>> GetMyAdvertisementsAsync([FromQuery] PropertiesForApprovalRequest propertiesForApprovalRequest)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized(new ErrorResponse("Authentication", "Invalid token."));
+            }
+
+            var result = await _mediator
+                .Send(new FetchMyAdvertisementsQuery
+                (
+                    username,
+                    propertiesForApprovalRequest.Page,
+                    propertiesForApprovalRequest.PageSize
+
                 ));
 
             return result.Match<ActionResult>(

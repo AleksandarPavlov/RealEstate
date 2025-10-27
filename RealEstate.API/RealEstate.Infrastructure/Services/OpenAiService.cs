@@ -33,7 +33,7 @@ namespace RealEstate.Infrastructure.Services;
             
             var requestBody = new
             {
-                model = "deepseek/deepseek-r1-0528:free", 
+                model = "tngtech/deepseek-r1t2-chimera:free", 
                 messages = new[]
                 {
                     new { role = "user", content = $"Write a professional property description in Serbian language of max 200 characters. This is the given property: address is {address}, size is {size}, listing type is {listingType} and property type is {propertyType}. Exclude metadata such as number of characters and information about the text so it can be used directly as an advertisement" }
@@ -46,7 +46,7 @@ namespace RealEstate.Infrastructure.Services;
             
             var response = await _httpClient.PostAsync($"{_openAiApiUrl}", content);
 
-            if (!response.IsSuccessStatusCode) return Result<string?>.Failure(new Error("PropertyDescription", "Failed to generate property description."));
+           if (!response.IsSuccessStatusCode) return Result<string?>.Failure(new Error("PropertyDescription", "Failed to generate property description."));
             
             var responseContent = await response.Content.ReadAsStringAsync();
             

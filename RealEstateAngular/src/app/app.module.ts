@@ -37,6 +37,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { MyAdvertisementsPageComponent } from './pages/my-advertisements-page/my-advertisements-page.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     LoginPageComponent,
     RegisterPageComponent,
     AdminPageComponent,
+    MyAdvertisementsPageComponent,
   ],
   imports: [
     BrowserModule,

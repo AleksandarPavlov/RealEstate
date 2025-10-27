@@ -19,7 +19,11 @@ export class AuthInterceptor implements HttpInterceptor {
     const authService = inject(AuthService);
     const token = authService.getToken();
 
-    if (request.url.includes('/login') || request.url.includes('/register')) {
+    if (
+      request.url.includes('/login') ||
+      request.url.includes('/register') ||
+      request.url.includes('/autocomplete')
+    ) {
       return next.handle(request);
     }
 

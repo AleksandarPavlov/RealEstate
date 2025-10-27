@@ -10,6 +10,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { authGuard } from './guards/auth.guard';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { MyAdvertisementsPageComponent } from './pages/my-advertisements-page/my-advertisements-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
+  { path: 'my-advertisements', component: MyAdvertisementsPageComponent },
   { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
 

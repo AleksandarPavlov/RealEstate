@@ -67,6 +67,25 @@ export class PropertyService {
     );
   }
 
+  fetchMy(queryParams?: PropertyQueryParams) {
+    let params = new HttpParams();
+
+    if (queryParams) {
+      for (const [key, value] of Object.entries(queryParams)) {
+        if (value !== undefined && value !== null) {
+          params = params.append(
+            key,
+            typeof value === 'boolean' ? value.toString() : value
+          );
+        }
+      }
+    }
+    return this.httpClient.get<PropertyResponse[]>(
+      'http://localhost:5157/property/my-adds',
+      { params }
+    );
+  }
+
   fetchNearby(
     lat: number,
     lon: number,

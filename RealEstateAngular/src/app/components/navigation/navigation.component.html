@@ -22,31 +22,31 @@
             class="navigation flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6"
           >
             <li
-              class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
             >
               <a href="" class="flex items-center"> Početna </a>
             </li>
             <li
-              class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
               (click)="toggleSellMenu()"
             >
               <a class="flex items-center"> Prodaja </a>
             </li>
             <li
-              class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
               (click)="toggleRentMenu()"
             >
               <a class="flex items-center"> Izdavanje </a>
             </li>
             <li
-              class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
             >
               <a href="#" class="flex items-center" [routerLink]="['/list']">
                 Sve nekretnine
               </a>
             </li>
             <li
-              class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+              class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
             >
               <a
                 href="#"
@@ -58,14 +58,14 @@
             </li>
             <ng-container *ngIf="!isLoggedIn">
               <li
-                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+                class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
               >
                 <a class="flex items-center" [routerLink]="['/login']"
                   >Uloguj se</a
                 >
               </li>
               <li
-                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+                class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
               >
                 <a class="flex items-center" [routerLink]="['/register']"
                   >Registracija</a
@@ -76,17 +76,26 @@
             <ng-container *ngIf="isLoggedIn">
               <li
                 *ngIf="userRole === 'ADMIN'"
-                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+                class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
               >
                 <a class="flex items-center" [routerLink]="['/admin']"
                   >Admin Stranica</a
                 >
               </li>
               <li
-                class="block p-1 text-sm antialiased font-medium leading-normal text-gray-900"
+                class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
               >
                 <a class="flex items-center cursor-pointer" (click)="logout()"
                   >Izloguj se</a
+                >
+              </li>
+              <li
+                class="block p-1 text-xs antialiased font-medium leading-normal text-gray-900"
+              >
+                <a
+                  class="flex items-center cursor-pointer"
+                  [routerLink]="['/my-advertisements']"
+                  >Moji oglasi</a
                 >
               </li>
             </ng-container>

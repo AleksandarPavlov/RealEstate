@@ -11,6 +11,7 @@ public record PropertyResponse
     string Name,
     PropertyListingType ListingType,
     PropertyType Type,
+    PropertyStatus Status,
     string City,
     string? Address,
     int Price,

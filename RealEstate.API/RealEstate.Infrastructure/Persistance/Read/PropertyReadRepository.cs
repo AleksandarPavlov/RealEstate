@@ -155,5 +155,23 @@ namespace RealEstate.Infrastructure.Persistance.Read
             return Result<IEnumerable<DomainProperty>>.Success(domainProperties);
         }
 
+        public async Task<Result<IEnumerable<DomainProperty>>> FetchMyAdvertisements(string username, PropertyFilters filters)
+        {
+            var query = _context.Property.AsQueryable();
+
+            query = query.Where(p => p.Advertiser.Username == username);
+
+            var properties = await query.Skip(filters.Page * filters.PageSize)
+                               .Take(filters.PageSize)
+                               .Include(p => p.Images)
+                               .ToListAsync();
+
+            var domainProperties = properties
+            .Select(Property.ToDomain)
+            .Where(result => result.IsSuccess)
+            .Select(result => result.Value);
+
+            return Result<IEnumerable<DomainProperty>>.Success(domainProperties);
+        }
     }
 }

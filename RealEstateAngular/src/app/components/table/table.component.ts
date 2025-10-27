@@ -16,9 +16,11 @@ export class TableComponent {
   @Input() currentPage: number = 0;
   @Input() backgroundColor: string = '#fce4e4';
   @Input() adminView: boolean = false;
+  @Input() showStatus: boolean = false;
   @Output() nextPage = new EventEmitter<void>();
   @Output() previousPage = new EventEmitter<void>();
   listingType = ListingType;
+  PropertyStatus = PropertyStatus;
 
   constructor(private propertyService: PropertyService) {}
 

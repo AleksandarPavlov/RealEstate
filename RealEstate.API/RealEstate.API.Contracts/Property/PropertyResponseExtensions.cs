@@ -16,6 +16,7 @@ namespace RealEstate.API.Contracts.Property
                 property.Name.Value,
                 property.ListingType,
                 property.Type,
+                property.PropertyStatus,
                 property.Location.City,
                 property.Location.Address,
                 property.Price.Value,
