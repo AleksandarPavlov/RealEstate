@@ -17,6 +17,8 @@ export class TableComponent {
   @Input() backgroundColor: string = '#fce4e4';
   @Input() adminView: boolean = false;
   @Input() showStatus: boolean = false;
+  @Input() sortAsc: boolean = true;
+  @Input() currentFilters: any = {};
   @Output() nextPage = new EventEmitter<void>();
   @Output() previousPage = new EventEmitter<void>();
   listingType = ListingType;
@@ -62,5 +64,13 @@ export class TableComponent {
           console.error('Failed to decline property', err);
         },
       });
+  }
+
+  get updatedSortQueryParams() {
+    return {
+      ...this.currentFilters,
+      SortAsc: !this.sortAsc,
+      Page: this.currentPage,
+    };
   }
 }

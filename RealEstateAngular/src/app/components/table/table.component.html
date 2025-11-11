@@ -6,12 +6,32 @@
       <thead>
         <tr [style.background-color]="backgroundColor" class="text-center">
           <th class="p-4 border-y border-blue-gray-50">
-            <p
-              class="block text-xs antialiased font-semibold leading-none text-gray-900"
-            >
-              Naziv nekretnine
-            </p>
+            <div class="flex items-center justify-center gap-2">
+              <p
+                class="block text-xs antialiased font-semibold leading-none text-gray-900"
+              >
+                Naziv nekretnine / Cena
+              </p>
+
+              <button
+                [routerLink]="[]"
+                [queryParams]="{ SortAsc: !sortAsc }"
+                queryParamsHandling="merge"
+                class="text-gray-600 hover:text-gray-900 transition"
+                title="Sortiraj po ceni"
+              >
+                <i
+                  class="fa-solid"
+                  [ngClass]="
+                    sortAsc
+                      ? 'fa-arrow-up-wide-short'
+                      : 'fa-arrow-down-wide-short'
+                  "
+                ></i>
+              </button>
+            </div>
           </th>
+
           <th class="p-4 border-y border-blue-gray-50">
             <p
               class="block text-xs antialiased font-semibold leading-none text-gray-900"

@@ -150,7 +150,8 @@ namespace RealEstate.API.Controllers
                     propertiesByFilterRequest.GroundFloor,
                     propertiesByFilterRequest.NumberOfRooms,
                     propertiesByFilterRequest.Page,
-                    propertiesByFilterRequest.PageSize
+                    propertiesByFilterRequest.PageSize,
+                    propertiesByFilterRequest.SortAsc
                 ));
 
             return result.Match<ActionResult>(

@@ -17,6 +17,7 @@
     [isFetching]="isFetching"
     [currentPage]="currentPage"
     (nextPage)="handleNextPage()"
+    [sortAsc]="currentFilters.SortAsc ?? true"
     (previousPage)="handlePreviousPage()"
   ></app-table>
   <app-footer></app-footer>

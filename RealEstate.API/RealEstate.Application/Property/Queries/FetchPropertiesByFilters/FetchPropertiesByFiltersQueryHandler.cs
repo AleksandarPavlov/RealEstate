@@ -25,7 +25,8 @@ namespace RealEstate.Application.Property.Queries.FetchPropertiesByFilters
                 request.GroundFloor,
                 request.NumberOfRooms,
                 request.Page,
-                request.PageSize);
+                request.PageSize,
+                request.SortAsc);
 
             var result = await _propertyRepository.FetchPropertiesByFilters(filters);
             

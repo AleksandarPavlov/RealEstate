@@ -55,6 +55,7 @@ export class PropertyListPageComponent {
         NumberOfRooms: params['NumberOfRooms']
           ? +params['NumberOfRooms']
           : undefined,
+        SortAsc: params['SortAsc'] === 'false' ? false : true,
       };
 
       this.propertyTypeName = params['PropertyType']

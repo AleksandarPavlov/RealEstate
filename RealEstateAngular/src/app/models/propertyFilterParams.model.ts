@@ -10,6 +10,7 @@ export class PropertyQueryParams {
   GroundFloor?: boolean;
   NumberOfRooms?: number;
   Page?: number = 0;
+  SortAsc?: boolean = true;
 
   constructor(params?: Partial<PropertyQueryParams>) {
     if (params) {
@@ -21,6 +22,7 @@ export class PropertyQueryParams {
       this.GroundFloor = params.GroundFloor;
       this.NumberOfRooms = params.NumberOfRooms;
       this.Page = params.Page;
+      this.SortAsc = params.SortAsc;
     }
   }
 }

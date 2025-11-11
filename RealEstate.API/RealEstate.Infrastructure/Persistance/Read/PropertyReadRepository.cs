@@ -59,6 +59,10 @@ namespace RealEstate.Infrastructure.Persistance.Read
 
             query = query.Where(p => p.PropertyStatus == PropertyStatus.APPROVED);
 
+            query = filters.SortAsc
+            ? query.OrderBy(p => p.Price)
+            : query.OrderByDescending(p => p.Price);
+
             var properties = await query.Skip(filters.Page * filters.PageSize)
                                .Take(filters.PageSize)
                                .Include(p => p.Images)

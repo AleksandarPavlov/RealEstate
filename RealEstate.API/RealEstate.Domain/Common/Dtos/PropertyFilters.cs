@@ -13,6 +13,7 @@ namespace RealEstate.Application.Property.Dtos
         bool? GroundFloor,
         int? NumberOfRooms,
         int Page = 0,
-        int PageSize = 10
+        int PageSize = 10,
+        bool SortAsc = true
         );
 }

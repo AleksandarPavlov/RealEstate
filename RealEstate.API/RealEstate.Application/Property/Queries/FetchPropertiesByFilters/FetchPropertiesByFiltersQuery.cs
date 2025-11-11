@@ -15,6 +15,7 @@ namespace RealEstate.Application.Property.Queries.FetchPropertiesByFilters
         bool? GroundFloor,
         int? NumberOfRooms,
         int Page = 0,
-        int PageSize = 10
+        int PageSize = 10,
+        bool SortAsc = true
         ) : IRequest<Result<IEnumerable<DomainProperty>>>;
 }
