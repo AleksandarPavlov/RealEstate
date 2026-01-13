@@ -1,0 +1,25 @@
+<app-navigation></app-navigation>
+<div class="body-wrapper">
+<div class ="title-section mt-10">
+  <h1 class=" block antialiased tracking-normal text-center text-gray-900 font-extrabold text-3xl">Pronađi budući dom sa jednim klikom.</h1>
+  <p class="block text-sm antialiased text-center font-light leading-normal mt-3 text-gray-800 max-w-lg">
+  Klikni na željenu lokaciju na mapi, definiši udaljenost i tip oglasa, a zatim pogledaj sve nekretnine u okolini.
+</p>
+<app-tooltip class="mt-4" [size]="'large'"[icon]="'fa-solid fa-circle-question'" [text]=" 'Klikom na mapu možete pogledati sve nekretine u udaljenosti koju ste definisali u polju ispod. Takođe možete izabrati tip oglasa koji želite da pretražujete. Klikom na marker koji se pojavi možete pogledati detalje o nekretnini.'"></app-tooltip>
+</div>
+<div class="map-wrapper">
+  <app-map
+    [mapWidth]="'100%'"
+    [mapHeight]="'80vh'"
+    [mapId]="'search-map-id'"
+    [lat]="'44.2107675'"
+    [lon]="'20.9224158'"
+    [setView]="true"
+  >
+  </app-map>
+</div>
+</div>
+<app-footer></app-footer>
+<div class="bottom-skyline">
+
+</div>

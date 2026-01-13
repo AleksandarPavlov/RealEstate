@@ -1,0 +1,31 @@
+﻿
+using RealEstate.API.Contracts.Advertiser;
+using RealEstate.API.Contracts.Coordinates;
+using RealEstate.Domain.Common.Enums;
+
+namespace RealEstate.API.Contracts.Property;
+
+public record PropertyResponse
+(
+    long Id,
+    string Name,
+    PropertyListingType ListingType,
+    PropertyType Type,
+    PropertyStatus Status,
+    string City,
+    string? Address,
+    int Price,
+    double SizeInMmSquared,
+    DateTime CreationTime,
+    bool IsPremium,
+    bool? IsFurnished,
+    string? FloorNumber,
+    int? NumberOfRooms,
+    CoordinatesResponse? Coordinates,
+    AdvertiserResponse? Advertiser,
+    IEnumerable<string>? Images,
+    string? Description,
+    int? PricePerMmSquared
+);
+
+

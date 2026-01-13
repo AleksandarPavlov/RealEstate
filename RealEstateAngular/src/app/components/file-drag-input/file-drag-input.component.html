@@ -1,0 +1,117 @@
+<div
+  class="flex items-center justify-center w-full"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+>
+  <label
+    for="dropzone-file"
+    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+  >
+    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+      <svg
+        class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 20 16"
+        aria-hidden="true"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+        />
+      </svg>
+      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+        <span class="font-semibold">Click to upload</span> or drag and drop
+      </p>
+      <p class="text-xs text-gray-500 dark:text-gray-400">
+        SVG, PNG, JPG or GIF (MAX. 800x400px)
+      </p>
+    </div>
+    <input
+      id="dropzone-file"
+      type="file"
+      class="hidden"
+      (change)="onFilesSelected($event)"
+      multiple
+      accept="image/*"
+    />
+  </label>
+</div>
+
+<div class="flex flex-wrap mt-4 gap-4 justify-center">
+  <div class="absolute inset-100 mt-8 flex justify-center items-center z-50">
+    <app-toast
+      [message]="'Maksimalno 4 slike je dozvoljeno!'"
+      [toastType]="toastType.Danger"
+      *ngIf="showDangerToast"
+      (close)="toggleErrorToast(false)"
+    ></app-toast>
+  </div>
+  <div *ngFor="let preview of filePreviews; let i = index" class="relative">
+    <img
+      [src]="preview"
+      alt="Preview"
+      class="w-28 h-28 object-cover rounded-md"
+    />
+    <button
+      class="absolute top-1 right-1 bg-red-600 w-4 h-4 rounded-full"
+      (click)="removeFile(i)"
+    >
+      <svg
+        height="100%"
+        width="100%"
+        version="1.1"
+        id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 512 512"
+        xml:space="preserve"
+        fill="#000000"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            style="fill: #ff0c38"
+            d="M437.02,74.98C388.668,26.629,324.38,0,256,0S123.333,26.629,74.981,74.98 c-99.814,99.814-99.815,262.223-0.002,362.038C123.331,485.371,187.62,512,256,512s132.668-26.629,181.02-74.982 C536.833,337.203,536.833,174.794,437.02,74.98z"
+          ></path>
+          <path
+            id="SVGCleanerId_0"
+            style="fill: #ffffff"
+            d="M371.193,338.28L288.912,256l82.28-82.281c9.089-9.087,9.089-23.824,0-32.912 c-9.087-9.089-23.824-9.087-32.912,0L256,223.088l-82.282-82.282c-9.087-9.089-23.824-9.089-32.912,0 c-9.089,9.087-9.089,23.824,0,32.912L223.087,256l-82.282,82.282c-9.089,9.087-9.089,23.824,0,32.912 c4.544,4.546,10.501,6.817,16.455,6.817c5.955,0,11.913-2.273,16.455-6.817L256,288.912l82.281,82.28 c4.544,4.544,10.501,6.817,16.455,6.817s11.913-2.273,16.455-6.817C380.282,362.105,380.282,347.369,371.193,338.28z"
+          ></path>
+          <path
+            style="fill: #ff0c38"
+            d="M256,0v223.088l82.28-82.282c9.087-9.087,23.824-9.089,32.912,0c9.089,9.087,9.089,23.824,0,32.912 L288.912,256l82.281,82.28c9.089,9.087,9.089,23.824,0,32.912c-4.544,4.544-10.501,6.817-16.457,6.817 c-5.956,0-11.913-2.273-16.455-6.817L256,288.912V512c68.38,0,132.668-26.629,181.02-74.982c99.814-99.815,99.814-262.225,0-362.038 C388.668,26.629,324.38,0,256,0z"
+          ></path>
+          <path
+            id="SVGCleanerId_1"
+            style="fill: #ff0c38"
+            d="M173.718,371.194c-4.544,4.544-10.501,6.817-16.455,6.817 c-5.956,0-11.913-2.271-16.457-6.817c-9.089-9.087-9.089-23.824,0-32.912L223.087,256l-82.282-82.281 c-9.089-9.087-9.089-23.824,0-32.912c9.087-9.089,23.825-9.089,32.912,0L256,223.088V0C187.62,0,123.333,26.629,74.981,74.98 c-99.814,99.814-99.815,262.223-0.002,362.038C123.331,485.371,187.62,512,256,512V288.912L173.718,371.194z"
+          ></path>
+          <g>
+            <path
+              id="SVGCleanerId_0_1_"
+              style="fill: #ffffff"
+              d="M371.193,338.28L288.912,256l82.28-82.281 c9.089-9.087,9.089-23.824,0-32.912c-9.087-9.089-23.824-9.087-32.912,0L256,223.088l-82.282-82.282 c-9.087-9.089-23.824-9.089-32.912,0c-9.089,9.087-9.089,23.824,0,32.912L223.087,256l-82.282,82.282 c-9.089,9.087-9.089,23.824,0,32.912c4.544,4.546,10.501,6.817,16.455,6.817c5.955,0,11.913-2.273,16.455-6.817L256,288.912 l82.281,82.28c4.544,4.544,10.501,6.817,16.455,6.817s11.913-2.273,16.455-6.817C380.282,362.105,380.282,347.369,371.193,338.28z"
+            ></path>
+          </g>
+          <g>
+            <path
+              id="SVGCleanerId_1_1_"
+              style="fill: #ff0c38"
+              d="M173.718,371.194c-4.544,4.544-10.501,6.817-16.455,6.817 c-5.956,0-11.913-2.271-16.457-6.817c-9.089-9.087-9.089-23.824,0-32.912L223.087,256l-82.282-82.281 c-9.089-9.087-9.089-23.824,0-32.912c9.087-9.089,23.825-9.089,32.912,0L256,223.088V0C187.62,0,123.333,26.629,74.981,74.98 c-99.814,99.814-99.815,262.223-0.002,362.038C123.331,485.371,187.62,512,256,512V288.912L173.718,371.194z"
+            ></path>
+          </g>
+        </g>
+      </svg>
+    </button>
+  </div>
+</div>

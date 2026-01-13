@@ -1,18 +1,33 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using RealEstate.Infrastructure.Persistance.Entities;
 
 namespace RealEstate.Infrastructure.Persistance
 {
     public class ApplicationDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+              : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=RealEstate;Trusted_Connection=True;Encrypt=false;");
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
 
+        public DbSet<Property> Property { get; set; } = null!;
+        public DbSet<PropertyImage> PropertyImage { get; set; } = null!;
+        public DbSet<Advertiser> Advertiser { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Property>()
+                .HasMany(p => p.Images) 
+                .WithOne(img => img.Property)
+                .HasForeignKey(img => img.PropertyId) 
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Advertiser>()
+                .HasMany(a => a.Properties)
+                .WithOne(p => p.Advertiser)
+                .HasForeignKey(p => p.AdvertiserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

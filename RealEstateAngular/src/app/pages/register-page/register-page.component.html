@@ -1,0 +1,128 @@
+<app-navigation></app-navigation>
+
+<div class="login-section min-h-screen flex justify-center items-center">
+  <div class="form-container py-6 px-4 w-full max-w-5xl">
+    <div
+      class="bg-white border border-slate-300 rounded-lg p-8 shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)]"
+    >
+      <div class="mb-8 text-center">
+        <h1 class="text-slate-900 text-3xl font-semibold">Registruj se</h1>
+      </div>
+
+      <form
+        class="grid grid-cols-1 md:grid-cols-2 gap-6"
+        [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="flex flex-col gap-4">
+          <div>
+            <label class="text-slate-900 text-sm font-medium mb-2 block">
+              Korisničko ime
+            </label>
+            <input
+              formControlName="username"
+              name="username"
+              type="text"
+              required
+              class="w-full text-sm text-slate-900 border border-slate-300 pl-4 pr-10 py-3 rounded-lg outline-blue-600"
+              placeholder="Unesite korisničko ime"
+            />
+          </div>
+
+          <div>
+            <label class="text-slate-900 text-sm font-medium mb-2 block">
+              Lozinka
+            </label>
+            <input
+              formControlName="password"
+              name="password"
+              type="password"
+              required
+              class="w-full text-sm text-slate-900 border border-slate-300 pl-4 pr-10 py-3 rounded-lg outline-blue-600"
+              placeholder="Unesite lozinku"
+            />
+          </div>
+
+          <div>
+            <label class="text-slate-900 text-sm font-medium mb-2 block">
+              Email adresa
+            </label>
+            <input
+              formControlName="emailAddress"
+              name="email"
+              type="email"
+              required
+              class="w-full text-sm text-slate-900 border border-slate-300 pl-4 pr-10 py-3 rounded-lg outline-blue-600"
+              placeholder="Unesite email adresu"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div>
+            <label class="text-slate-900 text-sm font-medium mb-2 block">
+              Ime i prezime
+            </label>
+            <input
+              formControlName="fullName"
+              name="fullname"
+              type="text"
+              required
+              class="w-full text-sm text-slate-900 border border-slate-300 pl-4 pr-10 py-3 rounded-lg outline-blue-600"
+              placeholder="Unesite ime i prezime"
+            />
+          </div>
+
+          <div>
+            <label class="text-slate-900 text-sm font-medium mb-2 block">
+              Kontakt telefon
+            </label>
+            <input
+              formControlName="contactNumber"
+              name="phone"
+              type="text"
+              required
+              class="w-full text-sm text-slate-900 border border-slate-300 pl-4 pr-10 py-3 rounded-lg outline-blue-600"
+              placeholder="Unesite broj telefona"
+            />
+          </div>
+
+          <div>
+            <label class="text-slate-900 text-sm font-medium mb-2 block">
+              Link do društvene mreže
+            </label>
+            <input
+              formControlName="socialMediaLink"
+              name="socialLink"
+              type="text"
+              class="w-full text-sm text-slate-900 border border-slate-300 pl-4 pr-10 py-3 rounded-lg outline-blue-600"
+              placeholder="Unesite link profila"
+            />
+          </div>
+        </div>
+
+        <div class="col-span-1 md:col-span-2 mt-6">
+          <button
+            type="submit"
+            [disabled]="loading"
+            style="background-color: #79a450"
+            class="w-full shadow-xl py-3 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white hover:bg-[#6e964a] focus:outline-none cursor-pointer transition"
+          >
+            {{ loading ? "Učitavanje..." : "Registruj se" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
+>
+  <app-toast
+    *ngIf="toastVisible"
+    [message]="toastMessage"
+    [toastType]="toastType"
+    (close)="toastVisible = false"
+    class="pointer-events-auto"
+  ></app-toast>
+</div>

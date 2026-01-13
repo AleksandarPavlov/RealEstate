@@ -1,0 +1,19 @@
+<app-navigation></app-navigation>
+<div class="table-wrapper">
+  <h1
+    class="map-header block antialiased tracking-normal text-center mt-14 text-gray-900 font-bold text-2xl pb-16"
+  >
+    Admin Stranica
+  </h1>
+  <app-table
+    [properties]="properties"
+    [isFetching]="isFetching"
+    [currentPage]="currentPage"
+    [backgroundColor]="'#edf8ed'"
+    [adminView]="true"
+    (nextPage)="handleNextPage()"
+    (previousPage)="handlePreviousPage()"
+  ></app-table>
+  <app-footer></app-footer>
+  <div class="bottom-skyline"></div>
+</div>
